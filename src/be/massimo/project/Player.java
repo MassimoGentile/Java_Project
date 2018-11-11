@@ -3,7 +3,7 @@ package be.massimo.project;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-public class Player extends User{
+public abstract class Player extends User{
 	
 	// 	ATTRIBUTES
 	private int Amount;
