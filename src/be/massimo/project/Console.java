@@ -3,10 +3,19 @@ package be.massimo.project;
 public class Console {
 	
 	// 	ATTRIBUTES
+	private int Id;
 	private String Name;
 	private String Version;
 	
 	// 	GET/SET
+	public int getId() {
+		return this.Id;
+	}
+	
+	public void setId(int id) {
+		this.Id = id;
+	}
+	
 	public String getName() {
 		return this.Name;
 	}
@@ -24,7 +33,8 @@ public class Console {
 	}
 	
 	//	CONSTRUCTOR(S)
-	public Console(String name, String version) {
+	public Console(int id, String name, String version) {
+		this.Id = id;
 		this.Name = name;
 		this.Version = version;
 	}
