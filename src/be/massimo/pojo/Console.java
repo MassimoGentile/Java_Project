@@ -1,4 +1,4 @@
-package be.massimo.project;
+package be.massimo.pojo;
 
 public class Console {
 	
