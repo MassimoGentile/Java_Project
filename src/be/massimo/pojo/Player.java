@@ -35,12 +35,30 @@ public class Player extends User{
 		this.ListBooking = listBooking;
 	}
 	
+	public void addBooking(Booking booking) {
+		if(!this.ListBooking.contains(booking))
+			this.ListBooking.add(booking);
+	}
+	
+	public void removeBooking(Booking booking) {
+		this.ListBooking.remove(booking);
+	}
+	
 	public List<Copy> getListCopy(){
 		return this.ListCopy;
 	}
 	
 	public void setListCopy(List<Copy> listCopy) {
 		this.ListCopy = listCopy;
+	}
+	
+	public void addCopy(Copy copy) {
+		if(!this.ListCopy.contains(copy))
+			this.ListCopy.add(copy);
+	}
+	
+	public void removeCopy(Copy copy) {
+		this.ListCopy.remove(copy);
 	}
 	
 	public Boolean getAdmin() {
