@@ -1,6 +1,7 @@
 package be.massimo.dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 
 import be.massimo.pojo.Booking;
 
@@ -17,7 +18,16 @@ public class BookingDAO extends DAO<Booking>{
 	
 	@Override
 	public boolean delete(Booking obj) {
-		return false;
+		try {
+			this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("DELETE FROM Booking WHERE Booking_Id=" + obj.getId());
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
