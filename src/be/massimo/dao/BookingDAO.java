@@ -13,7 +13,15 @@ public class BookingDAO extends DAO<Booking>{
 	
 	@Override
 	public boolean create(Booking obj) {
-		return false;
+		try {
+			this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Booking (Booking_BeginDateWanted, Booking_BookingDate, Game_Id) VALUES (" + obj.getBeginDateWanted() + "," + obj.getBookingDate() + "," + obj.getGameWanted().getId() + ")");
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
@@ -22,8 +30,7 @@ public class BookingDAO extends DAO<Booking>{
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("DELETE FROM Booking WHERE Booking_Id=" + obj.getId());
-		}
-		catch(Exception e) {
+		}catch(Exception e) {
 			e.printStackTrace();
 			return false;
 		}
