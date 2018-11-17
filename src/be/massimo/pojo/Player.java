@@ -12,6 +12,7 @@ public class Player extends User{
 	private LocalDateTime RegisterDate;
 	private List<Booking> ListBooking;
 	private List<Copy> ListCopy;
+	private Boolean Admin;
 	
 	// 	GET/SET
 	public int getAmount() {
@@ -42,6 +43,13 @@ public class Player extends User{
 		this.ListCopy = listCopy;
 	}
 	
+	public Boolean getAdmin() {
+		return this.Admin;
+	}
+	
+	public void setAdmin(Boolean admin) {
+		this.Admin = admin;
+	}
 	//	CONSTRUCTOR(S)
 	public Player(int id, String name, String firstname, Date birthday, String email, String password, String address) {
 		super(id, name, firstname, birthday, email, password, address);
@@ -49,6 +57,7 @@ public class Player extends User{
 		this.RegisterDate = LocalDateTime.now();
 		this.ListBooking = new ArrayList<Booking>();
 		this.ListCopy = new ArrayList<Copy>();
+		this.Admin = false;
 	}
 	
 	public Player(int id, String email, String password) {
@@ -57,5 +66,6 @@ public class Player extends User{
 		this.RegisterDate = LocalDateTime.now();
 		this.ListBooking = new ArrayList<Booking>();
 		this.ListCopy = new ArrayList<Copy>();
+		this.Admin = false;
 	}
 }
