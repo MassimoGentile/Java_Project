@@ -8,8 +8,8 @@ public class Loan {
 	private int Id;
 	private LocalDateTime BeginDate;
 	private LocalDateTime EndDate;
-	private Borrower B;
-	private Lender L;
+	private Player Borrower;
+	private Player Lender;
 	private Copy C;
 	
 	//	GET/SET
@@ -37,20 +37,20 @@ public class Loan {
 		this.EndDate = endDate;
 	}
 	
-	public Borrower getBorrower() {
-		return this.B;
+	public Player getBorrower() {
+		return this.Borrower;
 	}
 	
-	public void setBorrower(Borrower b) {
-		this.B = b;
+	public void setBorrower(Player borrower) {
+		this.Borrower = borrower;
 	}
 	
-	public Lender getLender() {
-		return this.L;
+	public Player getLender() {
+		return this.Lender;
 	}
 	
-	public void setLender(Lender l) {
-		this.L = l;
+	public void setLender(Player lender) {
+		this.Lender = lender;
 	}
 	
 	public Copy getCopy() {
@@ -62,11 +62,11 @@ public class Loan {
 	}
 	
 	// 	CONSTRUCTOR(S)
-	public Loan(int id, LocalDateTime datedebut, LocalDateTime datefin, Borrower b, Lender l) {
+	public Loan(int id, LocalDateTime datedebut, LocalDateTime datefin, Player borrower, Player lender) {
 		this.Id = id;
 		this.BeginDate = datedebut;
 		this.EndDate = datefin;
-		this.B = b;
-		this.L = l;
+		this.Borrower = borrower;
+		this.Lender = lender;
 	}
 }

@@ -7,7 +7,7 @@ public class Copy {
 	//	Attributes
 	private Game G;
 	private LocalDateTime DateAdded;
-	private Lender L;
+	private Player Lender;
 	
 	//	GET/SET
 	public Game getGame() {
@@ -26,18 +26,18 @@ public class Copy {
 		this.DateAdded = dateAdded;
 	}
 	
-	public Lender getLender() {
-		return this.L;
+	public Player getLender() {
+		return this.Lender;
 	}
 	
-	public void setLender(Lender l) {
-		this.L = l;
+	public void setLender(Player lender) {
+		this.Lender = lender;
 	}
 	
 	//	CONSTRUCTOR(S)
-	public Copy(Game game, Lender lender) {
+	public Copy(Game game, Player lender) {
 		this.G = game;
 		this.DateAdded = LocalDateTime.now();
-		this.L = lender;
+		this.Lender = lender;
 	}
 }

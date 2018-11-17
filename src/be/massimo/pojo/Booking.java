@@ -6,7 +6,7 @@ public class Booking {
 	//	ATTRIBUTES
 		private LocalDateTime BeginDateWanted;
 		private Game GameWanted;
-		private Borrower B;
+		private Player P;
 		private LocalDateTime BookingDate;
 		
 	//	GET/SET
@@ -18,8 +18,8 @@ public class Booking {
 			return this.GameWanted;
 		}
 		
-		public Borrower getBorrower() {
-			return this.B;
+		public Player getPlayer() {
+			return this.P;
 		}
 		
 		public LocalDateTime getBookingDate() {
@@ -27,10 +27,10 @@ public class Booking {
 		}
 		
 	//	CONSTRUCTOR(S)
-		public Booking(LocalDateTime beginDateWanted, Game gameWanted, Borrower borrower, LocalDateTime bookingDate) {
+		public Booking(LocalDateTime beginDateWanted, Game gameWanted, Player player, LocalDateTime bookingDate) {
 			this.BeginDateWanted = beginDateWanted;
 			this.GameWanted = gameWanted;
-			this.B = borrower;
+			this.P = player;
 			this.BookingDate = bookingDate;
 		}
 }
