@@ -4,12 +4,21 @@ import java.time.LocalDateTime;
 
 public class Booking {
 	//	ATTRIBUTES
+		private int Id;
 		private LocalDateTime BeginDateWanted;
 		private Game GameWanted;
 		private Player P;
 		private LocalDateTime BookingDate;
 		
 	//	GET/SET
+		public int getId() {
+			return this.Id;
+		}
+		
+		public void setId(int id) {
+			this.Id = id;
+		}
+		
 		public LocalDateTime getBeginDateWanted() {
 			return this.BeginDateWanted;
 		}
