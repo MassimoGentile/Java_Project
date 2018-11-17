@@ -1,5 +1,20 @@
 package be.massimo.dao;
 
-public class DAO {
+import java.sql.Connection;
 
+public abstract class DAO<T> {
+	
+	protected Connection Connect = null;
+	
+	public DAO(Connection conn) {
+		this.Connect = conn;
+	}
+	
+	public abstract boolean create(T obj);
+	
+	public abstract boolean delete(T obj);
+	
+	public abstract boolean update(T obj);
+	
+	public abstract T find(int id);
 }
