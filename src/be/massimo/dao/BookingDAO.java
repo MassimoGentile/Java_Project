@@ -39,7 +39,15 @@ public class BookingDAO extends DAO<Booking>{
 	
 	@Override
 	public boolean update(Booking obj) {
-		return false;
+		try {
+			this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Booking SET Booking_BeginDateWanted =" + obj.getBeginDateWanted() + ", Booking_BookingDate =" + obj.getBookingDate() + ", Game_Id =" + obj.getGameWanted().getId() + " WHERE Booking_Id =" + obj.getId());
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
