@@ -1,5 +1,33 @@
 package be.massimo.dao;
 
-public class PlayerDAO {
+import java.sql.Connection;
 
+import be.massimo.pojo.Player;
+
+
+public class PlayerDAO extends DAO<Player>{
+	
+	public PlayerDAO(Connection conn) {
+		super(conn);
+	}
+	
+	@Override
+	public boolean create(Player obj) {
+		return false;
+	}
+	
+	@Override
+	public boolean delete(Player obj) {
+		return false;
+	}
+	
+	@Override
+	public boolean update(Player obj) {
+		return false;
+	}
+	
+	@Override
+	public Player find(int id) {
+		return null;
+	}
 }
