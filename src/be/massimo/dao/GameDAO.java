@@ -16,7 +16,7 @@ public class GameDAO extends DAO<Game>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Game (Game_Name, Game_Developers, Game_Editor, Game_Unit, Console_Id) VALUES (" + obj.getName() + "," + obj.getDevelopers() + "," + obj.getEditor() + "," + obj.getUnit() + "," + obj.getConsoleId() + ")");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Game (Game_Name, Game_Developers, Game_Editor, Game_Unit, Console_Id) VALUES (" + obj.getName() + "," + obj.getDevelopers() + "," + obj.getEditor() + "," + obj.getUnit() + "," + obj.getConsole().getId() + ")");
 		}catch(Exception e) {
 			e.printStackTrace();
 			return false;
