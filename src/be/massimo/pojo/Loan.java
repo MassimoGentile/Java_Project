@@ -62,11 +62,12 @@ public class Loan {
 	}
 	
 	// 	CONSTRUCTOR(S)
-	public Loan(int id, LocalDateTime datedebut, LocalDateTime datefin, Player borrower, Player lender) {
+	public Loan(int id, LocalDateTime datedebut, LocalDateTime datefin, Player borrower, Player lender, Copy copy) {
 		this.Id = id;
 		this.BeginDate = datedebut;
 		this.EndDate = datefin;
 		this.Borrower = borrower;
 		this.Lender = lender;
+		this.C = copy;
 	}
 }

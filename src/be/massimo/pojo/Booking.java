@@ -6,9 +6,9 @@ public class Booking {
 	//	ATTRIBUTES
 		private int Id;
 		private LocalDateTime BeginDateWanted;
+		private LocalDateTime BookingDate;
 		private Game GameWanted;
 		private Player P;
-		private LocalDateTime BookingDate;
 		
 	//	GET/SET
 		public int getId() {
@@ -23,23 +23,39 @@ public class Booking {
 			return this.BeginDateWanted;
 		}
 		
-		public Game getGameWanted() {
-			return this.GameWanted;
-		}
-		
-		public Player getPlayer() {
-			return this.P;
+		public void setBeginDateWanted(LocalDateTime beginDateWanted) {
+			this.BeginDateWanted = beginDateWanted;
 		}
 		
 		public LocalDateTime getBookingDate() {
 			return this.BookingDate;
 		}
 		
+		public void setBookingDate(LocalDateTime bookingDate) {
+			this.BookingDate = bookingDate;
+		}
+		
+		public Game getGameWanted() {
+			return this.GameWanted;
+		}
+		
+		public void setGameWanted(Game gameWanted) {
+			this.GameWanted = gameWanted;
+		}
+		
+		public Player getPlayer() {
+			return this.P;
+		}
+		
+		public void setPlayer(Player player) {
+			this.P = player;
+		}
+		
 	//	CONSTRUCTOR(S)
-		public Booking(LocalDateTime beginDateWanted, Game gameWanted, Player player, LocalDateTime bookingDate) {
+		public Booking(LocalDateTime beginDateWanted, LocalDateTime bookingDate, Game gameWanted, Player player) {
 			this.BeginDateWanted = beginDateWanted;
+			this.BookingDate = bookingDate;
 			this.GameWanted = gameWanted;
 			this.P = player;
-			this.BookingDate = bookingDate;
 		}
 }
