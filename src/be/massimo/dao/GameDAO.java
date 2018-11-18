@@ -53,6 +53,17 @@ public class GameDAO extends DAO<Game>{
 	
 	@Override
 	public Game find(int id) {
-		return null;
+		Game game = null;
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Game WHERE Game_Id =" + id);
+			ConsoleDAO consoleDAO = new ConsoleDAO(this.Connect);
+			if(result.first())
+				game = new Game(id, result.getString("Game_Name"), result.getString("Game_Developers"), result.getString("Game_Editor"), result.getInt("Game_Unit"), consoleDAO.find(result.getInt("Console_Id")));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return game;
 	}
 }
