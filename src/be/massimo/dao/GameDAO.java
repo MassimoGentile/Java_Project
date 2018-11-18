@@ -39,7 +39,15 @@ public class GameDAO extends DAO<Game>{
 	
 	@Override
 	public boolean update(Game obj) {
-		return false;
+		try {
+			this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Game SET Game_Name =" + obj.getName() + ", Game_Developers =" + obj.getDevelopers() + ", Game_Editor =" + obj.getEditor() + ", Game_Unit =" + obj.getUnit() + ", Console_Id =" + obj.getConsole().getId() + " WHERE Game_Id =" + obj.getId());
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
