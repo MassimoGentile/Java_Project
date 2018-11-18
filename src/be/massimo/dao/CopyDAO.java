@@ -13,7 +13,6 @@ public class CopyDAO extends DAO<Copy>{
 	}
 	
 	@Override
-	//Player Id missing in the database, must be check !
 	public boolean create(Copy obj) {
 		try {
 			this.Connect.createStatement(
