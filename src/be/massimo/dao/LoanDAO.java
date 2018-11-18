@@ -40,7 +40,15 @@ public class LoanDAO extends DAO<Loan>{
 	
 	@Override
 	public boolean update(Loan obj) {
-		return false;
+		try {
+			this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Loan SET Loan_BeginDate =" + obj.getBeginDate() + ", Loan_EndDate =" + obj.getEndDate() + ", Borrower_Id =" + obj.getBorrower().getId() + ", Lender_Id =" + obj.getLender().getId() + ", Copy_Id =" + obj.getCopy().getId() + " WHERE Loan_Id =" + obj.getId());
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
