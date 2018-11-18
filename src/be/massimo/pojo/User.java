@@ -9,9 +9,9 @@ public abstract class User {
 	private String Name;
 	private String Firstname;
 	private Date Birthday;
+	private String Address;
 	private String Email;
 	private String Password;
-	private String Address;
 	
 	//	GET/SET
 	public int getId() {
@@ -46,6 +46,14 @@ public abstract class User {
 		this.Birthday = birthday;
 	}
 	
+	public String getAddress() {
+		return this.Address;
+	}
+	
+	public void setAddress(String address) {
+		this.Address = address;
+	}
+	
 	public String getEmail() {
 		return this.Email;
 	}
@@ -62,23 +70,15 @@ public abstract class User {
 		this.Password = password;
 	}
 	
-	public String getAddress() {
-		return this.Address;
-	}
-	
-	public void setAddress(String address) {
-		this.Address = address;
-	}
-	
 	//	CONSTRUCTOR(S)
-	public User(int id, String name, String firstname, Date birthday, String email, String password, String address) {
+	public User(int id, String name, String firstname, Date birthday, String address, String email, String password) {
 		this.Id = id;
 		this.Name = name;
 		this.Firstname = firstname;
 		this.Birthday = birthday;
+		this.Address = address;
 		this.Email = email;
 		this.Password = password;
-		this.Address = address;
 	}
 	
 	public User(int id, String email, String password) {
@@ -86,8 +86,8 @@ public abstract class User {
 		this.Name = "";
 		this.Firstname = "";
 		this.Birthday = new Date();
+		this.Address = "";
 		this.Email = email;
 		this.Password = password;
-		this.Address = "";
 	}
 }
