@@ -1,6 +1,7 @@
 package be.massimo.dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 
 import be.massimo.pojo.Loan;
 
@@ -13,7 +14,15 @@ public class LoanDAO extends DAO<Loan>{
 	
 	@Override
 	public boolean create(Loan obj) {
-		return false;
+		try {
+			this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Loan (Loan_BeginDate, Loan_EndDate, User_Id, Copy_Id, Booking_Id) VALUES (" + obj.getBeginDate() + "," + obj.getEndDate() + "," + obj.getLender().getId() + "," + obj.getCopy().getId() + "," + obj.getBooking().getId() + ")");
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
