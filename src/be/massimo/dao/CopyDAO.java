@@ -27,7 +27,15 @@ public class CopyDAO extends DAO<Copy>{
 	
 	@Override
 	public boolean delete(Copy obj) {
-		return false;
+		try {
+			this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("DELETE FROM Copy WHERE Copy_Id=" + obj.getId());
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
