@@ -8,13 +8,21 @@ import java.util.List;
 public class Player extends User{
 	
 	// 	ATTRIBUTES
+	private Boolean Admin;
 	private int Amount;
 	private LocalDateTime RegisterDate;
 	private List<Booking> ListBooking;
 	private List<Copy> ListCopy;
-	private Boolean Admin;
 	
 	// 	GET/SET
+	public Boolean getAdmin() {
+		return this.Admin;
+	}
+	
+	public void setAdmin(Boolean admin) {
+		this.Admin = admin;
+	}
+	
 	public int getAmount() {
 		return this.Amount;
 	}
@@ -61,29 +69,22 @@ public class Player extends User{
 		this.ListCopy.remove(copy);
 	}
 	
-	public Boolean getAdmin() {
-		return this.Admin;
-	}
-	
-	public void setAdmin(Boolean admin) {
-		this.Admin = admin;
-	}
 	//	CONSTRUCTOR(S)
 	public Player(int id, String name, String firstname, Date birthday, String email, String password, String address) {
 		super(id, name, firstname, birthday, email, password, address);
+		this.Admin = false;
 		this.Amount = 10;
 		this.RegisterDate = LocalDateTime.now();
 		this.ListBooking = new ArrayList<Booking>();
 		this.ListCopy = new ArrayList<Copy>();
-		this.Admin = false;
 	}
 	
 	public Player(int id, String email, String password) {
 		super(id, email, password);
+		this.Admin = false;
 		this.Amount = 10;
 		this.RegisterDate = LocalDateTime.now();
 		this.ListBooking = new ArrayList<Booking>();
 		this.ListCopy = new ArrayList<Copy>();
-		this.Admin = false;
 	}
 }
