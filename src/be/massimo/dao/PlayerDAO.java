@@ -27,7 +27,15 @@ public class PlayerDAO extends DAO<Player>{
 	
 	@Override
 	public boolean delete(Player obj) {
-		return false;
+		try {
+			this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("DELETE FROM User WHERE User_Id=" + obj.getId());
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
