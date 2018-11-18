@@ -5,11 +5,20 @@ import java.time.LocalDateTime;
 public class Copy {
 	
 	//	Attributes
+	private int Id;
 	private Game G;
 	private LocalDateTime DateAdded;
 	private Player Lender;
 	
 	//	GET/SET
+	public int getId() {
+		return this.Id;
+	}
+	
+	public void setId(int id) {
+		this.Id = id;
+	}
+	
 	public Game getGame() {
 		return this.G;
 	}
