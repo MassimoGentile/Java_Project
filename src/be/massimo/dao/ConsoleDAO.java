@@ -40,7 +40,15 @@ public class ConsoleDAO extends DAO<Console>{
 	
 	@Override
 	public boolean update(Console obj) {
-		return false;
+		try {
+			this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Console SET Console_Name =" + obj.getName() + ", Console_Version =" + obj.getVersion() + " WHERE Console_Id =" + obj.getId());
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
