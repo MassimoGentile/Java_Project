@@ -1,6 +1,7 @@
 package be.massimo.dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 
 import be.massimo.pojo.Console;
 
@@ -13,7 +14,15 @@ public class ConsoleDAO extends DAO<Console>{
 	
 	@Override
 	public boolean create(Console obj) {
-		return false;
+		try {
+			this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Console (Console_Name, Console_Version) VALUES (" + obj.getName() + "," + obj.getVersion() + ")");
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
