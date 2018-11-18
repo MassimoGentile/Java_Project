@@ -60,11 +60,12 @@ public class Game {
 	}
 	
 	//	CONSTRUCTOR(S)
-	public Game(int id,String name, String developers, String editor, int unit) {
+	public Game(int id,String name, String developers, String editor, int unit, Console console) {
 		this.Id = id;
 		this.Name = name;
 		this.Developers = developers;
 		this.Editor = editor;
 		this.Unit = unit;
+		this.C = console;
 	}
 }
