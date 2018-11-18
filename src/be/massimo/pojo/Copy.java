@@ -44,7 +44,8 @@ public class Copy {
 	}
 	
 	//	CONSTRUCTOR(S)
-	public Copy(Game game, Player lender) {
+	public Copy(int id, Game game, Player lender) {
+		this.Id = id;
 		this.G = game;
 		this.DateAdded = LocalDateTime.now();
 		this.Lender = lender;
