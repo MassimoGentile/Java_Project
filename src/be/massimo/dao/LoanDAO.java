@@ -17,7 +17,7 @@ public class LoanDAO extends DAO<Loan>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Loan (Loan_BeginDate, Loan_EndDate, User_Id, Copy_Id, Booking_Id) VALUES (" + obj.getBeginDate() + "," + obj.getEndDate() + "," + obj.getLender().getId() + "," + obj.getCopy().getId() + "," + obj.getBooking().getId() + ")");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Loan (Loan_BeginDate, Loan_EndDate, Borrower_Id, Lender_Id, Copy_Id) VALUES (" + obj.getBeginDate() + "," + obj.getEndDate() + "," + obj.getBorrower().getId() + "," + obj.getLender().getId() + "," + obj.getCopy().getId() + ")");
 		}catch(Exception e) {
 			e.printStackTrace();
 			return false;
