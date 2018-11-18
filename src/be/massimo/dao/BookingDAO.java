@@ -53,6 +53,18 @@ public class BookingDAO extends DAO<Booking>{
 	
 	@Override
 	public Booking find(int id) {
-		return null;
+		Booking booking = null;
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Booking WHERE Booking_Id =" + id);
+			GameDAO gameDAO = new GameDAO(this.Connect);
+			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
+			if(result.first())
+				booking = new Booking(result.getDate("Booking_BeginDateWanted"), result.getDate("Booking_BookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("User_Id")))));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return booking;
 	}
 }
