@@ -44,7 +44,7 @@ public class CopyDAO extends DAO<Copy>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Copy SET Copy_DateAdded =" + obj.getDateAdded() + ", Game_Id =" + obj.getGame().getId() + " WHERE Copy_Id =" + obj.getId());
+					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Copy SET Copy_DateAdded =" + obj.getDateAdded() + ", Game_Id =" + obj.getGame().getId() + ", Lender_Id =" + obj.getLender().getId() + " WHERE Copy_Id =" + obj.getId());
 		}catch(Exception e) {
 			e.printStackTrace();
 			return false;
