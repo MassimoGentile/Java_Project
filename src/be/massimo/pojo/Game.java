@@ -8,6 +8,7 @@ public class Game {
 	private String Developers;
 	private String Editor;
 	private int Unit;
+	private Console C;
 	
 	//	GET/SET
 	public int getId() {
@@ -48,6 +49,14 @@ public class Game {
 	
 	public void setUnit(int unit) {
 		this.Unit = unit;
+	}
+	
+	public Console getConsole(){
+		return this.C;
+	}
+	
+	public void setConsole(Console console) {
+		this.C = console;
 	}
 	
 	//	CONSTRUCTOR(S)
