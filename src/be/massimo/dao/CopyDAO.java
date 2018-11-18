@@ -13,6 +13,7 @@ public class CopyDAO extends DAO<Copy>{
 	}
 	
 	@Override
+	//Player Id missing in the database, must be check !
 	public boolean create(Copy obj) {
 		try {
 			this.Connect.createStatement(
@@ -40,7 +41,15 @@ public class CopyDAO extends DAO<Copy>{
 	
 	@Override
 	public boolean update(Copy obj) {
-		return false;
+		try {
+			this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Copy SET Copy_DateAdded =" + obj.getDateAdded() + ", Game_Id =" + obj.getGame().getId() + " WHERE Copy_Id =" + obj.getId());
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
