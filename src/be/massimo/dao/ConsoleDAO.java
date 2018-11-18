@@ -54,6 +54,16 @@ public class ConsoleDAO extends DAO<Console>{
 	
 	@Override
 	public Console find(int id) {
-		return null;
+		Console console = null;
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Console WHERE Console_Id =" + id);
+			if(result.first())
+				console = new Console(id, result.getString("Console_Name"), result.getString("Console_Version"));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return console;
 	}
 }
