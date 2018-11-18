@@ -18,7 +18,7 @@ public class CopyDAO extends DAO<Copy>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Copy (Copy_DateAdded, Game_Id) VALUES (" + obj.getDateAdded() + "," + obj.getGame().getId() + ")");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Copy (Copy_DateAdded, Game_Id, Lender_Id) VALUES (" + obj.getDateAdded() + "," + obj.getGame().getId() + "," + obj.getLender().getId() + ")");
 		}catch(Exception e) {
 			e.printStackTrace();
 			return false;
