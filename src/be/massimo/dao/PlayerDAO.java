@@ -40,7 +40,15 @@ public class PlayerDAO extends DAO<Player>{
 	
 	@Override
 	public boolean update(Player obj) {
-		return false;
+		try {
+			this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE User SET User_Name =" + obj.getName() + ", User_Firstname =" + obj.getFirstname() + ", User_Birthday =" + obj.getBirthday() + ", User_Address =" + obj.getAddress() + ", User_Email =" + obj.getEmail() + ", User_Password =" + obj.getPassword() + ", User_Admin =" + obj.getAdmin() + ", User_Amount =" + obj.getAmount() + ", User_RegisterDate =" + obj.getRegisterDate() + " WHERE User_Id =" + obj.getId());
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
