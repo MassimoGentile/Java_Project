@@ -3,6 +3,7 @@ package be.massimo.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.ZoneId;
 
 import be.massimo.pojo.Booking;
 
@@ -61,7 +62,7 @@ public class BookingDAO extends DAO<Booking>{
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
 			if(result.first())
-				booking = new Booking(result.getDate("BBeginDateWanted"), result.getDate("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("User_Id")));
+				booking = new Booking(result.getDate("BBeginDateWanted").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), result.getDate("BBookingDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("User_Id")));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
