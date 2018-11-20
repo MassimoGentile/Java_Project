@@ -5,7 +5,7 @@ public class Game {
 	//	ATTRIBUTES
 	private int Id;
 	private String Name;
-	private String Developers;
+	private int ReleaseYear;
 	private String Editor;
 	private int Unit;
 	private Console C;
@@ -27,12 +27,12 @@ public class Game {
 		this.Name = name;
 	}
 	
-	public String getDevelopers() {
-		return this.Developers;
+	public int getReleaseYear() {
+		return this.ReleaseYear;
 	}
 	
-	public void setDevelopers(String developers) {
-		this.Developers = developers;
+	public void setDevelopers(int releaseYear) {
+		this.ReleaseYear = releaseYear;
 	}
 	
 	public String getEditor() {
@@ -60,10 +60,10 @@ public class Game {
 	}
 	
 	//	CONSTRUCTOR(S)
-	public Game(int id,String name, String developers, String editor, int unit, Console console) {
+	public Game(int id,String name, int releaseYear, String editor, int unit, Console console) {
 		this.Id = id;
 		this.Name = name;
-		this.Developers = developers;
+		this.ReleaseYear = releaseYear;
 		this.Editor = editor;
 		this.Unit = unit;
 		this.C = console;
