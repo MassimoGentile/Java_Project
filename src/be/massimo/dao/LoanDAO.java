@@ -3,6 +3,7 @@ package be.massimo.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.ZoneId;
 
 import be.massimo.pojo.Loan;
 
@@ -54,6 +55,18 @@ public class LoanDAO extends DAO<Loan>{
 	
 	@Override
 	public Loan find(int id) {
-		return null;
+		Loan loan = null;
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Loan WHERE Loan_Id =" + id);
+			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
+			CopyDAO copyDAO = new CopyDAO(this.Connect);
+			if(result.first())
+				loan = new Loan(id, result.getDate("LBeginDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), result.getDate("LEndDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), playerDAO.find(result.getInt("Borrower_Id")), playerDAO.find(result.getInt("Lender_Id")), copyDAO.find(result.getInt("Copy_Id")));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return loan;
 	}
 }
