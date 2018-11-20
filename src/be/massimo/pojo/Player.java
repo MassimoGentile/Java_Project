@@ -87,4 +87,13 @@ public class Player extends User{
 		this.ListBooking = new ArrayList<Booking>();
 		this.ListCopy = new ArrayList<Copy>();
 	}
+	
+	public Player(int id, String name, String firstname, Date birthday, String email, String password, String address, Boolean admin, int amount, LocalDateTime registerDate) {
+		super(id, name, firstname, birthday, email, password, address);
+		this.Admin = admin;
+		this.Amount = amount;
+		this.RegisterDate = registerDate;
+		this.ListBooking = new ArrayList<Booking>();
+		this.ListCopy = new ArrayList<Copy>();
+	}
 }
