@@ -2,6 +2,8 @@ package be.massimo.dao;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.ZoneId;
 
 import be.massimo.pojo.Loan;
 
@@ -17,8 +19,8 @@ public class LoanDAO extends DAO<Loan>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Loan (Loan_BeginDate, Loan_EndDate, Borrower_Id, Lender_Id, Copy_Id) VALUES (" + obj.getBeginDate() + "," + obj.getEndDate() + "," + obj.getBorrower().getId() + "," + obj.getLender().getId() + "," + obj.getCopy().getId() + ")");
-		}catch(Exception e) {
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Loan (LBeginDate, LEndDate, Borrower_Id, Lender_Id, Copy_Id) VALUES (" + obj.getBeginDate() + "," + obj.getEndDate() + "," + obj.getBorrower().getId() + "," + obj.getLender().getId() + "," + obj.getCopy().getId() + ")");
+		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -30,8 +32,8 @@ public class LoanDAO extends DAO<Loan>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("DELETE FROM Loan WHERE Loan_Id=" + obj.getId());
-		}catch(Exception e) {
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Loan WHERE Loan_Id=" + obj.getId());
+		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -43,8 +45,8 @@ public class LoanDAO extends DAO<Loan>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Loan SET Loan_BeginDate =" + obj.getBeginDate() + ", Loan_EndDate =" + obj.getEndDate() + ", Borrower_Id =" + obj.getBorrower().getId() + ", Lender_Id =" + obj.getLender().getId() + ", Copy_Id =" + obj.getCopy().getId() + " WHERE Loan_Id =" + obj.getId());
-		}catch(Exception e) {
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Loan SET LBeginDate =" + obj.getBeginDate() + ", LEndDate =" + obj.getEndDate() + ", Borrower_Id =" + obj.getBorrower().getId() + ", Lender_Id =" + obj.getLender().getId() + ", Copy_Id =" + obj.getCopy().getId() + " WHERE Loan_Id =" + obj.getId());
+		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -53,6 +55,18 @@ public class LoanDAO extends DAO<Loan>{
 	
 	@Override
 	public Loan find(int id) {
-		return null;
+		Loan loan = null;
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Loan WHERE Loan_Id =" + id);
+			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
+			CopyDAO copyDAO = new CopyDAO(this.Connect);
+			if(result.first())
+				loan = new Loan(id, result.getDate("LBeginDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), result.getDate("LEndDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), playerDAO.find(result.getInt("Borrower_Id")), playerDAO.find(result.getInt("Lender_Id")), copyDAO.find(result.getInt("Copy_Id")));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return loan;
 	}
 }
