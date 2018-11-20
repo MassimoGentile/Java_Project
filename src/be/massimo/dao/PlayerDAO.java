@@ -3,6 +3,7 @@ package be.massimo.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.ZoneId;
 
 import be.massimo.pojo.Player;
 
@@ -54,6 +55,16 @@ public class PlayerDAO extends DAO<Player>{
 	
 	@Override
 	public Player find(int id) {
-		return null;
+		Player player = null;
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Player WHERE Player_Id =" + id);
+			if(result.first())
+				player = new player(id, result.getString("UName"), result.getString("UFirstname"), result.getDate("UBirthday"), result.getString("UAddress"), result.getString("UEmail"), result.getString("UPassword"), result.getBoolean("UAdmin"), result.getInt("UAmount"), result.getDate("URegisterDate"));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return player;
 	}
 }
