@@ -17,7 +17,7 @@ public class BookingDAO extends DAO<Booking>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Booking (BBeginDateWanted, BBookingDate, Game_Id) VALUES (" + obj.getBeginDateWanted() + "," + obj.getBookingDate() + "," + obj.getGameWanted().getId() + ")");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Booking (BBeginDateWanted, BBookingDate, Game_Id, Borrower_Id) VALUES (" + obj.getBeginDateWanted() + "," + obj.getBookingDate() + "," + obj.getGameWanted().getId() + "," + obj.getPlayer().getId() + ")");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
