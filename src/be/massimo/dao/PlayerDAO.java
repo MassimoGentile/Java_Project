@@ -61,7 +61,7 @@ public class PlayerDAO extends DAO<Player>{
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Player WHERE Player_Id =" + id);
 			if(result.first())
-				player = new player(id, result.getString("UName"), result.getString("UFirstname"), result.getDate("UBirthday"), result.getString("UAddress"), result.getString("UEmail"), result.getString("UPassword"), result.getBoolean("UAdmin"), result.getInt("UAmount"), result.getDate("URegisterDate"));
+				player = new Player(id, result.getString("UName"), result.getString("UFirstname"), result.getDate("UBirthday"), result.getString("UAddress"), result.getString("UEmail"), result.getString("UPassword"), result.getBoolean("UAdmin"), result.getInt("UAmount"), result.getDate("URegisterDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
