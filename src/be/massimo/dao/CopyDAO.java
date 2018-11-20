@@ -58,7 +58,7 @@ public class CopyDAO extends DAO<Copy>{
 		try {
 			ResultSet result = this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Console WHERE Console_Id =" + id);
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Copy WHERE Copy_Id =" + id);
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
 			if(result.first())
