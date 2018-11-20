@@ -8,7 +8,7 @@ public class Booking {
 		private LocalDateTime BeginDateWanted;
 		private LocalDateTime BookingDate;
 		private Game GameWanted;
-		private Player P;
+		private Player Borrower;
 		
 	//	GET/SET
 		public int getId() {
@@ -43,19 +43,19 @@ public class Booking {
 			this.GameWanted = gameWanted;
 		}
 		
-		public Player getPlayer() {
-			return this.P;
+		public Player getBorrower() {
+			return this.Borrower;
 		}
 		
-		public void setPlayer(Player player) {
-			this.P = player;
+		public void setBorrower(Player borrower) {
+			this.Borrower = borrower;
 		}
 		
 	//	CONSTRUCTOR(S)
-		public Booking(LocalDateTime beginDateWanted, LocalDateTime bookingDate, Game gameWanted, Player player) {
+		public Booking(LocalDateTime beginDateWanted, LocalDateTime bookingDate, Game gameWanted, Player borrower) {
 			this.BeginDateWanted = beginDateWanted;
 			this.BookingDate = bookingDate;
 			this.GameWanted = gameWanted;
-			this.P = player;
+			this.Borrower = borrower;
 		}
 }
