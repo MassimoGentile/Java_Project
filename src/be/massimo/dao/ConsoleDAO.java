@@ -18,7 +18,7 @@ public class ConsoleDAO extends DAO<Console>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Console (Console_Name, Console_Version) VALUES (" + obj.getName() + "," + obj.getVersion() + ")");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Console (CName, CVersion) VALUES (" + obj.getName() + "," + obj.getVersion() + ")");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -44,7 +44,7 @@ public class ConsoleDAO extends DAO<Console>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Console SET Console_Name =" + obj.getName() + ", Console_Version =" + obj.getVersion() + " WHERE Console_Id =" + obj.getId());
+					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Console SET CName =" + obj.getName() + ", CVersion =" + obj.getVersion() + " WHERE Console_Id =" + obj.getId());
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -60,7 +60,7 @@ public class ConsoleDAO extends DAO<Console>{
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Console WHERE Console_Id =" + id);
 			if(result.first())
-				console = new Console(id, result.getString("Console_Name"), result.getString("Console_Version"));
+				console = new Console(id, result.getString("CName"), result.getString("CVersion"));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}

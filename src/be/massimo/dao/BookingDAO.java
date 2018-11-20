@@ -17,7 +17,7 @@ public class BookingDAO extends DAO<Booking>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Booking (Booking_BeginDateWanted, Booking_BookingDate, Game_Id) VALUES (" + obj.getBeginDateWanted() + "," + obj.getBookingDate() + "," + obj.getGameWanted().getId() + ")");
+					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Booking (BBeginDateWanted, BBookingDate, Game_Id) VALUES (" + obj.getBeginDateWanted() + "," + obj.getBookingDate() + "," + obj.getGameWanted().getId() + ")");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -43,7 +43,7 @@ public class BookingDAO extends DAO<Booking>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Booking SET Booking_BeginDateWanted =" + obj.getBeginDateWanted() + ", Booking_BookingDate =" + obj.getBookingDate() + ", Game_Id =" + obj.getGameWanted().getId() + " WHERE Booking_Id =" + obj.getId());
+					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Booking SET BBeginDateWanted =" + obj.getBeginDateWanted() + ", BBookingDate =" + obj.getBookingDate() + ", Game_Id =" + obj.getGameWanted().getId() + " WHERE Booking_Id =" + obj.getId());
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -61,7 +61,7 @@ public class BookingDAO extends DAO<Booking>{
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
 			if(result.first())
-				booking = new Booking(result.getDate("Booking_BeginDateWanted"), result.getDate("Booking_BookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("User_Id")))));
+				booking = new Booking(result.getDate("BBeginDateWanted"), result.getDate("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("User_Id")));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
