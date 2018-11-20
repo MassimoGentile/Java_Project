@@ -19,7 +19,7 @@ public class PlayerDAO extends DAO<Player>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO User (UName, UFirstname, UBirthday, UAddress, UEmail, UPassword, UAdmin, UAmount, URegisterDate) VALUES (" + obj.getName() + "," + obj.getFirstname() + "," + obj.getBirthday() + "," + obj.getAddress() + "," + obj.getEmail() + "," + obj.getPassword() + "," + obj.getAdmin() + "," + obj.getAmount() + "," + obj.getRegisterDate() + ")");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO User (UName, UFirstname, UBirthday, UAddress, UEmail, UPassword, UAdmin, UAmount, URegisterDate) VALUES (" + obj.getName() + "," + obj.getFirstname() + "," + obj.getBirthday() + "," + obj.getAddress() + "," + obj.getEmail() + "," + obj.getPassword() + "," + obj.getAdmin() + "," + obj.getAmount() + "," + obj.getRegisterDate() + ")");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -32,7 +32,7 @@ public class PlayerDAO extends DAO<Player>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("DELETE FROM User WHERE User_Id=" + obj.getId());
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM User WHERE User_Id=" + obj.getId());
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -45,7 +45,7 @@ public class PlayerDAO extends DAO<Player>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE User SET UName =" + obj.getName() + ", UFirstname =" + obj.getFirstname() + ", UBirthday =" + obj.getBirthday() + ", UAddress =" + obj.getAddress() + ", UEmail =" + obj.getEmail() + ", UPassword =" + obj.getPassword() + ", UAdmin =" + obj.getAdmin() + ", UAmount =" + obj.getAmount() + ", URegisterDate =" + obj.getRegisterDate() + " WHERE User_Id =" + obj.getId());
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE User SET UName =" + obj.getName() + ", UFirstname =" + obj.getFirstname() + ", UBirthday =" + obj.getBirthday() + ", UAddress =" + obj.getAddress() + ", UEmail =" + obj.getEmail() + ", UPassword =" + obj.getPassword() + ", UAdmin =" + obj.getAdmin() + ", UAmount =" + obj.getAmount() + ", URegisterDate =" + obj.getRegisterDate() + " WHERE User_Id =" + obj.getId());
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;

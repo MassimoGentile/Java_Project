@@ -19,7 +19,7 @@ public class LoanDAO extends DAO<Loan>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Loan (LBeginDate, LEndDate, Borrower_Id, Lender_Id, Copy_Id) VALUES (" + obj.getBeginDate() + "," + obj.getEndDate() + "," + obj.getBorrower().getId() + "," + obj.getLender().getId() + "," + obj.getCopy().getId() + ")");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Loan (LBeginDate, LEndDate, Borrower_Id, Lender_Id, Copy_Id) VALUES (" + obj.getBeginDate() + "," + obj.getEndDate() + "," + obj.getBorrower().getId() + "," + obj.getLender().getId() + "," + obj.getCopy().getId() + ")");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -32,7 +32,7 @@ public class LoanDAO extends DAO<Loan>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("DELETE FROM Loan WHERE Loan_Id=" + obj.getId());
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Loan WHERE Loan_Id=" + obj.getId());
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -45,7 +45,7 @@ public class LoanDAO extends DAO<Loan>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Loan SET LBeginDate =" + obj.getBeginDate() + ", LEndDate =" + obj.getEndDate() + ", Borrower_Id =" + obj.getBorrower().getId() + ", Lender_Id =" + obj.getLender().getId() + ", Copy_Id =" + obj.getCopy().getId() + " WHERE Loan_Id =" + obj.getId());
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Loan SET LBeginDate =" + obj.getBeginDate() + ", LEndDate =" + obj.getEndDate() + ", Borrower_Id =" + obj.getBorrower().getId() + ", Lender_Id =" + obj.getLender().getId() + ", Copy_Id =" + obj.getCopy().getId() + " WHERE Loan_Id =" + obj.getId());
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;

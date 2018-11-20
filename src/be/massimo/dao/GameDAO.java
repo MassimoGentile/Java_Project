@@ -17,7 +17,7 @@ public class GameDAO extends DAO<Game>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("INSERT INTO Game (GName, GReleaseYear, GEditor, GUnit, Console_Id) VALUES (" + obj.getName() + "," + obj.getReleaseYear() + "," + obj.getEditor() + "," + obj.getUnit() + "," + obj.getConsole().getId() + ")");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Game (GName, GReleaseYear, GEditor, GUnit, Console_Id) VALUES (" + obj.getName() + "," + obj.getReleaseYear() + "," + obj.getEditor() + "," + obj.getUnit() + "," + obj.getConsole().getId() + ")");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -30,7 +30,7 @@ public class GameDAO extends DAO<Game>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("DELETE FROM Game WHERE Game_Id=" + obj.getId());
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("DELETE FROM Game WHERE Game_Id=" + obj.getId());
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -43,7 +43,7 @@ public class GameDAO extends DAO<Game>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("UPDATE Game SET GName =" + obj.getName() + ", GReleaseYear =" + obj.getReleaseYear() + ", GEditor =" + obj.getEditor() + ", GUnit =" + obj.getUnit() + ", Console_Id =" + obj.getConsole().getId() + " WHERE Game_Id =" + obj.getId());
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Game SET GName =" + obj.getName() + ", GReleaseYear =" + obj.getReleaseYear() + ", GEditor =" + obj.getEditor() + ", GUnit =" + obj.getUnit() + ", Console_Id =" + obj.getConsole().getId() + " WHERE Game_Id =" + obj.getId());
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
