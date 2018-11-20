@@ -54,6 +54,18 @@ public class CopyDAO extends DAO<Copy>{
 	
 	@Override
 	public Copy find(int id) {
-		return null;
+		Copy copy = null;
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Console WHERE Console_Id =" + id);
+			GameDAO gameDAO = new GameDAO(this.Connect);
+			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
+			if(result.first())
+				copy = new Copy(id, gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Lender_Id")));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return copy;
 	}
 }
