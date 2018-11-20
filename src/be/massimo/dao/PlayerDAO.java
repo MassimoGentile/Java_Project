@@ -56,12 +56,38 @@ public class PlayerDAO extends DAO<Player>{
 	@Override
 	public Player find(int id) {
 		Player player = null;
+		
+		//PLAYER SELECTION
 		try {
 			ResultSet result = this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Player WHERE Player_Id =" + id);
 			if(result.first())
 				player = new Player(id, result.getString("UName"), result.getString("UFirstname"), result.getDate("UBirthday"), result.getString("UAddress"), result.getString("UEmail"), result.getString("UPassword"), result.getBoolean("UAdmin"), result.getInt("UAmount"), result.getDate("URegisterDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		//SELECTION OF ALL BOOKING OF THE PLAYER
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Booking WHERE Borrower_Id =" + id);
+			BookingDAO bookingDAO = new BookingDAO(this.Connect);
+			while(result.next())
+				player.addBooking(bookingDAO.find(result.getInt("Booking_Id")));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		//SELECTION OF ALL COPY OF THE PLAYER
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Copy WHERE Lender_Id =" + id);
+			CopyDAO copyDAO = new CopyDAO(this.Connect);
+			while(result.next())
+				player.addCopy(copyDAO.find(result.getInt("Copy_Id")));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
