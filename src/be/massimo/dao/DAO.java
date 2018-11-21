@@ -4,7 +4,7 @@ import java.sql.Connection;
 
 public abstract class DAO<T> {
 	
-	protected Connection Connect = null;
+	protected Connection Connect = ConnectionAccess.getInstance();
 	
 	public DAO(Connection conn) {
 		this.Connect = conn;
