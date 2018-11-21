@@ -18,7 +18,7 @@ public class BookingDAO extends DAO<Booking>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Booking (BBeginDateWanted, BBookingDate, Game_Id, Borrower_Id) VALUES (" + obj.getBeginDateWanted() + "," + obj.getBookingDate() + "," + obj.getGameWanted().getId() + "," + obj.getBorrower().getId() + ")");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Booking (BBeginDateWanted, BBookingDate, Game_Id, Borrower_Id) VALUES ( '" + obj.getBeginDateWanted() + "', '" + obj.getBookingDate() + "', " + obj.getGameWanted().getId() + ", " + obj.getBorrower().getId() + ")");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -44,7 +44,7 @@ public class BookingDAO extends DAO<Booking>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Booking SET BBeginDateWanted =" + obj.getBeginDateWanted() + ", BBookingDate =" + obj.getBookingDate() + ", Game_Id =" + obj.getGameWanted().getId() + ", Borrower_Id =" + obj.getBorrower().getId() + " WHERE Booking_Id =" + obj.getId());
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Booking SET BBeginDateWanted = '" + obj.getBeginDateWanted() + "', BBookingDate = '" + obj.getBookingDate() + "', Game_Id =" + obj.getGameWanted().getId() + ", Borrower_Id =" + obj.getBorrower().getId() + " WHERE Booking_Id =" + obj.getId());
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
