@@ -18,7 +18,7 @@ public class CopyDAO extends DAO<Copy>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Copy (CDateAdded, Game_Id, Lender_Id) VALUES (" + obj.getDateAdded() + "," + obj.getGame().getId() + "," + obj.getLender().getId() + ")");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO Copy (CDateAdded, Game_Id, Lender_Id) VALUES ( '" + obj.getDateAdded() + "'," + obj.getGame().getId() + "," + obj.getLender().getId() + ")");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
@@ -44,7 +44,7 @@ public class CopyDAO extends DAO<Copy>{
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Copy SET CDateAdded =" + obj.getDateAdded() + ", Game_Id =" + obj.getGame().getId() + ", Lender_Id =" + obj.getLender().getId() + " WHERE Copy_Id =" + obj.getId());
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE Copy SET CDateAdded = '" + obj.getDateAdded() + "', Game_Id =" + obj.getGame().getId() + ", Lender_Id =" + obj.getLender().getId() + " WHERE Copy_Id =" + obj.getId());
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
