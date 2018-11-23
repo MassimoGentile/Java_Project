@@ -72,7 +72,9 @@ public class JLogin extends JFrame {
 		JButton btnSignUp = new JButton("Sign Up");
 		btnSignUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Doit envoyer vers une nouvelle Jframe avec un formulaire d'inscription
+				JRegistration registration = new JRegistration();
+				registration.setVisible(true);
+				dispose();
 			}
 		});
 		btnSignUp.setBounds(385, 193, 89, 23);
