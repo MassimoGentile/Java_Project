@@ -150,7 +150,9 @@ public class JRegistration extends JFrame {
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Retourne sur JHome sans sauvegarder les champs
+				JLogin login = new JLogin();
+				login.setVisible(true);
+				dispose();
 			}
 		});
 		btnBack.setBounds(150, 344, 89, 23);
