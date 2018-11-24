@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 import be.massimo.pojo.Player;
 
@@ -61,7 +63,7 @@ public class PlayerDAO extends DAO<Player>{
 		try {
 			ResultSet result = this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Player WHERE Player_Id =" + id);
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM User WHERE User_Id =" + id);
 			if(result.first())
 				player = new Player(id, result.getString("UName"), result.getString("UFirstname"), result.getDate("UBirthday"), result.getString("UAddress"), result.getString("UEmail"), result.getString("UPassword"), result.getBoolean("UAdmin"), result.getInt("UAmount"), result.getDate("URegisterDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
 		}catch(SQLException e) {
@@ -92,5 +94,20 @@ public class PlayerDAO extends DAO<Player>{
 			e.printStackTrace();
 		}
 		return player;
+	}
+	
+	@Override
+	public List<Player> findAll(){
+		List<Player> players = new ArrayList<Player>();
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM User");
+			if(result.first())
+				players.add(new Player(result.getInt("User_Id"), result.getString("UName"), result.getString("UFirstname"), result.getDate("UBirthday"), result.getString("UAddress"), result.getString("UEmail"), result.getString("UPassword"), result.getBoolean("UAdmin"), result.getInt("UAmount"), result.getDate("URegisterDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return players;
 	}
 }
