@@ -6,8 +6,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+import java.awt.Font;
 
-public class Home extends JFrame {
+public class JHome extends JFrame {
 
 	private JPanel contentPane;
 
@@ -18,7 +20,7 @@ public class Home extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Home frame = new Home();
+					JHome frame = new JHome();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -30,13 +32,23 @@ public class Home extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Home() {
+	public JHome() {
+		setTitle("Java_Project - Home");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 280);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JButton btnBorrow = new JButton("Borrow");
+		btnBorrow.setFont(new Font("Tahoma", Font.BOLD, 35));
+		btnBorrow.setBounds(10, 78, 195, 77);
+		contentPane.add(btnBorrow);
+		
+		JButton btnLend = new JButton("Lend");
+		btnLend.setFont(new Font("Tahoma", Font.BOLD, 35));
+		btnLend.setBounds(229, 78, 195, 77);
+		contentPane.add(btnLend);
 	}
-
 }
