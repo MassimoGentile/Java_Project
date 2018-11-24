@@ -31,7 +31,7 @@ public class Game {
 		return this.ReleaseYear;
 	}
 	
-	public void setDevelopers(int releaseYear) {
+	public void setReleaseYear(int releaseYear) {
 		this.ReleaseYear = releaseYear;
 	}
 	
