@@ -50,4 +50,11 @@ public class Copy {
 		this.G = game;
 		this.Lender = lender;
 	}
+	
+	public Copy(int id, LocalDateTime dateAdded, Game game, Player lender) {
+		this.Id = id;
+		this.DateAdded = dateAdded;
+		this.G= game;
+		this.Lender = lender;
+	}
 }
