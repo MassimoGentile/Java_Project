@@ -3,6 +3,8 @@ package be.massimo.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import be.massimo.pojo.Game;
 
@@ -65,5 +67,21 @@ public class GameDAO extends DAO<Game>{
 			e.printStackTrace();
 		}
 		return game;
+	}
+	
+	@Override
+	public List<Game> findAll(){
+		List<Game> games = new ArrayList<Game>();
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Game");
+			ConsoleDAO consoleDAO = new ConsoleDAO(this.Connect);
+			if(result.first())
+				games.add(new Game(result.getInt("Game_Id"), result.getString("GName"), result.getInt("GReleaseYear"), result.getString("GEditor"), result.getInt("GUnit"), consoleDAO.find(result.getInt("Console_Id"))));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return games;
 	}
 }

@@ -3,6 +3,8 @@ package be.massimo.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import be.massimo.pojo.Console;
 
@@ -65,5 +67,20 @@ public class ConsoleDAO extends DAO<Console>{
 			e.printStackTrace();
 		}
 		return console;
+	}
+	
+	@Override
+	public List<Console> findAll(){
+		List<Console> consoles = new ArrayList<Console>();
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Console");
+			if(result.first())
+				consoles.add(new Console(result.getInt("Console_Id"), result.getString("CName"), result.getString("CVersion")));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return consoles;
 	}
 }

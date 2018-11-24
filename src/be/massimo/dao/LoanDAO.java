@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 import be.massimo.pojo.Loan;
 
@@ -68,5 +70,22 @@ public class LoanDAO extends DAO<Loan>{
 			e.printStackTrace();
 		}
 		return loan;
+	}
+	
+	@Override
+	public List<Loan> findAll(){
+		List<Loan> loans = new ArrayList<Loan>();
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Loan");
+			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
+			CopyDAO copyDAO = new CopyDAO(this.Connect);
+			if(result.first())
+				loans.add(new Loan(result.getInt("Loan_Id"), result.getDate("LBeginDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), result.getDate("LEndDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), playerDAO.find(result.getInt("Borrower_Id")), playerDAO.find(result.getInt("Lender_Id")), copyDAO.find(result.getInt("Copy_Id"))));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return loans;
 	}
 }
