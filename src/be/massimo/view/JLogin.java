@@ -84,6 +84,9 @@ public class JLogin extends JFrame {
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Doit permettre de faire la connexion à la base de données et si les données sont correctes, envoyer vers un nouvelle JFrame qui contient la page d'accueil des gens
+				JHome home = new JHome();
+				home.setVisible(true);
+				dispose();
 			}
 		});
 		btnLogin.setBounds(141, 193, 89, 23);
