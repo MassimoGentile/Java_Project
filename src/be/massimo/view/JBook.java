@@ -42,6 +42,7 @@ public class JBook extends JFrame {
 	 * Create the frame.
 	 */
 	public JBook() {
+		setTitle("Java_Project - Book");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 714, 337);
 		contentPane = new JPanel();
