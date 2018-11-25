@@ -138,6 +138,9 @@ public class JAlterProfil extends JFrame {
 		btnDeleteAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Call the player delete function
+				JLogin login = new JLogin();
+				login.setVisible(true);
+				dispose();
 			}
 		});
 		btnDeleteAccount.setBounds(150, 364, 317, 23);
