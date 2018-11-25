@@ -54,31 +54,37 @@ public class JAlterProfil extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblName = new JLabel("Name :");
+		lblName.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblName.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblName.setBounds(10, 24, 92, 25);
 		contentPane.add(lblName);
 		
 		JLabel lblFirstname = new JLabel("Firstname :");
+		lblFirstname.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblFirstname.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblFirstname.setBounds(10, 60, 92, 25);
 		contentPane.add(lblFirstname);
 		
 		JLabel lblBirthday = new JLabel("Birthday :");
+		lblBirthday.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblBirthday.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblBirthday.setBounds(10, 96, 92, 25);
 		contentPane.add(lblBirthday);
 		
 		JLabel lblNewLabel = new JLabel("Address :");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setBounds(10, 132, 92, 25);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblEmail = new JLabel("Email :");
+		lblEmail.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblEmail.setBounds(10, 168, 92, 25);
 		contentPane.add(lblEmail);
 		
 		JLabel lblPassword = new JLabel("Password :");
+		lblPassword.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblPassword.setBounds(10, 204, 92, 25);
 		contentPane.add(lblPassword);
