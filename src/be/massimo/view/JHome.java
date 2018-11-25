@@ -50,11 +50,13 @@ public class JHome extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnBorrow = new JButton("Borrow");
+		btnBorrow.setFocusable(false);
 		btnBorrow.setFont(new Font("Tahoma", Font.BOLD, 35));
 		btnBorrow.setBounds(39, 403, 195, 77);
 		contentPane.add(btnBorrow);
 		
 		JButton btnLend = new JButton("Lend");
+		btnLend.setFocusable(false);
 		btnLend.setFont(new Font("Tahoma", Font.BOLD, 35));
 		btnLend.setBounds(487, 403, 195, 77);
 		contentPane.add(btnLend);
