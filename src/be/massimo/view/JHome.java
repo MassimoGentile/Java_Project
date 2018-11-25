@@ -68,6 +68,13 @@ public class JHome extends JFrame {
 		contentPane.add(btnBorrow);
 		
 		JButton btnLend = new JButton("Lend");
+		btnLend.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JLend lend = new JLend();
+				lend.setVisible(true);
+				dispose();
+			}
+		});
 		btnLend.setFocusable(false);
 		btnLend.setFont(new Font("Tahoma", Font.BOLD, 35));
 		btnLend.setBounds(487, 425, 195, 77);
