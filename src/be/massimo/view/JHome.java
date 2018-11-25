@@ -18,6 +18,8 @@ import java.awt.SystemColor;
 import javax.swing.JLabel;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+import javax.swing.JList;
 
 public class JHome extends JFrame {
 
@@ -47,7 +49,7 @@ public class JHome extends JFrame {
 	public JHome() {
 		setTitle("Java_Project - Home");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 722, 498);
+		setBounds(100, 100, 722, 627);
 		contentPane = new JPanel();
 		contentPane.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,7 +66,7 @@ public class JHome extends JFrame {
 		});
 		btnBorrow.setFocusable(false);
 		btnBorrow.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnBorrow.setBounds(38, 425, 127, 20);
+		btnBorrow.setBounds(37, 558, 127, 20);
 		contentPane.add(btnBorrow);
 		
 		JButton btnLend = new JButton("Lend");
@@ -77,7 +79,7 @@ public class JHome extends JFrame {
 		});
 		btnLend.setFocusable(false);
 		btnLend.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnLend.setBounds(569, 425, 113, 20);
+		btnLend.setBounds(570, 558, 113, 20);
 		contentPane.add(btnLend);
 		
 		JButton btnProfil = new JButton("");
@@ -111,22 +113,22 @@ public class JHome extends JFrame {
 		
 		JLabel lblA = new JLabel("List of Games Lend");
 		lblA.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblA.setBounds(38, 97, 644, 20);
+		lblA.setBounds(37, 66, 644, 20);
 		contentPane.add(lblA);
 		
 		tableLend = new JTable();
 		tableLend.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tableLend.setBounds(39, 128, 644, 122);
+		tableLend.setBounds(38, 97, 644, 122);
 		contentPane.add(tableLend);
 		
 		JLabel lblListOfGames = new JLabel("List of Games Borrow");
 		lblListOfGames.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblListOfGames.setBounds(38, 261, 644, 20);
+		lblListOfGames.setBounds(37, 230, 644, 20);
 		contentPane.add(lblListOfGames);
 		
 		tableBorrow = new JTable();
 		tableBorrow.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tableBorrow.setBounds(38, 292, 644, 122);
+		tableBorrow.setBounds(37, 261, 644, 122);
 		contentPane.add(tableBorrow);
 		
 		JLabel lblUnitAmount = new JLabel("Unit Amount :");
@@ -140,5 +142,17 @@ public class JHome extends JFrame {
 		lblUnit.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblUnit.setBounds(628, 11, 50, 32);
 		contentPane.add(lblUnit);
+		
+		JLabel lblListOfGame = new JLabel("List of Game Book");
+		lblListOfGame.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblListOfGame.setBounds(37, 394, 644, 20);
+		contentPane.add(lblListOfGame);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(37, 425, 644, 122);
+		contentPane.add(scrollPane);
+		
+		JList listBook = new JList();
+		scrollPane.setViewportView(listBook);
 	}
 }
