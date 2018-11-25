@@ -55,6 +55,13 @@ public class JHome extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnBorrow = new JButton("Borrow");
+		btnBorrow.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JBorrow borrow = new JBorrow();
+				borrow.setVisible(true);
+				dispose();
+			}
+		});
 		btnBorrow.setFocusable(false);
 		btnBorrow.setFont(new Font("Tahoma", Font.BOLD, 35));
 		btnBorrow.setBounds(38, 425, 195, 77);
