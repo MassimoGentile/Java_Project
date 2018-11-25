@@ -62,7 +62,9 @@ public class JHome extends JFrame {
 		JButton btnProfil = new JButton("");
 		btnProfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Redirect to JAlterProfil by clicking on the gearing
+				JAlterProfil profil = new JAlterProfil();
+				profil.setVisible(true);
+				dispose();
 			}
 		});
 		btnProfil.setContentAreaFilled(false);
