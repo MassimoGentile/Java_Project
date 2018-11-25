@@ -110,6 +110,10 @@ public class JBorrow extends JFrame {
 		JButton btnBook = new JButton("Book");
 		btnBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Need to transfert the selected game in the list to the following JFrame
+				JBook book = new JBook();
+				book.setVisible(true);
+				dispose();
 			}
 		});
 		btnBook.setBounds(312, 440, 90, 23);
