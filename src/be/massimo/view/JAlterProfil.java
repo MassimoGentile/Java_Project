@@ -120,7 +120,7 @@ public class JAlterProfil extends JFrame {
 				dispose();
 			}
 		});
-		btnBack.setBounds(150, 343, 89, 23);
+		btnBack.setBounds(150, 343, 71, 23);
 		contentPane.add(btnBack);
 		
 		JButton btnSaveChanges = new JButton("Save Changes");
@@ -131,7 +131,7 @@ public class JAlterProfil extends JFrame {
 				dispose();
 			}
 		});
-		btnSaveChanges.setBounds(366, 343, 101, 23);
+		btnSaveChanges.setBounds(348, 343, 119, 23);
 		contentPane.add(btnSaveChanges);
 	}
 }
