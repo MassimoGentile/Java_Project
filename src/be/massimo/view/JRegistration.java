@@ -1,19 +1,25 @@
 package be.massimo.view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JPasswordField;
 import java.awt.Color;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
 
 
@@ -21,12 +27,12 @@ import java.awt.event.ActionEvent;
 public class JRegistration extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JPasswordField passwordField;
+	private JTextField txtName;
+	private JTextField txtFirstname;
+	private JTextField txtAddress;
+	private JTextField txtEmail;
+	private JPasswordField txtPassword;
+	private static final DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
 
 	/**
 	 * Launch the application.
@@ -56,10 +62,10 @@ public class JRegistration extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(150, 85, 317, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtName = new JTextField();
+		txtName.setBounds(150, 85, 317, 20);
+		contentPane.add(txtName);
+		txtName.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Name :");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -97,29 +103,24 @@ public class JRegistration extends JFrame {
 		lblPassword.setBounds(10, 261, 92, 25);
 		contentPane.add(lblPassword);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(150, 119, 317, 20);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtFirstname = new JTextField();
+		txtFirstname.setBounds(150, 119, 317, 20);
+		contentPane.add(txtFirstname);
+		txtFirstname.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(150, 156, 317, 20);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txtAddress = new JTextField();
+		txtAddress.setBounds(150, 191, 317, 20);
+		contentPane.add(txtAddress);
+		txtAddress.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(150, 191, 317, 20);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		txtEmail = new JTextField();
+		txtEmail.setBounds(150, 227, 317, 20);
+		contentPane.add(txtEmail);
+		txtEmail.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(150, 227, 317, 20);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
-		
-		passwordField = new JPasswordField();
-		passwordField.setBounds(150, 265, 317, 20);
-		contentPane.add(passwordField);
+		txtPassword = new JPasswordField();
+		txtPassword.setBounds(150, 265, 317, 20);
+		contentPane.add(txtPassword);
 		
 		JLabel label = new JLabel("*");
 		label.setForeground(Color.RED);
@@ -142,6 +143,15 @@ public class JRegistration extends JFrame {
 		btnSignUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Crée un nouvelle utilisateur et renvoie sur JHome
+				if(txtEmail.getText().isEmpty() && txtPassword.getText().isEmpty())
+					JOptionPane.showMessageDialog(null, "Email and Password are empty", "Error", JOptionPane.ERROR_MESSAGE);
+				else if(txtEmail.getText().isEmpty())
+					JOptionPane.showMessageDialog(null, "Email is empty", "Error", JOptionPane.ERROR_MESSAGE);
+				else if(txtPassword.getText().isEmpty())
+					JOptionPane.showMessageDialog(null, "Password is empty", "Error", JOptionPane.ERROR_MESSAGE);
+				else {
+					JOptionPane.showMessageDialog(null, "Work in progress please wait", "Success", JOptionPane.INFORMATION_MESSAGE);
+				}		
 			}
 		});
 		btnSignUp.setBounds(378, 344, 89, 23);
@@ -157,7 +167,18 @@ public class JRegistration extends JFrame {
 		});
 		btnBack.setBounds(150, 344, 89, 23);
 		contentPane.add(btnBack);
+		
+		
+		JFormattedTextField txtBirthday = new JFormattedTextField(dateFormat);
+		txtBirthday.setBounds(150, 157, 317, 20);
+		txtBirthday.setColumns(10);
+		contentPane.add(txtBirthday);
+		try {
+            MaskFormatter dateMask = new MaskFormatter("##/##/####");
+            dateMask.install(txtBirthday);
+        } catch (ParseException ex) {
+            ex.getMessage();
+        }
 	}
-
 }
 
