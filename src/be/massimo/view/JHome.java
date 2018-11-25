@@ -47,7 +47,7 @@ public class JHome extends JFrame {
 	public JHome() {
 		setTitle("Java_Project - Home");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 722, 548);
+		setBounds(100, 100, 722, 498);
 		contentPane = new JPanel();
 		contentPane.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -63,8 +63,8 @@ public class JHome extends JFrame {
 			}
 		});
 		btnBorrow.setFocusable(false);
-		btnBorrow.setFont(new Font("Tahoma", Font.BOLD, 35));
-		btnBorrow.setBounds(38, 425, 195, 77);
+		btnBorrow.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnBorrow.setBounds(38, 425, 127, 20);
 		contentPane.add(btnBorrow);
 		
 		JButton btnLend = new JButton("Lend");
@@ -76,8 +76,8 @@ public class JHome extends JFrame {
 			}
 		});
 		btnLend.setFocusable(false);
-		btnLend.setFont(new Font("Tahoma", Font.BOLD, 35));
-		btnLend.setBounds(487, 425, 195, 77);
+		btnLend.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnLend.setBounds(569, 425, 113, 20);
 		contentPane.add(btnLend);
 		
 		JButton btnProfil = new JButton("");

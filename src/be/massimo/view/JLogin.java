@@ -42,7 +42,7 @@ public class JLogin extends JFrame {
 	public JLogin() {
 		setTitle("Java_Project - Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 557, 300);
+		setBounds(100, 100, 539, 267);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -77,7 +77,7 @@ public class JLogin extends JFrame {
 				dispose();
 			}
 		});
-		btnSignUp.setBounds(385, 193, 89, 23);
+		btnSignUp.setBounds(380, 182, 89, 23);
 		contentPane.add(btnSignUp);
 		
 		JButton btnLogin = new JButton("Login");
@@ -89,7 +89,7 @@ public class JLogin extends JFrame {
 				dispose();
 			}
 		});
-		btnLogin.setBounds(141, 193, 89, 23);
+		btnLogin.setBounds(141, 182, 89, 23);
 		contentPane.add(btnLogin);
 		
 		JButton btnClear = new JButton("Clear");
@@ -99,7 +99,7 @@ public class JLogin extends JFrame {
 				PassFPassword.setText("");
 			}
 		});
-		btnClear.setBounds(265, 193, 89, 23);
+		btnClear.setBounds(266, 182, 89, 23);
 		contentPane.add(btnClear);
 	}
 }

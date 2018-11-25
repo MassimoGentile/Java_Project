@@ -44,7 +44,7 @@ public class JBook extends JFrame {
 	public JBook() {
 		setTitle("Java_Project - Book");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 714, 337);
+		setBounds(100, 100, 714, 293);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -78,12 +78,12 @@ public class JBook extends JFrame {
 		
 		tableGameBook = new JTable();
 		tableGameBook.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tableGameBook.setBounds(39, 128, 644, 122);
+		tableGameBook.setBounds(31, 85, 644, 122);
 		contentPane.add(tableGameBook);
 		
 		JLabel lblNewLabel_2 = new JLabel("Informations about the game");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel_2.setBounds(39, 97, 644, 23);
+		lblNewLabel_2.setBounds(31, 54, 644, 23);
 		contentPane.add(lblNewLabel_2);
 		
 		JButton btnBack = new JButton("Back");
@@ -94,7 +94,7 @@ public class JBook extends JFrame {
 				dispose();
 			}
 		});
-		btnBack.setBounds(39, 261, 89, 23);
+		btnBack.setBounds(31, 218, 89, 23);
 		contentPane.add(btnBack);
 		
 		JButton btnBookThisGame = new JButton("Book this game");
@@ -106,7 +106,7 @@ public class JBook extends JFrame {
 				dispose();
 			}
 		});
-		btnBookThisGame.setBounds(553, 261, 125, 23);
+		btnBookThisGame.setBounds(545, 218, 125, 23);
 		contentPane.add(btnBookThisGame);
 	}
 }

@@ -47,7 +47,7 @@ public class JAlterProfil extends JFrame {
 	public JAlterProfil() {
 		setTitle("Java_Project - Profil");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 565, 439);
+		setBounds(100, 100, 565, 386);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -55,61 +55,61 @@ public class JAlterProfil extends JFrame {
 		
 		JLabel lblName = new JLabel("Name :");
 		lblName.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblName.setBounds(10, 81, 92, 25);
+		lblName.setBounds(10, 24, 92, 25);
 		contentPane.add(lblName);
 		
 		JLabel lblFirstname = new JLabel("Firstname :");
 		lblFirstname.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblFirstname.setBounds(10, 117, 92, 25);
+		lblFirstname.setBounds(10, 60, 92, 25);
 		contentPane.add(lblFirstname);
 		
 		JLabel lblBirthday = new JLabel("Birthday :");
 		lblBirthday.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblBirthday.setBounds(10, 153, 92, 25);
+		lblBirthday.setBounds(10, 96, 92, 25);
 		contentPane.add(lblBirthday);
 		
 		JLabel lblNewLabel = new JLabel("Address :");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setBounds(10, 189, 92, 25);
+		lblNewLabel.setBounds(10, 132, 92, 25);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblEmail = new JLabel("Email :");
 		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblEmail.setBounds(10, 225, 92, 25);
+		lblEmail.setBounds(10, 168, 92, 25);
 		contentPane.add(lblEmail);
 		
 		JLabel lblPassword = new JLabel("Password :");
 		lblPassword.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblPassword.setBounds(10, 261, 92, 25);
+		lblPassword.setBounds(10, 204, 92, 25);
 		contentPane.add(lblPassword);
 		
 		txtName = new JTextField();
-		txtName.setBounds(150, 85, 317, 20);
+		txtName.setBounds(150, 28, 317, 20);
 		contentPane.add(txtName);
 		txtName.setColumns(10);
 		
 		txtFirstaname = new JTextField();
-		txtFirstaname.setBounds(150, 119, 317, 20);
+		txtFirstaname.setBounds(150, 62, 317, 20);
 		contentPane.add(txtFirstaname);
 		txtFirstaname.setColumns(10);
 		
 		txtBirthday = new JTextField();
-		txtBirthday.setBounds(150, 156, 317, 20);
+		txtBirthday.setBounds(150, 99, 317, 20);
 		contentPane.add(txtBirthday);
 		txtBirthday.setColumns(10);
 		
 		txtAddress = new JTextField();
-		txtAddress.setBounds(150, 191, 317, 20);
+		txtAddress.setBounds(150, 134, 317, 20);
 		contentPane.add(txtAddress);
 		txtAddress.setColumns(10);
 		
 		txtEmail = new JTextField();
-		txtEmail.setBounds(150, 227, 317, 20);
+		txtEmail.setBounds(150, 170, 317, 20);
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(10);
 		
 		txtPassword = new JPasswordField();
-		txtPassword.setBounds(150, 265, 317, 20);
+		txtPassword.setBounds(150, 208, 317, 20);
 		contentPane.add(txtPassword);
 		
 		JButton btnBack = new JButton("Back");
@@ -120,7 +120,7 @@ public class JAlterProfil extends JFrame {
 				dispose();
 			}
 		});
-		btnBack.setBounds(150, 296, 317, 23);
+		btnBack.setBounds(150, 239, 317, 23);
 		contentPane.add(btnBack);
 		
 		JButton btnSaveChanges = new JButton("Save Changes");
@@ -131,7 +131,7 @@ public class JAlterProfil extends JFrame {
 				dispose();
 			}
 		});
-		btnSaveChanges.setBounds(150, 330, 317, 23);
+		btnSaveChanges.setBounds(150, 273, 317, 23);
 		contentPane.add(btnSaveChanges);
 		
 		JButton btnDeleteAccount = new JButton("Delete your account");
@@ -143,7 +143,7 @@ public class JAlterProfil extends JFrame {
 				dispose();
 			}
 		});
-		btnDeleteAccount.setBounds(150, 364, 317, 23);
+		btnDeleteAccount.setBounds(150, 307, 317, 23);
 		contentPane.add(btnDeleteAccount);
 	}
 }

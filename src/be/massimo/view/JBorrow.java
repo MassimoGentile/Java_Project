@@ -43,7 +43,7 @@ public class JBorrow extends JFrame {
 	public JBorrow() {
 		setTitle("Java_Project - Borrow");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 722, 514);
+		setBounds(100, 100, 722, 491);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -77,12 +77,12 @@ public class JBorrow extends JFrame {
 		
 		JLabel lblNewLabel_2 = new JLabel("List of all games available to borrow");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel_2.setBounds(38, 95, 644, 23);
+		lblNewLabel_2.setBounds(33, 70, 644, 23);
 		contentPane.add(lblNewLabel_2);
 		
 		JList listGames = new JList();
 		listGames.setBorder(new LineBorder(new Color(0, 0, 0)));
-		listGames.setBounds(38, 129, 644, 300);
+		listGames.setBounds(33, 104, 644, 300);
 		contentPane.add(listGames);
 		
 		JButton btnBack = new JButton("Back");
@@ -93,7 +93,7 @@ public class JBorrow extends JFrame {
 				dispose();
 			}
 		});
-		btnBack.setBounds(38, 440, 70, 23);
+		btnBack.setBounds(33, 415, 70, 23);
 		contentPane.add(btnBack);
 		
 		JButton btnBorrow = new JButton("Borrow");
@@ -104,7 +104,7 @@ public class JBorrow extends JFrame {
 				dispose();
 			}
 		});
-		btnBorrow.setBounds(593, 440, 89, 23);
+		btnBorrow.setBounds(588, 415, 89, 23);
 		contentPane.add(btnBorrow);
 		
 		JButton btnBook = new JButton("Book");
@@ -116,7 +116,7 @@ public class JBorrow extends JFrame {
 				dispose();
 			}
 		});
-		btnBook.setBounds(312, 440, 90, 23);
+		btnBook.setBounds(307, 415, 90, 23);
 		contentPane.add(btnBook);
 	}
 }

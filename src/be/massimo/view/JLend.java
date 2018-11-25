@@ -49,7 +49,7 @@ public class JLend extends JFrame {
 	public JLend() {
 		setTitle("Java_Project - Lend");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 703, 509);
+		setBounds(100, 100, 703, 458);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -180,7 +180,7 @@ public class JLend extends JFrame {
 				dispose();
 			}
 		});
-		btnBack.setBounds(10, 424, 73, 23);
+		btnBack.setBounds(456, 384, 73, 23);
 		contentPane.add(btnBack);
 		
 		JButton btnLendGame = new JButton("Lend this game");
@@ -192,7 +192,7 @@ public class JLend extends JFrame {
 				dispose();
 			}
 		});
-		btnLendGame.setBounds(141, 424, 139, 23);
+		btnLendGame.setBounds(539, 384, 139, 23);
 		contentPane.add(btnLendGame);
 	}
 }
