@@ -47,7 +47,7 @@ public class JAlterProfil extends JFrame {
 	public JAlterProfil() {
 		setTitle("Java_Project - Profil");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 565, 416);
+		setBounds(100, 100, 565, 439);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -120,7 +120,7 @@ public class JAlterProfil extends JFrame {
 				dispose();
 			}
 		});
-		btnBack.setBounds(150, 343, 71, 23);
+		btnBack.setBounds(150, 296, 317, 23);
 		contentPane.add(btnBack);
 		
 		JButton btnSaveChanges = new JButton("Save Changes");
@@ -131,7 +131,16 @@ public class JAlterProfil extends JFrame {
 				dispose();
 			}
 		});
-		btnSaveChanges.setBounds(348, 343, 119, 23);
+		btnSaveChanges.setBounds(150, 330, 317, 23);
 		contentPane.add(btnSaveChanges);
+		
+		JButton btnDeleteAccount = new JButton("Delete your account");
+		btnDeleteAccount.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Call the player delete function
+			}
+		});
+		btnDeleteAccount.setBounds(150, 364, 317, 23);
+		contentPane.add(btnDeleteAccount);
 	}
 }
