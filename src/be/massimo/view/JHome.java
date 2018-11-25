@@ -15,10 +15,15 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
+import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
+import javax.swing.SwingConstants;
 
 public class JHome extends JFrame {
 
 	private JPanel contentPane;
+	private JTable tableLend;
+	private JTable tableBorrow;
 
 	/**
 	 * Launch the application.
@@ -42,7 +47,7 @@ public class JHome extends JFrame {
 	public JHome() {
 		setTitle("Java_Project - Home");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 722, 569);
+		setBounds(100, 100, 722, 548);
 		contentPane = new JPanel();
 		contentPane.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -52,13 +57,13 @@ public class JHome extends JFrame {
 		JButton btnBorrow = new JButton("Borrow");
 		btnBorrow.setFocusable(false);
 		btnBorrow.setFont(new Font("Tahoma", Font.BOLD, 35));
-		btnBorrow.setBounds(39, 403, 195, 77);
+		btnBorrow.setBounds(38, 425, 195, 77);
 		contentPane.add(btnBorrow);
 		
 		JButton btnLend = new JButton("Lend");
 		btnLend.setFocusable(false);
 		btnLend.setFont(new Font("Tahoma", Font.BOLD, 35));
-		btnLend.setBounds(487, 403, 195, 77);
+		btnLend.setBounds(487, 425, 195, 77);
 		contentPane.add(btnLend);
 		
 		JButton btnProfil = new JButton("");
@@ -89,5 +94,37 @@ public class JHome extends JFrame {
 		btnDisconnect.setIcon(new ImageIcon(JHome.class.getResource("/Images/logout-sign32.png")));
 		btnDisconnect.setBounds(10, 11, 32, 32);
 		contentPane.add(btnDisconnect);
+		
+		JLabel lblA = new JLabel("List of Games Lend");
+		lblA.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblA.setBounds(38, 97, 644, 20);
+		contentPane.add(lblA);
+		
+		tableLend = new JTable();
+		tableLend.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tableLend.setBounds(39, 128, 644, 122);
+		contentPane.add(tableLend);
+		
+		JLabel lblListOfGames = new JLabel("List of Games Borrow");
+		lblListOfGames.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblListOfGames.setBounds(38, 261, 644, 20);
+		contentPane.add(lblListOfGames);
+		
+		tableBorrow = new JTable();
+		tableBorrow.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tableBorrow.setBounds(38, 292, 644, 122);
+		contentPane.add(tableBorrow);
+		
+		JLabel lblUnitAmount = new JLabel("Unit Amount :");
+		lblUnitAmount.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblUnitAmount.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblUnitAmount.setBounds(516, 11, 106, 32);
+		contentPane.add(lblUnitAmount);
+		
+		JLabel lblUnit = new JLabel("10");
+		lblUnit.setHorizontalAlignment(SwingConstants.LEFT);
+		lblUnit.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblUnit.setBounds(628, 11, 50, 32);
+		contentPane.add(lblUnit);
 	}
 }
