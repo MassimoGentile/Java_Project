@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import be.massimo.pojo.Player;
@@ -20,7 +21,7 @@ public class PlayerDAO extends DAO<Player>{
 	@Override
 	public boolean create(Player obj) {
 		String birthday = new SimpleDateFormat("dd/MM/yyyy").format(obj.getBirthday());
-		String registerDate = new SimpleDateFormat("dd/MM/yyyy").format(obj.getRegisterDate());
+		String registerDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
