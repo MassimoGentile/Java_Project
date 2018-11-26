@@ -48,10 +48,12 @@ public class PlayerDAO extends DAO<Player>{
 	
 	@Override
 	public boolean update(Player obj) {
+		String birthday = new SimpleDateFormat("dd/MM/yyyy").format(obj.getBirthday());
+		String registerDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE User SET UName = '" + obj.getName() + "', UFirstname = '" + obj.getFirstname() + "', UBirthday = '" + obj.getBirthday() + "', UAddress = '" + obj.getAddress() + "', UEmail = '" + obj.getEmail() + "', UPassword = '" + obj.getPassword() + "', UAdmin = '" + obj.getAdmin() + "', UAmount =" + obj.getAmount() + ", URegisterDate = '" + obj.getRegisterDate() + "' WHERE User_Id =" + obj.getId());
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("UPDATE User SET UName = '" + obj.getName() + "', UFirstname = '" + obj.getFirstname() + "', UBirthday = '" + birthday + "', UAddress = '" + obj.getAddress() + "', UEmail = '" + obj.getEmail() + "', UPassword = '" + obj.getPassword() + "', UAdmin = '" + obj.getAdmin() + "', UAmount =" + obj.getAmount() + ", URegisterDate = '" + registerDate + "' WHERE User_Id =" + obj.getId());
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
