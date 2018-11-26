@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -21,6 +22,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import be.massimo.BusinessLayer.PlayerBusiness;
+
 
 
 // ATTENTION IL FAUT CHANGER LE NOM DE LA CLASSE HOME EN JHOME
@@ -32,7 +35,7 @@ public class JRegistration extends JFrame {
 	private JTextField txtAddress;
 	private JTextField txtEmail;
 	private JPasswordField txtPassword;
-	private static final DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
+	private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 	/**
 	 * Launch the application.
@@ -56,7 +59,7 @@ public class JRegistration extends JFrame {
 	public JRegistration() {
 		setTitle("Java_Project - Registration");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 560, 420);
+		setBounds(100, 100, 518, 369);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -122,41 +125,6 @@ public class JRegistration extends JFrame {
 		txtPassword.setBounds(150, 265, 317, 20);
 		contentPane.add(txtPassword);
 		
-		JLabel label = new JLabel("*");
-		label.setForeground(Color.RED);
-		label.setBounds(473, 225, 46, 14);
-		contentPane.add(label);
-		
-		JLabel label_1 = new JLabel("*");
-		label_1.setForeground(Color.RED);
-		label_1.setBounds(473, 264, 46, 14);
-		contentPane.add(label_1);
-		
-		JLabel lblTheFiedls = new JLabel("Fields with a red * must be filled !");
-		lblTheFiedls.setForeground(Color.RED);
-		lblTheFiedls.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTheFiedls.setFont(new Font("Tahoma", Font.PLAIN, 9));
-		lblTheFiedls.setBounds(150, 297, 317, 14);
-		contentPane.add(lblTheFiedls);
-		
-		JButton btnSignUp = new JButton("Sign Up");
-		btnSignUp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//Crée un nouvelle utilisateur et renvoie sur JHome
-				if(txtEmail.getText().isEmpty() && txtPassword.getText().isEmpty())
-					JOptionPane.showMessageDialog(null, "Email and Password are empty", "Error", JOptionPane.ERROR_MESSAGE);
-				else if(txtEmail.getText().isEmpty())
-					JOptionPane.showMessageDialog(null, "Email is empty", "Error", JOptionPane.ERROR_MESSAGE);
-				else if(txtPassword.getText().isEmpty())
-					JOptionPane.showMessageDialog(null, "Password is empty", "Error", JOptionPane.ERROR_MESSAGE);
-				else {
-					JOptionPane.showMessageDialog(null, "Work in progress please wait", "Success", JOptionPane.INFORMATION_MESSAGE);
-				}		
-			}
-		});
-		btnSignUp.setBounds(378, 344, 89, 23);
-		contentPane.add(btnSignUp);
-		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -165,7 +133,7 @@ public class JRegistration extends JFrame {
 				dispose();
 			}
 		});
-		btnBack.setBounds(150, 344, 89, 23);
+		btnBack.setBounds(150, 296, 89, 23);
 		contentPane.add(btnBack);
 		
 		
@@ -179,6 +147,29 @@ public class JRegistration extends JFrame {
         } catch (ParseException ex) {
             ex.getMessage();
         }
+		
+		JButton btnSignUp = new JButton("Sign Up");
+		btnSignUp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//Crée un nouvelle utilisateur et renvoie sur JHome
+				if(txtName.getText().isEmpty() && txtFirstname.getText().isEmpty() && txtBirthday.getText().isEmpty() && txtAddress.getText().isEmpty() && txtEmail.getText().isEmpty() && txtPassword.getText().isEmpty())
+					JOptionPane.showMessageDialog(null, "Field(s) are empty", "Error", JOptionPane.ERROR_MESSAGE);
+				else {
+					java.util.Date date = null;
+					java.sql.Date sDate = null;
+					try {
+						date = dateFormat.parse(txtBirthday.getText());
+						sDate = new java.sql.Date(date.getTime());
+					} catch (ParseException e1) {			
+						JOptionPane.showMessageDialog(null, "Error with the date", "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					PlayerBusiness player = new PlayerBusiness();
+					player.Registration(txtName.getText(), txtFirstname.getText(), sDate, txtAddress.getText(), txtEmail.getText(), txtPassword.getText());
+				}		
+			}
+		});
+		btnSignUp.setBounds(378, 296, 89, 23);
+		contentPane.add(btnSignUp);
 	}
 }
 
