@@ -1,5 +1,6 @@
 package be.massimo.pojo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public abstract class User {
@@ -8,7 +9,7 @@ public abstract class User {
 	private int Id;
 	private String Name;
 	private String Firstname;
-	private Date Birthday;
+	private String Birthday;
 	private String Address;
 	private String Email;
 	private String Password;
@@ -38,11 +39,11 @@ public abstract class User {
 		this.Firstname = firstname;
 	}
 	
-	public Date getBirthday() {
+	public String getBirthday() {
 		return this.Birthday;
 	}
 	
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.Birthday = birthday;
 	}
 	
@@ -71,7 +72,7 @@ public abstract class User {
 	}
 	
 	//	CONSTRUCTOR(S)
-	public User(int id, String name, String firstname, Date birthday, String address, String email, String password) {
+	public User(int id, String name, String firstname, String birthday, String address, String email, String password) {
 		this.Id = id;
 		this.Name = name;
 		this.Firstname = firstname;
@@ -81,7 +82,7 @@ public abstract class User {
 		this.Password = password;
 	}
 	
-	public User(String name, String firstname, Date birthday, String address, String email, String password) {
+	public User(String name, String firstname, String birthday, String address, String email, String password) {
 		this.Name = name;
 		this.Firstname = firstname;
 		this.Birthday = birthday;
@@ -93,7 +94,7 @@ public abstract class User {
 	public User(String email, String password) {
 		this.Name = "";
 		this.Firstname = "";
-		this.Birthday = new Date();
+		this.Birthday = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 		this.Address = "";
 		this.Email = email;
 		this.Password = password;

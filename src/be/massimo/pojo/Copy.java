@@ -1,12 +1,13 @@
 package be.massimo.pojo;
 
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Copy {
 	
 	//	Attributes
 	private int Id;
-	private LocalDateTime DateAdded;
+	private String DateAdded;
 	private Game G;
 	private Player Lender;
 	
@@ -19,11 +20,11 @@ public class Copy {
 		this.Id = id;
 	}
 	
-	public LocalDateTime getDateAdded() {
+	public String getDateAdded() {
 		return this.DateAdded;
 	}
 	
-	public void setDateAdded(LocalDateTime dateAdded) {
+	public void setDateAdded(String dateAdded) {
 		this.DateAdded = dateAdded;
 	}
 	
@@ -46,12 +47,12 @@ public class Copy {
 	//	CONSTRUCTOR(S)
 	public Copy(int id, Game game, Player lender) {
 		this.Id = id;
-		this.DateAdded = LocalDateTime.now();
+		this.DateAdded = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 		this.G = game;
 		this.Lender = lender;
 	}
 	
-	public Copy(int id, LocalDateTime dateAdded, Game game, Player lender) {
+	public Copy(int id, String dateAdded, Game game, Player lender) {
 		this.Id = id;
 		this.DateAdded = dateAdded;
 		this.G= game;
