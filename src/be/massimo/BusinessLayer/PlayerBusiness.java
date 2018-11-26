@@ -1,7 +1,6 @@
 package be.massimo.BusinessLayer;
 
 import java.sql.Connection;
-import java.util.Date;
 import java.util.List;
 
 import be.massimo.dao.ConnectionAccess;
@@ -18,7 +17,7 @@ public class PlayerBusiness {
 	
 	public Player Login(String email, String password) {
 		if(email != null && password != null) {
-			List<Player> listPlayer = new PlayerDAO(conn).findAll();
+			List<Player> listPlayer = new PlayerDAO(conn).getAll();
 			for(int i = 0; i < listPlayer.size(); i++) {
 				if(listPlayer.get(i).getEmail().equals(email) && listPlayer.get(i).getPassword().equals(password))
 					return listPlayer.get(i);
@@ -27,7 +26,7 @@ public class PlayerBusiness {
 		return null;
 	}
 	
-	public boolean Registration(String name, String firstname, Date birthday, String address, String email, String password) {
+	public boolean Registration(String name, String firstname, String birthday, String address, String email, String password) {
 		if(name != null && firstname != null && birthday != null && address != null && email != null && password != null) {
 			Player player = new Player(name, firstname, birthday, address, email, password);
 			if(new PlayerDAO(conn).create(player))
@@ -38,7 +37,7 @@ public class PlayerBusiness {
 			return false;
 	}
 	
-	public boolean Modification(String name, String firstname, Date birthday, String address, String email, String password) {
+	public boolean Modification(String name, String firstname, String birthday, String address, String email, String password) {
 		if(name != null && firstname != null && birthday != null && address != null && email != null && password != null) {
 			Player player = new Player(name, firstname, birthday, address, email, password);
 			if(new PlayerDAO(conn).update(player))
@@ -49,7 +48,7 @@ public class PlayerBusiness {
 			return false;
 	}
 	
-	public boolean Remove(String name, String firstname, Date birthday, String address, String email, String password) {
+	public boolean Remove(String name, String firstname, String birthday, String address, String email, String password) {
 		if(name != null && firstname != null && birthday != null && address != null && email != null && password != null) {
 			Player player = new Player(name, firstname, birthday, address, email, password);
 			if(new PlayerDAO(conn).delete(player))
