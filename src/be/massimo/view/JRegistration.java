@@ -163,6 +163,10 @@ public class JRegistration extends JFrame {
 					}
 					PlayerBusiness player = new PlayerBusiness();
 					player.Registration(txtName.getText(), txtFirstname.getText(), date, txtAddress.getText(), txtEmail.getText(), txtPassword.getText());
+					JOptionPane.showMessageDialog(null, "New User Created", "Success", JOptionPane.INFORMATION_MESSAGE);
+					JLogin login = new JLogin();
+					login.setVisible(true);
+					dispose();
 				}		
 			}
 		});
