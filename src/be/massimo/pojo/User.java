@@ -81,8 +81,16 @@ public abstract class User {
 		this.Password = password;
 	}
 	
-	public User(int id, String email, String password) {
-		this.Id = id;
+	public User(String name, String firstname, Date birthday, String address, String email, String password) {
+		this.Name = name;
+		this.Firstname = firstname;
+		this.Birthday = birthday;
+		this.Address = address;
+		this.Email = email;
+		this.Password = password;
+	}
+	
+	public User(String email, String password) {
 		this.Name = "";
 		this.Firstname = "";
 		this.Birthday = new Date();
