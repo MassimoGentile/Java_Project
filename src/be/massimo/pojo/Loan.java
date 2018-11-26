@@ -1,13 +1,11 @@
 package be.massimo.pojo;
 
-import java.time.LocalDateTime;
-
 public class Loan {
 	
 	//	ATTRIBUTES
 	private int Id;
-	private LocalDateTime BeginDate;
-	private LocalDateTime EndDate;
+	private String BeginDate;
+	private String EndDate;
 	private Player Borrower;
 	private Player Lender;
 	private Copy C;
@@ -21,19 +19,19 @@ public class Loan {
 		this.Id = id;
 	}
 	
-	public LocalDateTime getBeginDate() {
+	public String getBeginDate() {
 		return this.BeginDate;
 	}
 	
-	public void setBeginDate(LocalDateTime beginDate) {
+	public void setBeginDate(String beginDate) {
 		this.BeginDate = beginDate;
 	}
 	
-	public LocalDateTime getEndDate() {
+	public String getEndDate() {
 		return this.EndDate;
 	}
 	
-	public void setEndDate(LocalDateTime endDate) {
+	public void setEndDate(String endDate) {
 		this.EndDate = endDate;
 	}
 	
@@ -62,7 +60,7 @@ public class Loan {
 	}
 	
 	// 	CONSTRUCTOR(S)
-	public Loan(int id, LocalDateTime datedebut, LocalDateTime datefin, Player borrower, Player lender, Copy copy) {
+	public Loan(int id, String datedebut, String datefin, Player borrower, Player lender, Copy copy) {
 		this.Id = id;
 		this.BeginDate = datedebut;
 		this.EndDate = datefin;
