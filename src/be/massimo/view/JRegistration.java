@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -155,14 +154,8 @@ public class JRegistration extends JFrame {
 				if(txtName.getText().isEmpty() && txtFirstname.getText().isEmpty() && txtBirthday.getText().isEmpty() && txtAddress.getText().isEmpty() && txtEmail.getText().isEmpty() && txtPassword.getText().isEmpty())
 					JOptionPane.showMessageDialog(null, "Field(s) are empty", "Error", JOptionPane.ERROR_MESSAGE);
 				else {
-					Date date = null;
-					try {
-						date = dateFormat.parse(txtBirthday.getText());
-					} catch (ParseException e1) {			
-						JOptionPane.showMessageDialog(null, "Error with the date", "Error", JOptionPane.ERROR_MESSAGE);
-					}
 					PlayerBusiness player = new PlayerBusiness();
-					player.Registration(txtName.getText(), txtFirstname.getText(), date, txtAddress.getText(), txtEmail.getText(), txtPassword.getText());
+					player.Registration(txtName.getText(), txtFirstname.getText(), txtBirthday.getText(), txtAddress.getText(), txtEmail.getText(), txtPassword.getText());
 					JOptionPane.showMessageDialog(null, "New User Created", "Success", JOptionPane.INFORMATION_MESSAGE);
 					JLogin login = new JLogin();
 					login.setVisible(true);
