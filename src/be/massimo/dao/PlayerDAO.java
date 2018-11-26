@@ -3,6 +3,7 @@ package be.massimo.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,12 @@ public class PlayerDAO extends DAO<Player>{
 	
 	@Override
 	public boolean create(Player obj) {
+		String birthday = new SimpleDateFormat("dd/MM/yyyy").format(obj.getBirthday());
+		String registerDate = new SimpleDateFormat("dd/MM/yyyy").format(obj.getRegisterDate());
 		try {
 			this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO User (UName, UFirstname, UBirthday, UAddress, UEmail, UPassword, UAdmin, UAmount, URegisterDate) VALUES ( '" + obj.getName() + "', '" + obj.getFirstname() + "', '" + obj.getBirthday() + "', '" + obj.getAddress() + "', '" + obj.getEmail() + "', '" + obj.getPassword() + "', '" + obj.getAdmin() + "', " + obj.getAmount() + ", '" + obj.getRegisterDate() + "')");
+					ResultSet.CONCUR_READ_ONLY).executeUpdate("INSERT INTO User (UName, UFirstname, UBirthday, UAddress, UEmail, UPassword, UAdmin, UAmount, URegisterDate) VALUES ( '" + obj.getName() + "', '" + obj.getFirstname() + "', '" + birthday + "', '" + obj.getAddress() + "', '" + obj.getEmail() + "', '" + obj.getPassword() + "', '" + obj.getAdmin() + "', " + obj.getAmount() + ", '" + registerDate + "')");
 		}catch(SQLException e) {
 			e.printStackTrace();
 			return false;
