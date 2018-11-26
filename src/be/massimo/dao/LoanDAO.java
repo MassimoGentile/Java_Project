@@ -3,7 +3,6 @@ package be.massimo.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +64,7 @@ public class LoanDAO extends DAO<Loan>{
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
 			CopyDAO copyDAO = new CopyDAO(this.Connect);
 			if(result.first())
-				loan = new Loan(id, result.getDate("LBeginDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), result.getDate("LEndDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), playerDAO.find(result.getInt("Borrower_Id")), playerDAO.find(result.getInt("Lender_Id")), copyDAO.find(result.getInt("Copy_Id")));
+				loan = new Loan(id, result.getString("LBeginDate"), result.getString("LEndDate"), playerDAO.find(result.getInt("Borrower_Id")), playerDAO.find(result.getInt("Lender_Id")), copyDAO.find(result.getInt("Copy_Id")));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -73,7 +72,7 @@ public class LoanDAO extends DAO<Loan>{
 	}
 	
 	@Override
-	public List<Loan> findAll(){
+	public List<Loan> getAll(){
 		List<Loan> loans = new ArrayList<Loan>();
 		try {
 			ResultSet result = this.Connect.createStatement(
@@ -82,7 +81,7 @@ public class LoanDAO extends DAO<Loan>{
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
 			CopyDAO copyDAO = new CopyDAO(this.Connect);
 			if(result.first())
-				loans.add(new Loan(result.getInt("Loan_Id"), result.getDate("LBeginDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), result.getDate("LEndDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), playerDAO.find(result.getInt("Borrower_Id")), playerDAO.find(result.getInt("Lender_Id")), copyDAO.find(result.getInt("Copy_Id"))));
+				loans.add(new Loan(result.getInt("Loan_Id"), result.getString("LBeginDate"), result.getString("LEndDate"), playerDAO.find(result.getInt("Borrower_Id")), playerDAO.find(result.getInt("Lender_Id")), copyDAO.find(result.getInt("Copy_Id"))));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
