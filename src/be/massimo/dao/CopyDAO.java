@@ -3,7 +3,6 @@ package be.massimo.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +64,7 @@ public class CopyDAO extends DAO<Copy>{
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
 			if(result.first())
-				copy = new Copy(id, result.getDate("DateAdded").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Lender_Id")));
+				copy = new Copy(id, result.getString("DateAdded"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Lender_Id")));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -73,7 +72,7 @@ public class CopyDAO extends DAO<Copy>{
 	}
 	
 	@Override
-	public List<Copy> findAll(){
+	public List<Copy> getAll(){
 		List<Copy> copies = new ArrayList<Copy>();
 		try {
 			ResultSet result = this.Connect.createStatement(
@@ -82,7 +81,7 @@ public class CopyDAO extends DAO<Copy>{
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
 			if(result.first())
-				copies.add(new Copy(result.getInt("Copy_Id"), result.getDate("DateAdded").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(),gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Lender_Id"))));
+				copies.add(new Copy(result.getInt("Copy_Id"), result.getString("DateAdded"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Lender_Id"))));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}

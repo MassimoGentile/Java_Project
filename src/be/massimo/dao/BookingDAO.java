@@ -3,7 +3,6 @@ package be.massimo.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +63,7 @@ public class BookingDAO extends DAO<Booking>{
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
 			if(result.first())
-				booking = new Booking(result.getDate("BBeginDateWanted").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), result.getDate("BBookingDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Borrower_Id")));
+				booking = new Booking(result.getString("BBeginDateWanted"), result.getString("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Borrower_Id")));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -72,7 +71,7 @@ public class BookingDAO extends DAO<Booking>{
 	}
 	
 	@Override 
-	public List<Booking> findAll(){
+	public List<Booking> getAll(){
 		List<Booking> bookings = new ArrayList<Booking>();
 		try {
 			ResultSet result = this.Connect.createStatement(
@@ -81,7 +80,7 @@ public class BookingDAO extends DAO<Booking>{
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
 			if(result.first())
-				bookings.add(new Booking(result.getDate("BBeginDateWanted").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), result.getDate("BBookingDate").toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime(), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Borrower_Id"))));
+				bookings.add(new Booking(result.getString("BBeginDateWanted"), result.getString("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Borrower_Id"))));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}

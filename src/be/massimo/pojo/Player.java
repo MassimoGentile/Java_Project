@@ -1,6 +1,6 @@
 package be.massimo.pojo;
 
-import java.time.LocalDateTime;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +10,7 @@ public class Player extends User{
 	// 	ATTRIBUTES
 	private Boolean Admin;
 	private int Amount;
-	private LocalDateTime RegisterDate;
+	private String RegisterDate;
 	private List<Booking> ListBooking;
 	private List<Copy> ListCopy;
 	
@@ -31,7 +31,7 @@ public class Player extends User{
 		this.Amount = amount;
 	}
 	
-	public LocalDateTime getRegisterDate() {
+	public String getRegisterDate() {
 		return this.RegisterDate;
 	}
 	
@@ -70,20 +70,20 @@ public class Player extends User{
 	}
 	
 	//	CONSTRUCTOR(S)
-	public Player(int id, String name, String firstname, Date birthday, String email, String password, String address) {
+	public Player(int id, String name, String firstname, String birthday, String email, String password, String address) {
 		super(id, name, firstname, birthday, email, password, address);
 		this.Admin = false;
 		this.Amount = 10;
-		this.RegisterDate = LocalDateTime.now();
+		this.RegisterDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 		this.ListBooking = new ArrayList<Booking>();
 		this.ListCopy = new ArrayList<Copy>();
 	}
 	
-	public Player(String name, String firstname, Date birthday, String email, String password, String address) {
+	public Player(String name, String firstname, String birthday, String email, String password, String address) {
 		super(name, firstname, birthday, email, password, address);
 		this.Admin = false;
 		this.Amount = 10;
-		this.RegisterDate = LocalDateTime.now();
+		this.RegisterDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 		this.ListBooking = new ArrayList<Booking>();
 		this.ListCopy = new ArrayList<Copy>();
 	}
@@ -92,12 +92,12 @@ public class Player extends User{
 		super(email, password);
 		this.Admin = false;
 		this.Amount = 10;
-		this.RegisterDate = LocalDateTime.now();
+		this.RegisterDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 		this.ListBooking = new ArrayList<Booking>();
 		this.ListCopy = new ArrayList<Copy>();
 	}
 	
-	public Player(int id, String name, String firstname, Date birthday, String email, String password, String address, Boolean admin, int amount, LocalDateTime registerDate) {
+	public Player(int id, String name, String firstname, String birthday, String email, String password, String address, Boolean admin, int amount, String registerDate) {
 		super(id, name, firstname, birthday, email, password, address);
 		this.Admin = admin;
 		this.Amount = amount;

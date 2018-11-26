@@ -1,12 +1,10 @@
 package be.massimo.pojo;
 
-import java.time.LocalDateTime;
-
 public class Booking {
 	//	ATTRIBUTES
 		private int Id;
-		private LocalDateTime BeginDateWanted;
-		private LocalDateTime BookingDate;
+		private String BeginDateWanted;
+		private String BookingDate;
 		private Game GameWanted;
 		private Player Borrower;
 		
@@ -19,19 +17,19 @@ public class Booking {
 			this.Id = id;
 		}
 		
-		public LocalDateTime getBeginDateWanted() {
+		public String getBeginDateWanted() {
 			return this.BeginDateWanted;
 		}
 		
-		public void setBeginDateWanted(LocalDateTime beginDateWanted) {
+		public void setBeginDateWanted(String beginDateWanted) {
 			this.BeginDateWanted = beginDateWanted;
 		}
 		
-		public LocalDateTime getBookingDate() {
+		public String getBookingDate() {
 			return this.BookingDate;
 		}
 		
-		public void setBookingDate(LocalDateTime bookingDate) {
+		public void setBookingDate(String bookingDate) {
 			this.BookingDate = bookingDate;
 		}
 		
@@ -52,7 +50,7 @@ public class Booking {
 		}
 		
 	//	CONSTRUCTOR(S)
-		public Booking(LocalDateTime beginDateWanted, LocalDateTime bookingDate, Game gameWanted, Player borrower) {
+		public Booking(String beginDateWanted, String bookingDate, Game gameWanted, Player borrower) {
 			this.BeginDateWanted = beginDateWanted;
 			this.BookingDate = bookingDate;
 			this.GameWanted = gameWanted;

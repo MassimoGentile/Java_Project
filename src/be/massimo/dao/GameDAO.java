@@ -70,7 +70,7 @@ public class GameDAO extends DAO<Game>{
 	}
 	
 	@Override
-	public List<Game> findAll(){
+	public List<Game> getAll(){
 		List<Game> games = new ArrayList<Game>();
 		try {
 			ResultSet result = this.Connect.createStatement(

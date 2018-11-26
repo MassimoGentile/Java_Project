@@ -70,7 +70,7 @@ public class ConsoleDAO extends DAO<Console>{
 	}
 	
 	@Override
-	public List<Console> findAll(){
+	public List<Console> getAll(){
 		List<Console> consoles = new ArrayList<Console>();
 		try {
 			ResultSet result = this.Connect.createStatement(

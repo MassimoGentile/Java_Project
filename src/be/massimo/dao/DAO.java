@@ -19,5 +19,5 @@ public abstract class DAO<T> {
 	
 	public abstract T find(int id);
 	
-	public abstract List<T> findAll();
+	public abstract List<T> getAll();
 }
