@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.AbstractListModel;
 import javax.swing.ImageIcon;
@@ -17,6 +18,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import be.massimo.dao.GameDAO;
+import be.massimo.pojo.Game;
 import be.massimo.pojo.Player;
 
 public class JLend extends JFrame {
@@ -43,10 +46,11 @@ public class JLend extends JFrame {
 		lblNewLabel.setBounds(516, 11, 106, 32);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblUnit = new JLabel("10");
+		JLabel lblUnit = new JLabel("");
 		lblUnit.setHorizontalAlignment(SwingConstants.LEFT);
 		lblUnit.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblUnit.setBounds(628, 11, 50, 32);
+		lblUnit.setText(String.valueOf(Player.getAmount()));
 		contentPane.add(lblUnit);
 		
 		JLabel lblNewLabel_1 = new JLabel("Select your game :");
