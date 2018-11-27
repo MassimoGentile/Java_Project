@@ -102,7 +102,7 @@ public class PlayerDAO extends DAO<Player>{
 			ResultSet result = this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM User");
-			if(result.first())
+			while(result.next())
 				players.add(new Player(result.getInt("User_Id"), result.getString("UName"), result.getString("UFirstname"), result.getString("UBirthday"), result.getString("UAddress"), result.getString("UEmail"), result.getString("UPassword"), result.getBoolean("UAdmin"), result.getInt("UAmount"), result.getString("URegisterDate")));
 		}catch(SQLException e) {
 			e.printStackTrace();

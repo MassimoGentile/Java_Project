@@ -76,7 +76,7 @@ public class ConsoleDAO extends DAO<Console>{
 			ResultSet result = this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Console");
-			if(result.first())
+			while(result.next())
 				consoles.add(new Console(result.getInt("Console_Id"), result.getString("CName"), result.getString("CVersion")));
 		}catch(SQLException e) {
 			e.printStackTrace();

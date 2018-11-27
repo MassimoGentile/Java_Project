@@ -77,7 +77,7 @@ public class GameDAO extends DAO<Game>{
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Game");
 			ConsoleDAO consoleDAO = new ConsoleDAO(this.Connect);
-			if(result.first())
+			while(result.next())
 				games.add(new Game(result.getInt("Game_Id"), result.getString("GName"), result.getInt("GReleaseYear"), result.getString("GEditor"), result.getInt("GUnit"), consoleDAO.find(result.getInt("Console_Id"))));
 		}catch(SQLException e) {
 			e.printStackTrace();
