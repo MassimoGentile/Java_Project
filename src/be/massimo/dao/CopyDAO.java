@@ -80,7 +80,7 @@ public class CopyDAO extends DAO<Copy>{
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Copy");
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
-			if(result.first())
+			while(result.next())
 				copies.add(new Copy(result.getInt("Copy_Id"), result.getString("DateAdded"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Lender_Id"))));
 		}catch(SQLException e) {
 			e.printStackTrace();
