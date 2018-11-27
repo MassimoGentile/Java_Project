@@ -1,47 +1,33 @@
 package be.massimo.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JTable;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
-import java.awt.event.ActionListener;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
+import be.massimo.pojo.Player;
 
 public class JBook extends JFrame {
 
+	private Player Player;
 	private JPanel contentPane;
 	private JTable tableGameBook;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JBook frame = new JBook();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public JBook() {
+	public JBook(Player player) {
+		this.Player = player;
 		setTitle("Java_Project - Book");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 714, 293);
@@ -49,20 +35,6 @@ public class JBook extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JButton btnDisconnect = new JButton("");
-		btnDisconnect.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JHome home = new JHome();
-				home.setVisible(true);
-				dispose();
-			}
-		});
-		btnDisconnect.setContentAreaFilled(false);
-		btnDisconnect.setBorderPainted(false);
-		btnDisconnect.setIcon(new ImageIcon(JBook.class.getResource("/Images/logout-sign32.png")));
-		btnDisconnect.setBounds(10, 11, 32, 32);
-		contentPane.add(btnDisconnect);
 		
 		JLabel lblNewLabel = new JLabel("Unit Amount :");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -86,10 +58,27 @@ public class JBook extends JFrame {
 		lblNewLabel_2.setBounds(31, 54, 644, 23);
 		contentPane.add(lblNewLabel_2);
 		
+		/*
+		 * BUTTONS
+		 */
+		JButton btnDisconnect = new JButton("");
+		btnDisconnect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JLogin login = new JLogin();
+				login.setVisible(true);
+				dispose();
+			}
+		});
+		btnDisconnect.setContentAreaFilled(false);
+		btnDisconnect.setBorderPainted(false);
+		btnDisconnect.setIcon(new ImageIcon(JBook.class.getResource("/Images/logout-sign32.png")));
+		btnDisconnect.setBounds(10, 11, 32, 32);
+		contentPane.add(btnDisconnect);
+		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JBorrow borrow = new JBorrow();
+				JBorrow borrow = new JBorrow(Player);
 				borrow.setVisible(true);
 				dispose();
 			}
@@ -101,7 +90,7 @@ public class JBook extends JFrame {
 		btnBookThisGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Implementation require for the booking function
-				JHome home = new JHome();
+				JHome home = new JHome(Player);
 				home.setVisible(true);
 				dispose();
 			}

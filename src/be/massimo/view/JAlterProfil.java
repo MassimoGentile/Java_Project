@@ -1,22 +1,23 @@
 package be.massimo.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import be.massimo.pojo.Player;
 
 public class JAlterProfil extends JFrame {
 
+	private Player Player;
 	private JPanel contentPane;
 	private JTextField txtName;
 	private JTextField txtFirstaname;
@@ -26,25 +27,10 @@ public class JAlterProfil extends JFrame {
 	private JPasswordField txtPassword;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JAlterProfil frame = new JAlterProfil();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
-	public JAlterProfil() {
+	public JAlterProfil(Player player) {
+		this.Player = player;
 		setTitle("Java_Project - Profil");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 565, 386);
@@ -118,10 +104,13 @@ public class JAlterProfil extends JFrame {
 		txtPassword.setBounds(150, 208, 317, 20);
 		contentPane.add(txtPassword);
 		
+		/*
+		 * BUTTONS
+		 */
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JHome home = new JHome();
+				JHome home = new JHome(Player);
 				home.setVisible(true);
 				dispose();
 			}
@@ -132,7 +121,8 @@ public class JAlterProfil extends JFrame {
 		JButton btnSaveChanges = new JButton("Save Changes");
 		btnSaveChanges.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JHome home = new JHome();
+				//Call the player update function
+				JHome home = new JHome(Player);
 				home.setVisible(true);
 				dispose();
 			}
