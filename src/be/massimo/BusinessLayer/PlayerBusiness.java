@@ -37,24 +37,27 @@ public class PlayerBusiness {
 			return false;
 	}
 	
-	public boolean Modification(String name, String firstname, String birthday, String address, String email, String password) {
-		if(name != null && firstname != null && birthday != null && address != null && email != null && password != null) {
-			Player player = new Player(name, firstname, birthday, address, email, password);
-			if(new PlayerDAO(conn).update(player))
-				return true;
-			else
-				return false;
+	public Player Modification(int id, String name, String firstname, String birthday, String address, String email, String password) {
+		if(id != 0 && name != null && firstname != null && birthday != null && address != null && email != null && password != null) {
+			PlayerDAO playerDAO = new PlayerDAO(conn);
+			Player player = playerDAO.find(id);
+			player.setName(name);
+			player.setFirstname(firstname);
+			player.setBirthday(birthday);
+			player.setAddress(address);
+			player.setEmail(email);
+			player.setPassword(password);
+			playerDAO.update(player);
+			return player;
 		}else
-			return false;
+			return null;
 	}
 	
-	public boolean Remove(String name, String firstname, String birthday, String address, String email, String password) {
-		if(name != null && firstname != null && birthday != null && address != null && email != null && password != null) {
-			Player player = new Player(name, firstname, birthday, address, email, password);
-			if(new PlayerDAO(conn).delete(player))
-				return true;
-			else
-				return false;
+	public boolean Remove(Player player) {
+		if(player != null) {
+			PlayerDAO playerDAO = new PlayerDAO(conn);
+			playerDAO.delete(player);
+			return true;
 		}else
 			return false;
 	}

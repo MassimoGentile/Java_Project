@@ -79,7 +79,7 @@ public class BookingDAO extends DAO<Booking>{
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Booking");
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
-			if(result.first())
+			while(result.next())
 				bookings.add(new Booking(result.getString("BBeginDateWanted"), result.getString("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Borrower_Id"))));
 		}catch(SQLException e) {
 			e.printStackTrace();
