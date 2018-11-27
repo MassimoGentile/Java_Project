@@ -145,19 +145,12 @@ public class JAlterProfil extends JFrame {
 				}
 				else {
 					PlayerBusiness playerB = new PlayerBusiness();
-					boolean test = false;
-					test = playerB.Modification(Player.getId() ,txtName.getText(), txtFirstname.getText(), txtBirthday.getText(), txtAddress.getText(), txtEmail.getText(), txtPassword.getText());
-					if(test == false) {
+					Player = playerB.Modification(Player.getId() ,txtName.getText(), txtFirstname.getText(), txtBirthday.getText(), txtAddress.getText(), txtEmail.getText(), txtPassword.getText());
+					if(Player == null) {
 						JOptionPane.showMessageDialog(null, "Update fail, relaunch the application", "Update Fail", JOptionPane.ERROR_MESSAGE);
 						dispose();
 					}else {
 						JOptionPane.showMessageDialog(null, "Update success", "Success", JOptionPane.INFORMATION_MESSAGE);
-						Player.setName(txtName.getText());
-						Player.setFirstname(txtFirstname.getText());
-						Player.setBirthday(txtBirthday.getText());
-						Player.setAddress(txtAddress.getText());
-						Player.setEmail(txtEmail.getText());
-						Player.setPassword(txtPassword.getText());
 						JHome home = new JHome(Player);
 						home.setVisible(true);
 						dispose();
@@ -173,10 +166,20 @@ public class JAlterProfil extends JFrame {
 		JButton btnDeleteAccount = new JButton("Delete your account");
 		btnDeleteAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Call the player delete function
-				JLogin login = new JLogin();
-				login.setVisible(true);
-				dispose();
+				int n = JOptionPane.showConfirmDialog(null, "Are you sure to remove your account?", "Remove Account", JOptionPane.YES_NO_OPTION);
+				if(n == 0) {
+					PlayerBusiness playerB = new PlayerBusiness();
+					boolean test = false;
+					test = playerB.Remove(Player);
+					if(test == false) {
+						JOptionPane.showMessageDialog(null, "Fail to remove this account", "Error", JOptionPane.ERROR_MESSAGE);
+					}else {
+						JOptionPane.showMessageDialog(null, "Remove successfull,\n" + "Hope to see you again !", "Success", JOptionPane.INFORMATION_MESSAGE);
+						JLogin login = new JLogin();
+						login.setVisible(true);
+						dispose();
+					}
+				}
 			}
 		});
 		btnDeleteAccount.setBounds(150, 307, 317, 23);
