@@ -1,52 +1,34 @@
 package be.massimo.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JList;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.AbstractListModel;
-import javax.swing.ListSelectionModel;
 import java.awt.Cursor;
-import java.awt.Rectangle;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.AbstractListModel;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JScrollBar;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import be.massimo.pojo.Player;
 
 public class JLend extends JFrame {
 
+	private Player Player;
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JLend frame = new JLend();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public JLend() {
+	public JLend(Player player) {
+		this.Player = player;
 		setTitle("Java_Project - Lend");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 703, 458);
@@ -54,21 +36,7 @@ public class JLend extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JLogin login = new JLogin();
-				login.setVisible(true);
-				dispose();
-			}
-		});
-		btnNewButton.setContentAreaFilled(false);
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.setIcon(new ImageIcon(JLend.class.getResource("/Images/logout-sign32.png")));
-		btnNewButton.setBounds(10, 11, 32, 32);
-		contentPane.add(btnNewButton);
-		
+			
 		JLabel lblNewLabel = new JLabel("Unit Amount :");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -172,10 +140,27 @@ public class JLend extends JFrame {
 		lblUnitGame.setBounds(141, 383, 65, 20);
 		contentPane.add(lblUnitGame);
 		
+		/*
+		 * BUTTONS
+		 */
+		JButton btnDisconnect = new JButton("");
+		btnDisconnect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JLogin login = new JLogin();
+				login.setVisible(true);
+				dispose();
+			}
+		});
+		btnDisconnect.setContentAreaFilled(false);
+		btnDisconnect.setBorderPainted(false);
+		btnDisconnect.setIcon(new ImageIcon(JLend.class.getResource("/Images/logout-sign32.png")));
+		btnDisconnect.setBounds(10, 11, 32, 32);
+		contentPane.add(btnDisconnect);
+		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JHome home = new JHome();
+				JHome home = new JHome(Player);
 				home.setVisible(true);
 				dispose();
 			}
@@ -187,7 +172,7 @@ public class JLend extends JFrame {
 		btnLendGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Call the insert function of copy
-				JHome home = new JHome();
+				JHome home = new JHome(Player);
 				home.setVisible(true);
 				dispose();
 			}

@@ -1,7 +1,5 @@
 package be.massimo.view;
 
-import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,22 +33,6 @@ public class JRegistration extends JFrame {
 	private JTextField txtEmail;
 	private JPasswordField txtPassword;
 	private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JRegistration frame = new JRegistration();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -124,18 +106,6 @@ public class JRegistration extends JFrame {
 		txtPassword.setBounds(150, 265, 317, 20);
 		contentPane.add(txtPassword);
 		
-		JButton btnBack = new JButton("Back");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JLogin login = new JLogin();
-				login.setVisible(true);
-				dispose();
-			}
-		});
-		btnBack.setBounds(150, 296, 89, 23);
-		contentPane.add(btnBack);
-		
-		
 		JFormattedTextField txtBirthday = new JFormattedTextField(dateFormat);
 		txtBirthday.setBounds(150, 157, 317, 20);
 		txtBirthday.setColumns(10);
@@ -147,10 +117,23 @@ public class JRegistration extends JFrame {
             ex.getMessage();
         }
 		
+		/*
+		 * BUTTONS
+		 */
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JLogin login = new JLogin();
+				login.setVisible(true);
+				dispose();
+			}
+		});
+		btnBack.setBounds(150, 296, 89, 23);
+		contentPane.add(btnBack);
+		
 		JButton btnSignUp = new JButton("Sign Up");
 		btnSignUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Crée un nouvelle utilisateur et renvoie sur JHome
 				if(txtName.getText().isEmpty() && txtFirstname.getText().isEmpty() && txtBirthday.getText().isEmpty() && txtAddress.getText().isEmpty() && txtEmail.getText().isEmpty() && txtPassword.getText().isEmpty())
 					JOptionPane.showMessageDialog(null, "Field(s) are empty", "Error", JOptionPane.ERROR_MESSAGE);
 				else {

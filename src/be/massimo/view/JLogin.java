@@ -1,24 +1,28 @@
 package be.massimo.view;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import be.massimo.BusinessLayer.PlayerBusiness;
+import be.massimo.pojo.Player;
 
 public class JLogin extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField TxtFEmail;
-	private JPasswordField PassFPassword;
+	private JTextField txtEmail;
+	private JPasswordField txtPassword;
 
 	/**
 	 * Launch the application.
@@ -58,16 +62,50 @@ public class JLogin extends JFrame {
 		lblPassword.setBounds(10, 124, 107, 37);
 		contentPane.add(lblPassword);
 		
-		TxtFEmail = new JTextField();
-		TxtFEmail.setHorizontalAlignment(SwingConstants.CENTER);
-		TxtFEmail.setBounds(141, 70, 333, 37);
-		contentPane.add(TxtFEmail);
-		TxtFEmail.setColumns(10);
+		txtEmail = new JTextField();
+		txtEmail.setHorizontalAlignment(SwingConstants.CENTER);
+		txtEmail.setBounds(141, 70, 333, 37);
+		contentPane.add(txtEmail);
+		txtEmail.setColumns(10);
 		
-		PassFPassword = new JPasswordField();
-		PassFPassword.setHorizontalAlignment(SwingConstants.CENTER);
-		PassFPassword.setBounds(141, 124, 333, 37);
-		contentPane.add(PassFPassword);
+		txtPassword = new JPasswordField();
+		txtPassword.setHorizontalAlignment(SwingConstants.CENTER);
+		txtPassword.setBounds(141, 124, 333, 37);
+		contentPane.add(txtPassword);
+		
+		/*
+		 * BUTTONS
+		 */
+		JButton btnLogin = new JButton("Login");
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PlayerBusiness playerB = new PlayerBusiness();
+				if(txtEmail.getText().isEmpty() || txtPassword.getText().isEmpty())
+					JOptionPane.showMessageDialog(null, "One or more fields are empty", "Error", JOptionPane.ERROR_MESSAGE);
+				else {
+					Player player = playerB.Login(txtEmail.getText(), txtPassword.getText());
+					if( player == null)
+						JOptionPane.showMessageDialog(null, "Bad email or password", "Error", JOptionPane.ERROR_MESSAGE);
+					else {
+						JHome home = new JHome(player);
+						home.setVisible(true);
+						dispose();
+					}
+				}	
+			}
+		});
+		btnLogin.setBounds(141, 182, 89, 23);
+		contentPane.add(btnLogin);
+		
+		JButton btnClear = new JButton("Clear");
+		btnClear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtEmail.setText("");
+				txtPassword.setText("");
+			}
+		});
+		btnClear.setBounds(266, 182, 89, 23);
+		contentPane.add(btnClear);
 		
 		JButton btnSignUp = new JButton("Sign Up");
 		btnSignUp.addActionListener(new ActionListener() {
@@ -79,27 +117,5 @@ public class JLogin extends JFrame {
 		});
 		btnSignUp.setBounds(380, 182, 89, 23);
 		contentPane.add(btnSignUp);
-		
-		JButton btnLogin = new JButton("Login");
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//Doit permettre de faire la connexion à la base de données et si les données sont correctes, envoyer vers un nouvelle JFrame qui contient la page d'accueil des gens
-				JHome home = new JHome();
-				home.setVisible(true);
-				dispose();
-			}
-		});
-		btnLogin.setBounds(141, 182, 89, 23);
-		contentPane.add(btnLogin);
-		
-		JButton btnClear = new JButton("Clear");
-		btnClear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TxtFEmail.setText("");
-				PassFPassword.setText("");
-			}
-		});
-		btnClear.setBounds(266, 182, 89, 23);
-		contentPane.add(btnClear);
 	}
 }

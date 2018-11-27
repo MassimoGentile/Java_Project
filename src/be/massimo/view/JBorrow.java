@@ -1,46 +1,32 @@
 package be.massimo.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JList;
-import javax.swing.border.LineBorder;
 import java.awt.Color;
-import java.awt.event.ActionListener;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+
+import be.massimo.pojo.Player;
 
 public class JBorrow extends JFrame {
 
+	private Player Player;
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					JBorrow frame = new JBorrow();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public JBorrow() {
+	public JBorrow(Player player) {
+		this.Player = player;
 		setTitle("Java_Project - Borrow");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 722, 491);
@@ -48,20 +34,6 @@ public class JBorrow extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JButton btnDisconnect = new JButton("");
-		btnDisconnect.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JLogin login = new JLogin();
-				login.setVisible(true);
-				dispose();
-			}
-		});
-		btnDisconnect.setBorderPainted(false);
-		btnDisconnect.setContentAreaFilled(false);
-		btnDisconnect.setIcon(new ImageIcon(JBorrow.class.getResource("/Images/logout-sign32.png")));
-		btnDisconnect.setBounds(10, 11, 32, 32);
-		contentPane.add(btnDisconnect);
 		
 		JLabel lblNewLabel = new JLabel("Unit Amount :");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -85,10 +57,27 @@ public class JBorrow extends JFrame {
 		listGames.setBounds(33, 104, 644, 300);
 		contentPane.add(listGames);
 		
+		/*
+		 * BUTTONS
+		 */
+		JButton btnDisconnect = new JButton("");
+		btnDisconnect.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JLogin login = new JLogin();
+				login.setVisible(true);
+				dispose();
+			}
+		});
+		btnDisconnect.setBorderPainted(false);
+		btnDisconnect.setContentAreaFilled(false);
+		btnDisconnect.setIcon(new ImageIcon(JBorrow.class.getResource("/Images/logout-sign32.png")));
+		btnDisconnect.setBounds(10, 11, 32, 32);
+		contentPane.add(btnDisconnect);
+		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JHome home = new JHome();
+				JHome home = new JHome(Player);
 				home.setVisible(true);
 				dispose();
 			}
@@ -96,27 +85,27 @@ public class JBorrow extends JFrame {
 		btnBack.setBounds(33, 415, 70, 23);
 		contentPane.add(btnBack);
 		
-		JButton btnBorrow = new JButton("Borrow");
-		btnBorrow.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JHome home = new JHome();
-				home.setVisible(true);
-				dispose();
-			}
-		});
-		btnBorrow.setBounds(588, 415, 89, 23);
-		contentPane.add(btnBorrow);
-		
 		JButton btnBook = new JButton("Book");
 		btnBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Need to transfert the selected game in the list to the following JFrame
-				JBook book = new JBook();
+				JBook book = new JBook(Player);
 				book.setVisible(true);
 				dispose();
 			}
 		});
 		btnBook.setBounds(307, 415, 90, 23);
 		contentPane.add(btnBook);
+		
+		JButton btnBorrow = new JButton("Borrow");
+		btnBorrow.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JHome home = new JHome(Player);
+				home.setVisible(true);
+				dispose();
+			}
+		});
+		btnBorrow.setBounds(588, 415, 89, 23);
+		contentPane.add(btnBorrow);
 	}
 }
