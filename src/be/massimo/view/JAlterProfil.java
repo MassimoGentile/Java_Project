@@ -3,16 +3,23 @@ package be.massimo.view;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
 
+import be.massimo.BusinessLayer.PlayerBusiness;
 import be.massimo.pojo.Player;
 
 public class JAlterProfil extends JFrame {
@@ -20,11 +27,12 @@ public class JAlterProfil extends JFrame {
 	private Player Player;
 	private JPanel contentPane;
 	private JTextField txtName;
-	private JTextField txtFirstaname;
+	private JTextField txtFirstname;
 	private JTextField txtBirthday;
 	private JTextField txtAddress;
 	private JTextField txtEmail;
 	private JPasswordField txtPassword;
+	private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 	/**
 	 * Create the frame.
@@ -77,26 +85,37 @@ public class JAlterProfil extends JFrame {
 		
 		txtName = new JTextField();
 		txtName.setBounds(150, 28, 317, 20);
+		txtName.setText(Player.getName());
 		contentPane.add(txtName);
 		txtName.setColumns(10);
 		
-		txtFirstaname = new JTextField();
-		txtFirstaname.setBounds(150, 62, 317, 20);
-		contentPane.add(txtFirstaname);
-		txtFirstaname.setColumns(10);
+		txtFirstname = new JTextField();
+		txtFirstname.setBounds(150, 62, 317, 20);
+		txtFirstname.setText(Player.getFirstname());
+		contentPane.add(txtFirstname);
+		txtFirstname.setColumns(10);
 		
-		txtBirthday = new JTextField();
+		JFormattedTextField txtBirthday = new JFormattedTextField(dateFormat);
 		txtBirthday.setBounds(150, 99, 317, 20);
-		contentPane.add(txtBirthday);
 		txtBirthday.setColumns(10);
+		contentPane.add(txtBirthday);
+		try {
+            MaskFormatter dateMask = new MaskFormatter("##/##/####");
+            dateMask.install(txtBirthday);
+        } catch (ParseException ex) {
+            ex.getMessage();
+        }
+		txtBirthday.setText(Player.getBirthday());
 		
 		txtAddress = new JTextField();
 		txtAddress.setBounds(150, 134, 317, 20);
+		txtAddress.setText(Player.getAddress());
 		contentPane.add(txtAddress);
 		txtAddress.setColumns(10);
 		
 		txtEmail = new JTextField();
 		txtEmail.setBounds(150, 170, 317, 20);
+		txtEmail.setText(Player.getEmail());
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(10);
 		
@@ -121,10 +140,31 @@ public class JAlterProfil extends JFrame {
 		JButton btnSaveChanges = new JButton("Save Changes");
 		btnSaveChanges.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Call the player update function
-				JHome home = new JHome(Player);
-				home.setVisible(true);
-				dispose();
+				if(txtName.getText().isEmpty() || txtFirstname.getText().isEmpty() || txtBirthday.getText().isEmpty() || txtAddress.getText().isEmpty() || txtEmail.getText().isEmpty() || txtPassword.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "One ore more fields are empty", "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					PlayerBusiness playerB = new PlayerBusiness();
+					boolean test = false;
+					test = playerB.Modification(Player.getId() ,txtName.getText(), txtFirstname.getText(), txtBirthday.getText(), txtAddress.getText(), txtEmail.getText(), txtPassword.getText());
+					if(test == false) {
+						JOptionPane.showMessageDialog(null, "Update fail, relaunch the application", "Update Fail", JOptionPane.ERROR_MESSAGE);
+						dispose();
+					}else {
+						JOptionPane.showMessageDialog(null, "Update success", "Success", JOptionPane.INFORMATION_MESSAGE);
+						Player.setName(txtName.getText());
+						Player.setFirstname(txtFirstname.getText());
+						Player.setBirthday(txtBirthday.getText());
+						Player.setAddress(txtAddress.getText());
+						Player.setEmail(txtEmail.getText());
+						Player.setPassword(txtPassword.getText());
+						JHome home = new JHome(Player);
+						home.setVisible(true);
+						dispose();
+					}
+						
+					
+				}
 			}
 		});
 		btnSaveChanges.setBounds(150, 273, 317, 23);
