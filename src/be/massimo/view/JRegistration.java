@@ -150,7 +150,6 @@ public class JRegistration extends JFrame {
 		JButton btnSignUp = new JButton("Sign Up");
 		btnSignUp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Crée un nouvelle utilisateur et renvoie sur JHome
 				if(txtName.getText().isEmpty() && txtFirstname.getText().isEmpty() && txtBirthday.getText().isEmpty() && txtAddress.getText().isEmpty() && txtEmail.getText().isEmpty() && txtPassword.getText().isEmpty())
 					JOptionPane.showMessageDialog(null, "Field(s) are empty", "Error", JOptionPane.ERROR_MESSAGE);
 				else {
