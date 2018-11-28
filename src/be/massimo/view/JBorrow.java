@@ -4,17 +4,22 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import be.massimo.BusinessLayer.CopyBusiness;
+import be.massimo.pojo.Copy;
 import be.massimo.pojo.Player;
 
 public class JBorrow extends JFrame {
@@ -41,18 +46,25 @@ public class JBorrow extends JFrame {
 		lblNewLabel.setBounds(516, 11, 106, 32);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblUnit = new JLabel("10");
+		JLabel lblUnit = new JLabel("");
 		lblUnit.setHorizontalAlignment(SwingConstants.LEFT);
 		lblUnit.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblUnit.setBounds(628, 11, 50, 32);
+		lblUnit.setText(String.valueOf(Player.getAmount()));
 		contentPane.add(lblUnit);
 		
-		JLabel lblNewLabel_2 = new JLabel("List of all games available to borrow");
+		JLabel lblNewLabel_2 = new JLabel("List of all Copy");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel_2.setBounds(33, 70, 644, 23);
 		contentPane.add(lblNewLabel_2);
 		
-		JList listGames = new JList();
+		
+		List<Copy> copyL = new CopyBusiness().getCopies();
+		DefaultListModel<String> modelCopy = new DefaultListModel<>();
+		for(int i = 0; i < copyL.size(); i++)
+			modelCopy.addElement("Owner : " + copyL.get(i).getLender().getName() + " " + copyL.get(i).getLender().getFirstname() + " | Name: " + copyL.get(i).getGame().getName() + " | Console: " + copyL.get(i).getGame().getConsole().getName() + " " + copyL.get(i).getGame().getConsole().getVersion() + " | Unit: " + copyL.get(i).getGame().getUnit() + " | Available : " + copyL.get(i).getAvailable());
+		
+		JList listGames = new JList(modelCopy);
 		listGames.setBorder(new LineBorder(new Color(0, 0, 0)));
 		listGames.setBounds(33, 104, 644, 300);
 		contentPane.add(listGames);
@@ -100,9 +112,20 @@ public class JBorrow extends JFrame {
 		JButton btnBorrow = new JButton("Borrow");
 		btnBorrow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JHome home = new JHome(Player);
-				home.setVisible(true);
-				dispose();
+				if(listGames.isSelectionEmpty())
+					JOptionPane.showMessageDialog(null, "You must choose a game !", "Error", JOptionPane.ERROR_MESSAGE);
+				else if(copyL.get(listGames.getSelectedIndex()).getLender().getId() == Player.getId())
+					JOptionPane.showMessageDialog(null, "You can't borrow your own copy !", "Error", JOptionPane.ERROR_MESSAGE);
+				else if(copyL.get(listGames.getSelectedIndex()).getAvailable() == false)
+					JOptionPane.showMessageDialog(null, "You can't borrow this unavailable copy !", "Error", JOptionPane.ERROR_MESSAGE);
+				else {
+					/*Call the borrow function
+					JHome home = new JHome(Player);
+					home.setVisible(true);
+					dispose();*/
+					JOptionPane.showMessageDialog(null, "Copy: " + copyL.get(listGames.getSelectedIndex()).getGame().getName(), "Success", JOptionPane.INFORMATION_MESSAGE);
+				}
+				
 			}
 		});
 		btnBorrow.setBounds(588, 415, 89, 23);

@@ -1,11 +1,13 @@
 package be.massimo.pojo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Booking {
 	//	ATTRIBUTES
 		private int Id;
 		private String BeginDateWanted;
 		private String BookingDate;
-		private boolean Available;
 		private Game GameWanted;
 		private Player Borrower;
 		
@@ -34,14 +36,6 @@ public class Booking {
 			this.BookingDate = bookingDate;
 		}
 		
-		public boolean getAvailable() {
-			return this.Available;
-		}
-		
-		public void setAvailable(boolean available) {
-			this.Available = available;
-		}
-		
 		public Game getGameWanted() {
 			return this.GameWanted;
 		}
@@ -59,19 +53,17 @@ public class Booking {
 		}
 		
 	//	CONSTRUCTOR(S)
-		public Booking(String beginDateWanted, String bookingDate, boolean available, Game gameWanted, Player borrower) {
+		public Booking(String beginDateWanted, Game gameWanted, Player borrower) {
 			this.BeginDateWanted = beginDateWanted;
-			this.BookingDate = bookingDate;
-			this.Available = available;
+			this.BookingDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 			this.GameWanted = gameWanted;
 			this.Borrower = borrower;
 		}
 		
-		public Booking(int id, String beginDateWanted, String bookingDate, boolean available,Game gameWanted, Player borrower) {
+		public Booking(int id, String beginDateWanted, String bookingDate, Game gameWanted, Player borrower) {
 			this.Id = id;
 			this.BeginDateWanted = beginDateWanted;
 			this.BookingDate = bookingDate;
-			this.Available = available;
 			this.GameWanted = gameWanted;
 			this.Borrower = borrower;
 		}

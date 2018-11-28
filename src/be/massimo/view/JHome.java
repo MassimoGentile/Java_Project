@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import be.massimo.BusinessLayer.CopyBusiness;
+import be.massimo.pojo.Booking;
 import be.massimo.pojo.Copy;
 import be.massimo.pojo.Player;
 import javax.swing.ListSelectionModel;
@@ -79,21 +80,25 @@ public class JHome extends JFrame {
 		contentPane.add(scrollPane);
 		
 		List<Copy> copyL = Player.getListCopy();
-		DefaultListModel<String> model = new DefaultListModel<>();
+		DefaultListModel<String> modelCopy = new DefaultListModel<>();
 		for(int i = 0; i < copyL.size(); i++)
-			model.addElement(copyL.get(i).getGame().getName());
-		
-		JList tableLend = new JList(model);
+			modelCopy.addElement("Name: " + copyL.get(i).getGame().getName() + " | Console: " + copyL.get(i).getGame().getConsole().getName() + " " + copyL.get(i).getGame().getConsole().getVersion() + " | Unit: " + copyL.get(i).getGame().getUnit());
+		JList tableLend = new JList(modelCopy);
 		tableLend.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tableLend.setBounds(38, 97, 644, 122);
 		contentPane.add(tableLend);
 		
-		tableBorrow = new JTable();
+		
+		JList tableBorrow = new JList();
 		tableBorrow.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tableBorrow.setBounds(37, 261, 644, 122);
 		contentPane.add(tableBorrow);
 		
-		JList listBook = new JList();
+		List<Booking> bookingL = Player.getListBokking();
+		DefaultListModel<String> modelBooking = new DefaultListModel<>();
+		for(int i = 0; i < bookingL.size(); i++)
+			modelBooking.addElement("Game:" + bookingL.get(i).getGameWanted().getName() + " | Booking Date:" + bookingL.get(i).getBookingDate());
+		JList listBook = new JList(modelBooking);
 		listBook.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(listBook);
 		
