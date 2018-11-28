@@ -4,7 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -15,6 +17,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import be.massimo.BusinessLayer.CopyBusiness;
+import be.massimo.pojo.Copy;
 import be.massimo.pojo.Player;
 
 public class JBorrow extends JFrame {
@@ -53,6 +57,11 @@ public class JBorrow extends JFrame {
 		lblNewLabel_2.setBounds(33, 70, 644, 23);
 		contentPane.add(lblNewLabel_2);
 		
+		
+		List<Copy> copyL = new CopyBusiness().getCopies();
+		DefaultListModel<String> modelCopy = new DefaultListModel<>();
+		for(int i = 0; i < copyL.size(); i++)
+			modelCopy.addElement("Name: " + copyL.get(i).getGame().getName() + " | Console: " + copyL.get(i).getGame().getConsole().getName() + " " + copyL.get(i).getGame().getConsole().getVersion() + " | Unit: " + copyL.get(i).getGame().getUnit() + " | Available :");
 		JList listGames = new JList();
 		listGames.setBorder(new LineBorder(new Color(0, 0, 0)));
 		listGames.setBounds(33, 104, 644, 300);
