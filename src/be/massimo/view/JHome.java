@@ -68,10 +68,11 @@ public class JHome extends JFrame {
 		lblUnitAmount.setBounds(516, 11, 106, 32);
 		contentPane.add(lblUnitAmount);
 		
-		JLabel lblUnit = new JLabel("10");
+		JLabel lblUnit = new JLabel("");
 		lblUnit.setHorizontalAlignment(SwingConstants.LEFT);
 		lblUnit.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblUnit.setBounds(628, 11, 50, 32);
+		lblUnit.setText(String.valueOf(Player.getAmount()));
 		contentPane.add(lblUnit);
 		
 		JLabel lblListOfGame = new JLabel("List of Game Book");

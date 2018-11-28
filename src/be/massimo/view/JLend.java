@@ -4,8 +4,10 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,7 +18,13 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
+import be.massimo.BusinessLayer.ConsoleBusiness;
+import be.massimo.BusinessLayer.GameBusiness;
+import be.massimo.pojo.Console;
+import be.massimo.pojo.Game;
 import be.massimo.pojo.Player;
 
 public class JLend extends JFrame {
@@ -43,10 +51,11 @@ public class JLend extends JFrame {
 		lblNewLabel.setBounds(516, 11, 106, 32);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblUnit = new JLabel("10");
+		JLabel lblUnit = new JLabel("");
 		lblUnit.setHorizontalAlignment(SwingConstants.LEFT);
 		lblUnit.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblUnit.setBounds(628, 11, 50, 32);
+		lblUnit.setText(String.valueOf(Player.getAmount()));
 		contentPane.add(lblUnit);
 		
 		JLabel lblNewLabel_1 = new JLabel("Select your game :");
@@ -58,21 +67,6 @@ public class JLend extends JFrame {
 		scrollPane.setBounds(164, 84, 302, 74);
 		contentPane.add(scrollPane);
 		
-		JList listGame = new JList();
-		scrollPane.setViewportView(listGame);
-		listGame.setVisibleRowCount(1);
-		listGame.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		listGame.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listGame.setModel(new AbstractListModel() {
-			String[] values = new String[] {"1 - Il \u00E9tait une fois les noirs", "2 - La congolexicomatisation des lois du march\u00E9", "3 - Retour vers la friture", "4 - La mer noir ", "5 - Mamadou contre-attaque", "6 - Gizmo et les 7 nains", "7 - Bakala attraper les tous", "8 - Le retour du jet d'ail", "9 - Alibaba et les 40 trou duc", "10 - Attention \u00E0 la merde"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		
 		JLabel lblNewLabel_2 = new JLabel("Select the console :");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_2.setBounds(10, 169, 152, 20);
@@ -81,19 +75,6 @@ public class JLend extends JFrame {
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(164, 172, 164, 38);
 		contentPane.add(scrollPane_1);
-		
-		JList listConsole = new JList();
-		scrollPane_1.setViewportView(listConsole);
-		listConsole.setModel(new AbstractListModel() {
-			String[] values = new String[] {"1 - PC", "2 - PS4", "3 - XBOX ONE", "4 - NINTENDO SWITCH", "5 - PS3", "6 - XBOX 360", "7 - NINTENDO 3DS", "8 - NINTENDO DS", "9 - GAMEBOY"};
-			public int getSize() {
-				return values.length;
-			}
-			public Object getElementAt(int index) {
-				return values[index];
-			}
-		});
-		listConsole.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		JLabel lblNewLabel_3 = new JLabel("Game Informations");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -105,7 +86,7 @@ public class JLend extends JFrame {
 		lblNewLabel_4.setBounds(10, 290, 121, 20);
 		contentPane.add(lblNewLabel_4);
 		
-		JLabel lblNameGame = new JLabel("Alibaba et les 40 trou duc");
+		JLabel lblNameGame = new JLabel("");
 		lblNameGame.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNameGame.setBounds(141, 290, 537, 20);
 		contentPane.add(lblNameGame);
@@ -115,7 +96,7 @@ public class JLend extends JFrame {
 		lblNewLabel_5.setBounds(10, 321, 121, 20);
 		contentPane.add(lblNewLabel_5);
 		
-		JLabel lblYearReleaseGame = new JLabel("2012");
+		JLabel lblYearReleaseGame = new JLabel("");
 		lblYearReleaseGame.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblYearReleaseGame.setBounds(141, 321, 139, 20);
 		contentPane.add(lblYearReleaseGame);
@@ -125,7 +106,7 @@ public class JLend extends JFrame {
 		lblNewLabel_6.setBounds(10, 352, 121, 20);
 		contentPane.add(lblNewLabel_6);
 		
-		JLabel lblEditorGame = new JLabel("Mamadou Production");
+		JLabel lblEditorGame = new JLabel("");
 		lblEditorGame.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblEditorGame.setBounds(141, 352, 537, 20);
 		contentPane.add(lblEditorGame);
@@ -135,10 +116,50 @@ public class JLend extends JFrame {
 		lblUnit_1.setBounds(10, 383, 121, 20);
 		contentPane.add(lblUnit_1);
 		
-		JLabel lblUnitGame = new JLabel("5");
+		JLabel lblUnitGame = new JLabel("");
 		lblUnitGame.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblUnitGame.setBounds(141, 383, 65, 20);
 		contentPane.add(lblUnitGame);
+		
+		GameBusiness gameB = new GameBusiness();
+		List<Game> gameL = gameB.getAll();
+		DefaultListModel<String> model = new DefaultListModel<>();
+		for(int i = 0; i < gameL.size(); i++)
+			model.addElement(String.valueOf(gameL.get(i).getId()) + " - " + gameL.get(i).getName());
+		
+		JList listGame = new JList(model);
+		scrollPane.setViewportView(listGame);
+		listGame.setVisibleRowCount(1);
+		listGame.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listGame.addListSelectionListener(new ListSelectionListener(){
+			public void valueChanged(ListSelectionEvent e) {
+				if(e.getValueIsAdjusting() == false) {
+					Game game = gameL.get(listGame.getSelectedIndex());
+					lblNameGame.setText(game.getName());
+					lblYearReleaseGame.setText(String.valueOf(game.getReleaseYear()));
+					lblEditorGame.setText(game.getEditor());
+					lblUnitGame.setText(String.valueOf(game.getUnit()));
+				}
+			}
+		});
+		
+		
+		ConsoleBusiness consoleB = new ConsoleBusiness();
+		List<Console> consoleL = consoleB.getAll();
+		DefaultListModel<String> model2 = new DefaultListModel<>();
+		for(int i =0; i < consoleL.size(); i++)
+			model2.addElement(consoleL.get(i).getName() + " " + consoleL.get(i).getVersion());
+			
+		JList listConsole = new JList(model2);
+		scrollPane_1.setViewportView(listConsole);
+		listConsole.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listConsole.addListSelectionListener(new ListSelectionListener(){
+			public void valueChanged(ListSelectionEvent e) {
+				if(e.getValueIsAdjusting() == false) {
+					Console console = consoleL.get(listConsole.getSelectedIndex());
+				}
+			}
+		});
 		
 		/*
 		 * BUTTONS
