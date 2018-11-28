@@ -78,7 +78,7 @@ public class PlayerDAO extends DAO<Player>{
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Booking WHERE Borrower_Id =" + id);
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			while(result.next())
-				player.addBooking(new Booking(result.getInt("Booking_Id"), result.getString("BBeginDateWanted"), result.getString("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), player));
+				player.addBooking(new Booking(result.getInt("Booking_Id"), result.getString("BBeginDateWanted"), result.getString("BBookingDate"), result.getBoolean("BAvailable"), gameDAO.find(result.getInt("Game_Id")), player));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
