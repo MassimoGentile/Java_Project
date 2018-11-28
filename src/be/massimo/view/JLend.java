@@ -188,7 +188,8 @@ public class JLend extends JFrame {
 					CopyBusiness copyB = new CopyBusiness();
 					if(copyB.Add(copyB.findGame(Integer.parseInt(lblIdGame.getText())), Player)) {
 						JOptionPane.showMessageDialog(null, "New Copy Added Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-						//PlayerDAO find();
+						PlayerBusiness playerB = new PlayerBusiness();
+						Player = playerB.Refresh(Player.getId());
 						JHome home = new JHome(Player);
 						home.setVisible(true);
 						dispose();
