@@ -1,5 +1,8 @@
 package be.massimo.pojo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Booking {
 	//	ATTRIBUTES
 		private int Id;
@@ -50,9 +53,9 @@ public class Booking {
 		}
 		
 	//	CONSTRUCTOR(S)
-		public Booking(String beginDateWanted, String bookingDate, Game gameWanted, Player borrower) {
+		public Booking(String beginDateWanted, Game gameWanted, Player borrower) {
 			this.BeginDateWanted = beginDateWanted;
-			this.BookingDate = bookingDate;
+			this.BookingDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 			this.GameWanted = gameWanted;
 			this.Borrower = borrower;
 		}
