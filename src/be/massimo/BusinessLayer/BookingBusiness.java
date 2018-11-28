@@ -14,7 +14,7 @@ public class BookingBusiness {
 	public BookingBusiness() {
 		conn = ConnectionAccess.getInstance();
 	}
-	
+		
 	public List<Booking> getOwnBooking(int id){
 		return new BookingDAO(conn).getOwnBooking(id);
 	}

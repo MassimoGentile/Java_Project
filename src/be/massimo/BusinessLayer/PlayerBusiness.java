@@ -3,8 +3,13 @@ package be.massimo.BusinessLayer;
 import java.sql.Connection;
 import java.util.List;
 
+import be.massimo.dao.BookingDAO;
 import be.massimo.dao.ConnectionAccess;
+import be.massimo.dao.CopyDAO;
 import be.massimo.dao.PlayerDAO;
+import be.massimo.pojo.Booking;
+import be.massimo.pojo.Copy;
+import be.massimo.pojo.Game;
 import be.massimo.pojo.Player;
 
 public class PlayerBusiness {
@@ -71,5 +76,49 @@ public class PlayerBusiness {
 		}else {
 			return null;
 		}
+	}
+	
+	public Player AddBooking(Player player, String beginDateWanted, Game game) {
+		if(player != null && beginDateWanted != null && game != null) {
+			Booking booking = new Booking(beginDateWanted, game, player);
+			BookingDAO bookingDAO = new BookingDAO(conn);
+			bookingDAO.create(booking);
+			PlayerDAO playerDAO = new PlayerDAO(conn);
+			return playerDAO.find(player.getId());
+		}else
+			return null;
+	}
+	
+	public Player RemoveBooking(Player player, int id) {
+		if(player != null && id > 0) {
+			BookingDAO bookingDAO = new BookingDAO(conn);
+			Booking booking = bookingDAO.find(id);
+			bookingDAO.delete(booking);
+			PlayerDAO playerDAO = new PlayerDAO(conn);
+			return playerDAO.find(player.getId());
+		}else
+			return null;
+	}
+	
+	public Player AddCopy(Game game, Player player) {
+		if(game != null && player != null) {
+			Copy copy = new Copy(game,player);
+			CopyDAO copyDAO = new CopyDAO(conn);
+			copyDAO.create(copy);
+			PlayerDAO playerDAO = new PlayerDAO(conn);
+			return playerDAO.find(player.getId());
+		}else
+			return null;
+	}
+	
+	public Player RemoveCopy(Player player, int id) {
+		if(player != null && id > 0) {
+			CopyDAO copyDAO = new CopyDAO(conn);
+			Copy copy = copyDAO.find(id);
+			copyDAO.delete(copy);
+			PlayerDAO playerDAO = new PlayerDAO(conn);
+			return playerDAO.find(player.getId());
+		}else
+			return null;
 	}
 }
