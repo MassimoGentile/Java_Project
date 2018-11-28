@@ -20,6 +20,10 @@ public class CopyBusiness {
 		conn = ConnectionAccess.getInstance();
 	}
 	
+	public List<Copy> getCopies(){
+		return new CopyDAO(conn).getAll();
+	}
+	
 	public List<Copy> getOwnCopy(int id){
 		return new CopyDAO(conn).getOwnCopy(id);
 	}
