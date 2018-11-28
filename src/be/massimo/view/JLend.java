@@ -187,10 +187,13 @@ public class JLend extends JFrame {
 					JOptionPane.showMessageDialog(null, "You must select a game and a console !", "Error", JOptionPane.ERROR_MESSAGE);
 				else {
 					CopyBusiness copy = new CopyBusiness();
-					copy.Add(copy.findGame(Integer.parseInt(lblIdGame.getText())), Player);
-					JHome home = new JHome(Player);
-					home.setVisible(true);
-					dispose();
+					if(copy.Add(copy.findGame(Integer.parseInt(lblIdGame.getText())), Player)) {
+						JOptionPane.showMessageDialog(null, "New Copy Added Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+						JHome home = new JHome(Player);
+						home.setVisible(true);
+						dispose();
+					}else
+						JOptionPane.showMessageDialog(null, "Error during adding copy", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
