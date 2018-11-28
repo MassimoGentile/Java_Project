@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import be.massimo.BusinessLayer.ConsoleBusiness;
 import be.massimo.BusinessLayer.GameBusiness;
 import be.massimo.pojo.Console;
 import be.massimo.pojo.Game;
@@ -143,7 +144,7 @@ public class JLend extends JFrame {
 		});
 		
 		
-		/*ConsoleBusiness consoleB = new ConsoleBusiness();
+		ConsoleBusiness consoleB = new ConsoleBusiness();
 		List<Console> consoleL = consoleB.getAll();
 		DefaultListModel<String> model2 = new DefaultListModel<>();
 		for(int i =0; i < consoleL.size(); i++)
@@ -152,13 +153,13 @@ public class JLend extends JFrame {
 		JList listConsole = new JList(model2);
 		scrollPane_1.setViewportView(listConsole);
 		listConsole.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listGame.addListSelectionListener(new ListSelectionListener(){
+		listConsole.addListSelectionListener(new ListSelectionListener(){
 			public void valueChanged(ListSelectionEvent e) {
 				if(e.getValueIsAdjusting() == false) {
 					Console console = consoleL.get(listConsole.getSelectedIndex());
 				}
 			}
-		});*/
+		});
 		
 		/*
 		 * BUTTONS
