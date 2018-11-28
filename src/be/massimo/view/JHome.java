@@ -5,7 +5,9 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,7 +20,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import be.massimo.BusinessLayer.CopyBusiness;
+import be.massimo.pojo.Copy;
 import be.massimo.pojo.Player;
+import javax.swing.ListSelectionModel;
 
 public class JHome extends JFrame {
 
@@ -47,20 +52,10 @@ public class JHome extends JFrame {
 		lblA.setBounds(37, 66, 644, 20);
 		contentPane.add(lblA);
 		
-		tableLend = new JTable();
-		tableLend.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tableLend.setBounds(38, 97, 644, 122);
-		contentPane.add(tableLend);
-		
 		JLabel lblListOfGames = new JLabel("List of Games Borrow");
 		lblListOfGames.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblListOfGames.setBounds(37, 230, 644, 20);
 		contentPane.add(lblListOfGames);
-		
-		tableBorrow = new JTable();
-		tableBorrow.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tableBorrow.setBounds(37, 261, 644, 122);
-		contentPane.add(tableBorrow);
 		
 		JLabel lblUnitAmount = new JLabel("Unit Amount :");
 		lblUnitAmount.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -84,7 +79,23 @@ public class JHome extends JFrame {
 		scrollPane.setBounds(37, 425, 644, 122);
 		contentPane.add(scrollPane);
 		
+		List<Copy> copyL = Player.getListCopy();
+		DefaultListModel<String> model = new DefaultListModel<>();
+		for(int i = 0; i < copyL.size(); i++)
+			model.addElement(copyL.get(i).getGame().getName());
+		
+		JList tableLend = new JList(model);
+		tableLend.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tableLend.setBounds(38, 97, 644, 122);
+		contentPane.add(tableLend);
+		
+		tableBorrow = new JTable();
+		tableBorrow.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tableBorrow.setBounds(37, 261, 644, 122);
+		contentPane.add(tableBorrow);
+		
 		JList listBook = new JList();
+		listBook.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(listBook);
 		
 		/*
