@@ -41,13 +41,14 @@ public class JBorrow extends JFrame {
 		lblNewLabel.setBounds(516, 11, 106, 32);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblUnit = new JLabel("10");
+		JLabel lblUnit = new JLabel("");
 		lblUnit.setHorizontalAlignment(SwingConstants.LEFT);
 		lblUnit.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblUnit.setBounds(628, 11, 50, 32);
+		lblUnit.setText(String.valueOf(Player.getAmount()));
 		contentPane.add(lblUnit);
 		
-		JLabel lblNewLabel_2 = new JLabel("List of all games available to borrow");
+		JLabel lblNewLabel_2 = new JLabel("List of all Copy");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel_2.setBounds(33, 70, 644, 23);
 		contentPane.add(lblNewLabel_2);
