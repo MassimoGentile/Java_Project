@@ -20,7 +20,7 @@ public class PlayerBusiness {
 			List<Player> listPlayer = new PlayerDAO(conn).getAll();
 			for(int i = 0; i < listPlayer.size(); i++) {
 				if(listPlayer.get(i).getEmail().equals(email) && listPlayer.get(i).getPassword().equals(password))
-					return listPlayer.get(i);
+					return new PlayerDAO(conn).find(listPlayer.get(i).getId());
 			}
 		}
 		return null;
