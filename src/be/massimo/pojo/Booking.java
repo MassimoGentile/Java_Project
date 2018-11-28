@@ -56,4 +56,12 @@ public class Booking {
 			this.GameWanted = gameWanted;
 			this.Borrower = borrower;
 		}
+		
+		public Booking(int id, String beginDateWanted, String bookingDate, Game gameWanted, Player borrower) {
+			this.Id = id;
+			this.BeginDateWanted = beginDateWanted;
+			this.BookingDate = bookingDate;
+			this.GameWanted = gameWanted;
+			this.Borrower = borrower;
+		}
 }
