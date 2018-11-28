@@ -86,4 +86,20 @@ public class BookingDAO extends DAO<Booking>{
 		}
 		return bookings;
 	}
+	
+	public List<Booking> getOwnBooking(int id){
+		List<Booking> bookings = new ArrayList<Booking>();
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Booking WHERE Borrower_Id =" + id);
+			GameDAO gameDAO = new GameDAO(this.Connect);
+			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
+			while(result.next())
+				bookings.add(new Booking(result.getString("BBeginDateWanted"), result.getString("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Borrower_Id"))));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return bookings;
+	}
 }
