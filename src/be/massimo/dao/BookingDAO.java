@@ -63,7 +63,7 @@ public class BookingDAO extends DAO<Booking>{
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
 			if(result.first())
-				booking = new Booking(result.getString("BBeginDateWanted"), result.getString("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Borrower_Id")));
+				booking = new Booking(result.getInt("Booking_Id"), result.getString("BBeginDateWanted"), result.getString("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Borrower_Id")));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -80,7 +80,7 @@ public class BookingDAO extends DAO<Booking>{
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
 			while(result.next())
-				bookings.add(new Booking(result.getString("BBeginDateWanted"), result.getString("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Borrower_Id"))));
+				bookings.add(new Booking(result.getInt("Booking_Id"), result.getString("BBeginDateWanted"), result.getString("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Borrower_Id"))));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -96,7 +96,7 @@ public class BookingDAO extends DAO<Booking>{
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
 			while(result.next())
-				bookings.add(new Booking(result.getString("BBeginDateWanted"), result.getString("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Borrower_Id"))));
+				bookings.add(new Booking(result.getInt("Booking_Id"), result.getString("BBeginDateWanted"), result.getString("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Borrower_Id"))));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
