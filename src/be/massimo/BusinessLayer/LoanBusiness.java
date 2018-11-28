@@ -4,18 +4,18 @@ import java.sql.Connection;
 import java.util.List;
 
 import be.massimo.dao.ConnectionAccess;
-import be.massimo.dao.CopyDAO;
-import be.massimo.pojo.Copy;
+import be.massimo.dao.LoanDAO;
+import be.massimo.pojo.Loan;
 
-public class CopyBusiness {
+public class LoanBusiness {
 	
 	private Connection conn;
 	
-	public CopyBusiness() {
+	public LoanBusiness() {
 		conn = ConnectionAccess.getInstance();
 	}
 	
-	public List<Copy> getOwnCopy(int id){
-		return new CopyDAO(conn).getOwnCopy(id);
+	public List<Loan> getOwnLoan(int id){
+		return new LoanDAO(conn).getOwnLoan(id);
 	}
 }
