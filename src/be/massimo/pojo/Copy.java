@@ -58,4 +58,10 @@ public class Copy {
 		this.G= game;
 		this.Lender = lender;
 	}
+	
+	public Copy(Game game, Player lender) {
+		this.DateAdded = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+		this.G = game;
+		this.Lender = lender;
+	}
 }

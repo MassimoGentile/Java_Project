@@ -138,11 +138,14 @@ public class JRegistration extends JFrame {
 					JOptionPane.showMessageDialog(null, "Field(s) are empty", "Error", JOptionPane.ERROR_MESSAGE);
 				else {
 					PlayerBusiness player = new PlayerBusiness();
-					player.Registration(txtName.getText(), txtFirstname.getText(), txtBirthday.getText(), txtAddress.getText(), txtEmail.getText(), txtPassword.getText());
-					JOptionPane.showMessageDialog(null, "New User Created", "Success", JOptionPane.INFORMATION_MESSAGE);
-					JLogin login = new JLogin();
-					login.setVisible(true);
-					dispose();
+					if(player.Registration(txtName.getText(), txtFirstname.getText(), txtBirthday.getText(), txtAddress.getText(), txtEmail.getText(), txtPassword.getText())) {
+						JOptionPane.showMessageDialog(null, "New User Created", "Success", JOptionPane.INFORMATION_MESSAGE);
+						JLogin login = new JLogin();
+						login.setVisible(true);
+						dispose();
+					}else
+						JOptionPane.showMessageDialog(null, "Error user creation", "Error", JOptionPane.ERROR_MESSAGE);
+					
 				}		
 			}
 		});

@@ -1,18 +1,17 @@
 package be.massimo.view;
 
-import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -22,6 +21,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import be.massimo.BusinessLayer.ConsoleBusiness;
+import be.massimo.BusinessLayer.CopyBusiness;
 import be.massimo.BusinessLayer.GameBusiness;
 import be.massimo.pojo.Console;
 import be.massimo.pojo.Game;
@@ -67,18 +67,14 @@ public class JLend extends JFrame {
 		scrollPane.setBounds(164, 84, 302, 74);
 		contentPane.add(scrollPane);
 		
-		JLabel lblNewLabel_2 = new JLabel("Select the console :");
+		JLabel lblNewLabel_2 = new JLabel("Console :");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_2.setBounds(10, 169, 152, 20);
+		lblNewLabel_2.setBounds(10, 259, 152, 20);
 		contentPane.add(lblNewLabel_2);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(164, 172, 164, 38);
-		contentPane.add(scrollPane_1);
 		
 		JLabel lblNewLabel_3 = new JLabel("Game Informations");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel_3.setBounds(243, 236, 223, 32);
+		lblNewLabel_3.setBounds(242, 195, 223, 32);
 		contentPane.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Name :");
@@ -121,6 +117,16 @@ public class JLend extends JFrame {
 		lblUnitGame.setBounds(141, 383, 65, 20);
 		contentPane.add(lblUnitGame);
 		
+		JLabel lblIdGame = new JLabel("");
+		lblIdGame.setVisible(false);
+		lblIdGame.setBounds(20, 129, 46, 14);
+		contentPane.add(lblIdGame);
+		
+		JLabel lblNameConsole = new JLabel("");
+		lblNameConsole.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNameConsole.setBounds(141, 259, 537, 20);
+		contentPane.add(lblNameConsole);
+		
 		GameBusiness gameB = new GameBusiness();
 		List<Game> gameL = gameB.getAll();
 		DefaultListModel<String> model = new DefaultListModel<>();
@@ -139,27 +145,12 @@ public class JLend extends JFrame {
 					lblYearReleaseGame.setText(String.valueOf(game.getReleaseYear()));
 					lblEditorGame.setText(game.getEditor());
 					lblUnitGame.setText(String.valueOf(game.getUnit()));
+					lblIdGame.setText(String.valueOf(game.getId()));
+					lblNameConsole.setText(game.getConsole().getName() + " " + game.getConsole().getVersion());
 				}
 			}
 		});
 		
-		
-		ConsoleBusiness consoleB = new ConsoleBusiness();
-		List<Console> consoleL = consoleB.getAll();
-		DefaultListModel<String> model2 = new DefaultListModel<>();
-		for(int i =0; i < consoleL.size(); i++)
-			model2.addElement(consoleL.get(i).getName() + " " + consoleL.get(i).getVersion());
-			
-		JList listConsole = new JList(model2);
-		scrollPane_1.setViewportView(listConsole);
-		listConsole.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listConsole.addListSelectionListener(new ListSelectionListener(){
-			public void valueChanged(ListSelectionEvent e) {
-				if(e.getValueIsAdjusting() == false) {
-					Console console = consoleL.get(listConsole.getSelectedIndex());
-				}
-			}
-		});
 		
 		/*
 		 * BUTTONS
@@ -192,13 +183,22 @@ public class JLend extends JFrame {
 		JButton btnLendGame = new JButton("Lend this game");
 		btnLendGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Call the insert function of copy
-				JHome home = new JHome(Player);
-				home.setVisible(true);
-				dispose();
+				if(lblIdGame.getText().isEmpty())
+					JOptionPane.showMessageDialog(null, "You must select a game and a console !", "Error", JOptionPane.ERROR_MESSAGE);
+				else {
+					CopyBusiness copy = new CopyBusiness();
+					if(copy.Add(copy.findGame(Integer.parseInt(lblIdGame.getText())), Player)) {
+						JOptionPane.showMessageDialog(null, "New Copy Added Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+						JHome home = new JHome(Player);
+						home.setVisible(true);
+						dispose();
+					}else
+						JOptionPane.showMessageDialog(null, "Error during adding copy", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		btnLendGame.setBounds(539, 384, 139, 23);
 		contentPane.add(btnLendGame);
+		
 	}
 }

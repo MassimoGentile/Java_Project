@@ -68,4 +68,12 @@ public class Loan {
 		this.Lender = lender;
 		this.C = copy;
 	}
+	
+	public Loan(String datedebut, String datefin, Player borrower, Player lender, Copy copy) {
+		this.BeginDate = datedebut;
+		this.EndDate = datefin;
+		this.Borrower = borrower;
+		this.Lender = lender;
+		this.C = copy;
+	}
 }
