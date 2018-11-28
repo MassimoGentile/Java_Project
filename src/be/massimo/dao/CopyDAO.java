@@ -64,7 +64,7 @@ public class CopyDAO extends DAO<Copy>{
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
 			if(result.first())
-				copy = new Copy(id, result.getString("DateAdded"), result.getBoolean("Available"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Lender_Id")));
+				copy = new Copy(result.getInt("Copy_Id"), result.getString("DateAdded"), result.getBoolean("Available"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Lender_Id")));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
