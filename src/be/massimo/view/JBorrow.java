@@ -21,6 +21,7 @@ import javax.swing.border.LineBorder;
 import be.massimo.BusinessLayer.CopyBusiness;
 import be.massimo.pojo.Copy;
 import be.massimo.pojo.Player;
+import javax.swing.ListSelectionModel;
 
 public class JBorrow extends JFrame {
 
@@ -65,6 +66,7 @@ public class JBorrow extends JFrame {
 			modelCopy.addElement("Owner : " + copyL.get(i).getLender().getName() + " " + copyL.get(i).getLender().getFirstname() + " | Name: " + copyL.get(i).getGame().getName() + " | Console: " + copyL.get(i).getGame().getConsole().getName() + " " + copyL.get(i).getGame().getConsole().getVersion() + " | Unit: " + copyL.get(i).getGame().getUnit() + " | Available : " + copyL.get(i).getAvailable());
 		
 		JList listGames = new JList(modelCopy);
+		listGames.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		listGames.setBorder(new LineBorder(new Color(0, 0, 0)));
 		listGames.setBounds(33, 104, 644, 300);
 		contentPane.add(listGames);
@@ -100,10 +102,15 @@ public class JBorrow extends JFrame {
 		JButton btnBook = new JButton("Book");
 		btnBook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Need to transfert the selected game in the list to the following JFrame
-				JBook book = new JBook(Player);
-				book.setVisible(true);
-				dispose();
+				if(listGames.isSelectionEmpty())
+					JOptionPane.showMessageDialog(null, "You must choose a game !", "Error", JOptionPane.ERROR_MESSAGE);
+				else if(copyL.get(listGames.getSelectedIndex()).getLender().getId() == Player.getId())
+					JOptionPane.showMessageDialog(null, "You can't borrow your own copy !", "Error", JOptionPane.ERROR_MESSAGE);
+				else {
+					JBook book = new JBook(Player, copyL.get(listGames.getSelectedIndex()));
+					book.setVisible(true);
+					dispose();
+				}
 			}
 		});
 		btnBook.setBounds(307, 415, 90, 23);
