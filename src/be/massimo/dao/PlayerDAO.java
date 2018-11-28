@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.massimo.pojo.Booking;
 import be.massimo.pojo.Copy;
 import be.massimo.pojo.Player;
 
@@ -75,9 +76,9 @@ public class PlayerDAO extends DAO<Player>{
 			ResultSet result = this.Connect.createStatement(
 					ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Booking WHERE Borrower_Id =" + id);
-			BookingDAO bookingDAO = new BookingDAO(this.Connect);
+			GameDAO gameDAO = new GameDAO(this.Connect);
 			while(result.next())
-				player.addBooking(bookingDAO.find(result.getInt("Booking_Id")));
+				player.addBooking(new Booking(result.getInt("Booking_Id"), result.getString("BBeginDateWanted"), result.getString("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), player));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
