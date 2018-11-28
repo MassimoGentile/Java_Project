@@ -29,7 +29,6 @@ public class JHome extends JFrame {
 
 	private Player Player;
 	private JPanel contentPane;
-	private JTable tableLend;
 	private JTable tableBorrow;
 
 	
