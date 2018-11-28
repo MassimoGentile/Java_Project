@@ -61,4 +61,15 @@ public class PlayerBusiness {
 		}else
 			return false;
 	}
+	
+	public Player Refresh(int id) {
+		if(id != 0) {
+			Player player = null;
+			PlayerDAO playerD = new PlayerDAO(conn);
+			player = playerD.find(id);
+			return player;
+		}else {
+			return null;
+		}
+	}
 }
