@@ -116,11 +116,6 @@ public class JLend extends JFrame {
 		lblUnitGame.setBounds(141, 383, 65, 20);
 		contentPane.add(lblUnitGame);
 		
-		JLabel lblIdGame = new JLabel("");
-		lblIdGame.setVisible(false);
-		lblIdGame.setBounds(20, 129, 46, 14);
-		contentPane.add(lblIdGame);
-		
 		JLabel lblNameConsole = new JLabel("");
 		lblNameConsole.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNameConsole.setBounds(141, 259, 537, 20);
@@ -144,7 +139,6 @@ public class JLend extends JFrame {
 					lblYearReleaseGame.setText(String.valueOf(game.getReleaseYear()));
 					lblEditorGame.setText(game.getEditor());
 					lblUnitGame.setText(String.valueOf(game.getUnit()));
-					lblIdGame.setText(String.valueOf(game.getId()));
 					lblNameConsole.setText(game.getConsole().getName() + " " + game.getConsole().getVersion());
 				}
 			}
@@ -182,14 +176,14 @@ public class JLend extends JFrame {
 		JButton btnLendGame = new JButton("Lend this game");
 		btnLendGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(lblIdGame.getText().isEmpty())
-					JOptionPane.showMessageDialog(null, "You must select a game and a console !", "Error", JOptionPane.ERROR_MESSAGE);
+				if(listGame.isSelectionEmpty())
+					JOptionPane.showMessageDialog(null, "You must select a game !", "Error", JOptionPane.ERROR_MESSAGE);
 				else {
+					PlayerBusiness playerB = new PlayerBusiness();
 					CopyBusiness copyB = new CopyBusiness();
-					if(copyB.Add(copyB.findGame(Integer.parseInt(lblIdGame.getText())), Player)) {
+					Player = playerB.AddCopy(copyB.findGame(gameL.get(listGame.getSelectedIndex()).getId()), Player);	
+					if(Player != null) {
 						JOptionPane.showMessageDialog(null, "New Copy Added Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-						PlayerBusiness playerB = new PlayerBusiness();
-						Player = playerB.Refresh(Player.getId());
 						JHome home = new JHome(Player);
 						home.setVisible(true);
 						dispose();
