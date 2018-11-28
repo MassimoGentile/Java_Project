@@ -87,4 +87,20 @@ public class CopyDAO extends DAO<Copy>{
 		}
 		return copies;
 	}
+	
+	public List<Copy> getOwnCopy(int id){
+		List<Copy> copies = new ArrayList<Copy>();
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Copy WHERE Lender_Id =" + id);
+			GameDAO gameDAO = new GameDAO(this.Connect);
+			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
+			while(result.next())
+				copies.add(new Copy(result.getInt("Copy_Id"), result.getString("DateAdded"), gameDAO.find(result.getInt("Game_Id")), playerDAO.find(result.getInt("Lender_Id"))));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return copies;
+	}
 }
