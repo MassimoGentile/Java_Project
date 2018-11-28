@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -26,6 +27,7 @@ import be.massimo.BusinessLayer.GameBusiness;
 import be.massimo.pojo.Console;
 import be.massimo.pojo.Game;
 import be.massimo.pojo.Player;
+import javax.swing.JTextField;
 
 public class JLend extends JFrame {
 
@@ -121,6 +123,16 @@ public class JLend extends JFrame {
 		lblUnitGame.setBounds(141, 383, 65, 20);
 		contentPane.add(lblUnitGame);
 		
+		JLabel lblIdGame = new JLabel("");
+		lblIdGame.setVisible(false);
+		lblIdGame.setBounds(29, 219, 46, 14);
+		contentPane.add(lblIdGame);
+		
+		JLabel lblIdConsole = new JLabel("");
+		lblIdConsole.setVisible(false);
+		lblIdConsole.setBounds(29, 249, 46, 14);
+		contentPane.add(lblIdConsole);
+		
 		GameBusiness gameB = new GameBusiness();
 		List<Game> gameL = gameB.getAll();
 		DefaultListModel<String> model = new DefaultListModel<>();
@@ -139,6 +151,7 @@ public class JLend extends JFrame {
 					lblYearReleaseGame.setText(String.valueOf(game.getReleaseYear()));
 					lblEditorGame.setText(game.getEditor());
 					lblUnitGame.setText(String.valueOf(game.getUnit()));
+					lblIdGame.setText(String.valueOf(game.getId()));
 				}
 			}
 		});
@@ -157,6 +170,7 @@ public class JLend extends JFrame {
 			public void valueChanged(ListSelectionEvent e) {
 				if(e.getValueIsAdjusting() == false) {
 					Console console = consoleL.get(listConsole.getSelectedIndex());
+					lblIdConsole.setText(String.valueOf(console.getId()));
 				}
 			}
 		});
@@ -192,10 +206,13 @@ public class JLend extends JFrame {
 		JButton btnLendGame = new JButton("Lend this game");
 		btnLendGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//Call the insert function of copy
-				JHome home = new JHome(Player);
-				home.setVisible(true);
-				dispose();
+				if(lblIdGame.getText().isEmpty() || lblIdConsole.getText().isEmpty())
+					JOptionPane.showMessageDialog(null, "You must select a game and a console !", "Error", JOptionPane.ERROR_MESSAGE);
+				else {
+					JHome home = new JHome(Player);
+					home.setVisible(true);
+					dispose();
+				}
 			}
 		});
 		btnLendGame.setBounds(539, 384, 139, 23);
