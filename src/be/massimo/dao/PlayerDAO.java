@@ -78,7 +78,7 @@ public class PlayerDAO extends DAO<Player>{
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Booking WHERE Borrower_Id =" + id);
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			while(result.next())
-				player.addBooking(new Booking(result.getInt("Booking_Id"), result.getString("BBeginDateWanted"), result.getString("BBookingDate"), result.getBoolean("BAvailable"), gameDAO.find(result.getInt("Game_Id")), player));
+				player.addBooking(new Booking(result.getInt("Booking_Id"), result.getString("BBeginDateWanted"), result.getString("BBookingDate"), gameDAO.find(result.getInt("Game_Id")), player));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
@@ -90,7 +90,7 @@ public class PlayerDAO extends DAO<Player>{
 					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Copy WHERE Lender_Id =" + id);
 			GameDAO gameDAO = new GameDAO(this.Connect);
 			while(result.next())
-				player.addCopy(new Copy(result.getInt("Copy_Id"), result.getString("DateAdded"), gameDAO.find(result.getInt("Game_Id")), player));
+				player.addCopy(new Copy(result.getInt("Copy_Id"), result.getString("DateAdded"), result.getBoolean("Available"), gameDAO.find(result.getInt("Game_Id")), player));
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
