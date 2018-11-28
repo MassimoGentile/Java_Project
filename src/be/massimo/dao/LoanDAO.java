@@ -87,4 +87,20 @@ public class LoanDAO extends DAO<Loan>{
 		}
 		return loans;
 	}
+	
+	public List<Loan> getOwnLoan(int id){
+		List<Loan> loans = new ArrayList<Loan>();
+		try {
+			ResultSet result = this.Connect.createStatement(
+					ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Loan WHERE Borrower_Id =" + id);
+			PlayerDAO playerDAO = new PlayerDAO(this.Connect);
+			CopyDAO copyDAO = new CopyDAO(this.Connect);
+			while(result.next())
+				loans.add(new Loan(result.getInt("Loan_Id"), result.getString("LBeginDate"), result.getString("LEndDate"), playerDAO.find(result.getInt("Borrower_Id")), playerDAO.find(result.getInt("Lender_Id")), copyDAO.find(result.getInt("Copy_Id"))));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return loans;
+	}
 }
