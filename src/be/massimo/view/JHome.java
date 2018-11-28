@@ -97,7 +97,7 @@ public class JHome extends JFrame {
 		List<Booking> bookingL = Player.getListBokking();
 		DefaultListModel<String> modelBooking = new DefaultListModel<>();
 		for(int i = 0; i < bookingL.size(); i++)
-			modelBooking.addElement("Game:" + bookingL.get(i).getGameWanted().getName() + " | Available: " + bookingL.get(i).getAvailable() + " | Booking Date:" + bookingL.get(i).getBookingDate());
+			modelBooking.addElement("Game:" + bookingL.get(i).getGameWanted().getName() + " | Booking Date:" + bookingL.get(i).getBookingDate());
 		JList listBook = new JList(modelBooking);
 		listBook.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(listBook);
