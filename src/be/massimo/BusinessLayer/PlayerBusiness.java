@@ -20,7 +20,7 @@ public class PlayerBusiness {
 			List<Player> listPlayer = new PlayerDAO(conn).getAll();
 			for(int i = 0; i < listPlayer.size(); i++) {
 				if(listPlayer.get(i).getEmail().equals(email) && listPlayer.get(i).getPassword().equals(password))
-					return listPlayer.get(i);
+					return new PlayerDAO(conn).find(listPlayer.get(i).getId());
 			}
 		}
 		return null;
@@ -60,5 +60,16 @@ public class PlayerBusiness {
 			return true;
 		}else
 			return false;
+	}
+	
+	public Player Refresh(int id) {
+		if(id != 0) {
+			Player player = null;
+			PlayerDAO playerD = new PlayerDAO(conn);
+			player = playerD.find(id);
+			return player;
+		}else {
+			return null;
+		}
 	}
 }

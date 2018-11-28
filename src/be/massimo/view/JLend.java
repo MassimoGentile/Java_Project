@@ -20,10 +20,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import be.massimo.BusinessLayer.ConsoleBusiness;
 import be.massimo.BusinessLayer.CopyBusiness;
 import be.massimo.BusinessLayer.GameBusiness;
-import be.massimo.pojo.Console;
+import be.massimo.BusinessLayer.PlayerBusiness;
 import be.massimo.pojo.Game;
 import be.massimo.pojo.Player;
 
@@ -186,9 +185,11 @@ public class JLend extends JFrame {
 				if(lblIdGame.getText().isEmpty())
 					JOptionPane.showMessageDialog(null, "You must select a game and a console !", "Error", JOptionPane.ERROR_MESSAGE);
 				else {
-					CopyBusiness copy = new CopyBusiness();
-					if(copy.Add(copy.findGame(Integer.parseInt(lblIdGame.getText())), Player)) {
+					CopyBusiness copyB = new CopyBusiness();
+					if(copyB.Add(copyB.findGame(Integer.parseInt(lblIdGame.getText())), Player)) {
 						JOptionPane.showMessageDialog(null, "New Copy Added Successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+						PlayerBusiness playerB = new PlayerBusiness();
+						Player = playerB.Refresh(Player.getId());
 						JHome home = new JHome(Player);
 						home.setVisible(true);
 						dispose();
