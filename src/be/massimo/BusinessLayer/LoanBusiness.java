@@ -41,6 +41,9 @@ public class LoanBusiness {
 	public void RemoveLoan(Loan loan) {
 		LoanDAO loanDAO = new LoanDAO(conn);
 		loanDAO.delete(loan);
+		CopyDAO copyDAO = new CopyDAO(conn);
+		loan.getCopy().setAvailable(true);
+		copyDAO.update(loan.getCopy());
 		JOptionPane.showMessageDialog(null, "Loan Successfully Remove", "Remove Success", JOptionPane.INFORMATION_MESSAGE);
 	}
 }
