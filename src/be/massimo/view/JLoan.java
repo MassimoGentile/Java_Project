@@ -93,7 +93,7 @@ public class JLoan extends JFrame {
 		
 		JLabel txtUnit = new JLabel("");
 		txtUnit.setBounds(557, 93, 113, 14);
-		txtUnit.setText(String.valueOf(Player.getAmount()));
+		txtUnit.setText(String.valueOf(Copy.getGame().getUnit()));
 		contentPane.add(txtUnit);
 		
 		JLabel txtVersion = new JLabel("");

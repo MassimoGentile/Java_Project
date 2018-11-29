@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -20,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import be.massimo.BusinessLayer.PlayerBusiness;
+import be.massimo.pojo.Copy;
 import be.massimo.pojo.Player;
 
 public class JAlterProfil extends JFrame {
@@ -166,20 +169,30 @@ public class JAlterProfil extends JFrame {
 		JButton btnDeleteAccount = new JButton("Delete your account");
 		btnDeleteAccount.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int n = JOptionPane.showConfirmDialog(null, "Are you sure to remove your account?", "Remove Account", JOptionPane.YES_NO_OPTION);
-				if(n == 0) {
-					PlayerBusiness playerB = new PlayerBusiness();
-					boolean test = false;
-					test = playerB.Remove(Player);
-					if(test == false) {
-						JOptionPane.showMessageDialog(null, "Fail to remove this account", "Error", JOptionPane.ERROR_MESSAGE);
-					}else {
-						JOptionPane.showMessageDialog(null, "Remove successfull,\n" + "Hope to see you again !", "Success", JOptionPane.INFORMATION_MESSAGE);
-						JLogin login = new JLogin();
-						login.setVisible(true);
-						dispose();
-					}
+				List<Copy> copyL = new ArrayList<Copy>();
+				boolean available = false;
+				for(int i = 0; i < copyL.size(); i++) {
+					if(copyL.get(i).getAvailable() == false)
+						available = true;
 				}
+				if(available == true) {
+					JOptionPane.showMessageDialog(null, "You can't remove your account while your copies are on loan !", "Error", JOptionPane.ERROR_MESSAGE);
+				}else {
+					int n = JOptionPane.showConfirmDialog(null, "Are you sure to remove your account?", "Remove Account", JOptionPane.YES_NO_OPTION);
+					if(n == 0) {
+						PlayerBusiness playerB = new PlayerBusiness();
+						boolean test = false;
+						test = playerB.Remove(Player);
+						if(test == false) {
+							JOptionPane.showMessageDialog(null, "Fail to remove this account", "Error", JOptionPane.ERROR_MESSAGE);
+						}else {
+							JOptionPane.showMessageDialog(null, "Remove successfull,\n" + "Hope to see you again !", "Success", JOptionPane.INFORMATION_MESSAGE);
+							JLogin login = new JLogin();
+							login.setVisible(true);
+							dispose();
+						}
+					}
+				}	
 			}
 		});
 		btnDeleteAccount.setBounds(150, 307, 317, 23);

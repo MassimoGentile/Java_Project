@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
@@ -13,6 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,6 +24,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import be.massimo.BusinessLayer.CopyBusiness;
 import be.massimo.BusinessLayer.LoanBusiness;
 import be.massimo.pojo.Booking;
 import be.massimo.pojo.Copy;
@@ -80,14 +84,36 @@ public class JHome extends JFrame {
 		scrollPane.setBounds(37, 425, 644, 122);
 		contentPane.add(scrollPane);
 		
+		JScrollPane scrollPaneLend = new JScrollPane();
+		scrollPaneLend.setBounds(38, 97, 644, 122);
+		contentPane.add(scrollPaneLend);
+		
+		JScrollPane scrollPaneBorrow = new JScrollPane();
+		scrollPaneBorrow.setBounds(37, 261, 644, 122);
+		contentPane.add(scrollPaneBorrow);
+		
 		List<Copy> copyL = Player.getListCopy();
 		DefaultListModel<String> modelCopy = new DefaultListModel<>();
 		for(int i = 0; i < copyL.size(); i++)
 			modelCopy.addElement("Name: " + copyL.get(i).getGame().getName() + " | Console: " + copyL.get(i).getGame().getConsole().getName() + " " + copyL.get(i).getGame().getConsole().getVersion() + " | Unit: " + copyL.get(i).getGame().getUnit());
 		JList listLend = new JList(modelCopy);
-		listLend.setBorder(new LineBorder(new Color(0, 0, 0)));
-		listLend.setBounds(38, 97, 644, 122);
-		contentPane.add(listLend);
+		listLend.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listLend.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				JList list = (JList)evt.getSource();
+				if(evt.getClickCount() == 2) {
+					Copy copy = copyL.get(list.locationToIndex(evt.getPoint()));
+					if(copy.getAvailable() == false)
+						JOptionPane.showMessageDialog(null, "Error this copy is loaned, \nYou can't remove it !", "Impossible to remove now", JOptionPane.ERROR_MESSAGE);
+					else {
+						JRemoveCopy remCopy = new JRemoveCopy(Player, copy);
+						remCopy.setVisible(true);
+						dispose();
+					}	
+				}
+			}
+		});
+		scrollPaneLend.setViewportView(listLend);
 		
 		LoanBusiness loanB = new LoanBusiness();
 		List<Loan> loanL = loanB.getOwnLoan(Player.getId());
@@ -95,16 +121,37 @@ public class JHome extends JFrame {
 		for(int i = 0; i < loanL.size(); i++)
 			modelLoan.addElement("Game: " + loanL.get(i).getCopy().getGame().getName() + " | Console: " + loanL.get(i).getCopy().getGame().getConsole().getName() + " " + loanL.get(i).getCopy().getGame().getConsole().getVersion() +" | End Date: " + loanL.get(i).getEndDate() + " | Lender: " + loanL.get(i).getLender().getName() + " " + loanL.get(i).getLender().getFirstname());
 		JList listBorrow = new JList(modelLoan);
-		listBorrow.setBorder(new LineBorder(new Color(0, 0, 0)));
-		listBorrow.setBounds(37, 261, 644, 122);
-		contentPane.add(listBorrow);
+		listBorrow.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listBorrow.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				JList list = (JList)evt.getSource();
+				if(evt.getClickCount() == 2) {
+					Loan loan = loanL.get(list.locationToIndex(evt.getPoint()));
+					JRemoveLoan remLoan = new JRemoveLoan(Player, loan);
+					remLoan.setVisible(true);
+					dispose();
+				}
+			}
+		});
+		scrollPaneBorrow.setViewportView(listBorrow);
 		
 		List<Booking> bookingL = Player.getListBokking();
 		DefaultListModel<String> modelBooking = new DefaultListModel<>();
 		for(int i = 0; i < bookingL.size(); i++)
-			modelBooking.addElement("Game: " + bookingL.get(i).getGameWanted().getName() + " | Booking Date: " + bookingL.get(i).getBookingDate());
+			modelBooking.addElement("Game: " + bookingL.get(i).getGameWanted().getName() + " | Booking Date Wanted: " + bookingL.get(i).getBeginDateWanted());
 		JList listBook = new JList(modelBooking);
 		listBook.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		listBook.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				JList list = (JList)evt.getSource();
+				if(evt.getClickCount() == 2) {
+					Booking booking = bookingL.get(list.locationToIndex(evt.getPoint()));
+					JRemoveBooking remBooking = new JRemoveBooking(Player, booking);
+					remBooking.setVisible(true);
+					dispose();
+				}
+			}
+		});
 		scrollPane.setViewportView(listBook);
 		
 		/*
@@ -148,7 +195,7 @@ public class JHome extends JFrame {
 			}
 		});
 		btnBorrow.setFocusable(false);
-		btnBorrow.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnBorrow.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnBorrow.setBounds(37, 558, 127, 20);
 		contentPane.add(btnBorrow);
 		
@@ -161,8 +208,27 @@ public class JHome extends JFrame {
 			}
 		});
 		btnLend.setFocusable(false);
-		btnLend.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnLend.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnLend.setBounds(570, 558, 113, 20);
 		contentPane.add(btnLend);
+		
+		JButton btnBooking = new JButton("Booking");
+		btnBooking.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnBooking.setFocusable(false);
+		btnBooking.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JBooking booking = new JBooking(Player);
+				booking.setVisible(true);
+				dispose();
+			}
+		});
+		btnBooking.setBounds(325, 558, 113, 20);
+		contentPane.add(btnBooking);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel.setBounds(110, 11, 396, 32);
+		lblNewLabel.setText("Welcome " + Player.getName() + " " + Player.getFirstname());
+		contentPane.add(lblNewLabel);
 	}
 }
