@@ -16,15 +16,16 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import be.massimo.BusinessLayer.CopyBusiness;
+import be.massimo.BusinessLayer.LoanBusiness;
 import be.massimo.pojo.Booking;
 import be.massimo.pojo.Copy;
+import be.massimo.pojo.Loan;
 import be.massimo.pojo.Player;
-import javax.swing.ListSelectionModel;
 
 public class JHome extends JFrame {
 
@@ -47,12 +48,12 @@ public class JHome extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblA = new JLabel("List of Games Lend");
+		JLabel lblA = new JLabel("List of Games Lended");
 		lblA.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblA.setBounds(37, 66, 644, 20);
 		contentPane.add(lblA);
 		
-		JLabel lblListOfGames = new JLabel("List of Games Borrow");
+		JLabel lblListOfGames = new JLabel("List of Games Borrowed");
 		lblListOfGames.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblListOfGames.setBounds(37, 230, 644, 20);
 		contentPane.add(lblListOfGames);
@@ -70,7 +71,7 @@ public class JHome extends JFrame {
 		lblUnit.setText(String.valueOf(Player.getAmount()));
 		contentPane.add(lblUnit);
 		
-		JLabel lblListOfGame = new JLabel("List of Game Book");
+		JLabel lblListOfGame = new JLabel("List of Games Booked");
 		lblListOfGame.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblListOfGame.setBounds(37, 394, 644, 20);
 		contentPane.add(lblListOfGame);
@@ -83,16 +84,20 @@ public class JHome extends JFrame {
 		DefaultListModel<String> modelCopy = new DefaultListModel<>();
 		for(int i = 0; i < copyL.size(); i++)
 			modelCopy.addElement("Name: " + copyL.get(i).getGame().getName() + " | Console: " + copyL.get(i).getGame().getConsole().getName() + " " + copyL.get(i).getGame().getConsole().getVersion() + " | Unit: " + copyL.get(i).getGame().getUnit());
-		JList tableLend = new JList(modelCopy);
-		tableLend.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tableLend.setBounds(38, 97, 644, 122);
-		contentPane.add(tableLend);
+		JList listLend = new JList(modelCopy);
+		listLend.setBorder(new LineBorder(new Color(0, 0, 0)));
+		listLend.setBounds(38, 97, 644, 122);
+		contentPane.add(listLend);
 		
-		
-		JList tableBorrow = new JList();
-		tableBorrow.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tableBorrow.setBounds(37, 261, 644, 122);
-		contentPane.add(tableBorrow);
+		LoanBusiness loanB = new LoanBusiness();
+		List<Loan> loanL = loanB.getOwnLoan(Player.getId());
+		DefaultListModel<String> modelLoan = new DefaultListModel<>();
+		for(int i = 0; i < loanL.size(); i++)
+			modelLoan.addElement("Game: " + loanL.get(i).getCopy().getGame().getName() + " | Console: " + loanL.get(i).getCopy().getGame().getConsole().getName() + " " + loanL.get(i).getCopy().getGame().getConsole().getVersion() +" | End Date: " + loanL.get(i).getEndDate() + " | Lender: " + loanL.get(i).getLender().getName() + " " + loanL.get(i).getLender().getFirstname());
+		JList listBorrow = new JList(modelLoan);
+		listBorrow.setBorder(new LineBorder(new Color(0, 0, 0)));
+		listBorrow.setBounds(37, 261, 644, 122);
+		contentPane.add(listBorrow);
 		
 		List<Booking> bookingL = Player.getListBokking();
 		DefaultListModel<String> modelBooking = new DefaultListModel<>();
