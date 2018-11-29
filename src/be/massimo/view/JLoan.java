@@ -142,29 +142,6 @@ public class JLoan extends JFrame {
 		btnDisconnect.setBounds(10, 11, 32, 32);
 		contentPane.add(btnDisconnect);
 		
-		JButton btnCheckAvailable = new JButton("Check Available");
-		btnCheckAvailable.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String EndDate = txtEndDate.getText();
-				try {
-					Date date = dateFormat.parse(EndDate);
-				} catch (ParseException e1) {
-					e1.printStackTrace();
-				}
-				if(EndDate.trim().length() != 10)
-					JOptionPane.showMessageDialog(null, "You must set a Date", "Error", JOptionPane.ERROR_MESSAGE);
-				else {
-					List<Copy> copyL = new CopyBusiness().findAll(Copy.getId());
-					boolean available = true;
-					for(int i = 0; i < copyL.size(); i++) {
-						//Date dateBooking = dateFormat.parse(copyL.get(i).get)
-					}
-				}
-			}
-		});
-		btnCheckAvailable.setBounds(298, 180, 113, 23);
-		contentPane.add(btnCheckAvailable);
-		
 		JButton btnBack = new JButton("Back");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
