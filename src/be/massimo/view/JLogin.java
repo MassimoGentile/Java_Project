@@ -86,6 +86,11 @@ public class JLogin extends JFrame {
 					Player player = playerB.Login(txtEmail.getText(), txtPassword.getText());
 					if( player == null)
 						JOptionPane.showMessageDialog(null, "Bad email or password", "Error", JOptionPane.ERROR_MESSAGE);
+					else if(player.getAdmin() == true) {
+						JAdmin admin = new JAdmin(player);
+						admin.setVisible(true);
+						dispose();
+					}
 					else {
 						JHome home = new JHome(player);
 						home.setVisible(true);
