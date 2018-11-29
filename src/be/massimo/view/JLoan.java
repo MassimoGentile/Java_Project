@@ -1,30 +1,26 @@
 package be.massimo.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.text.MaskFormatter;
-
-import be.massimo.BusinessLayer.CopyBusiness;
-import be.massimo.pojo.Copy;
-import be.massimo.pojo.Player;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.awt.event.ActionEvent;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JFormattedTextField;
+import javax.swing.border.EmptyBorder;
+import javax.swing.text.MaskFormatter;
+
+import be.massimo.BusinessLayer.LoanBusiness;
+import be.massimo.pojo.Copy;
+import be.massimo.pojo.Player;
 
 public class JLoan extends JFrame {
 
@@ -156,6 +152,13 @@ public class JLoan extends JFrame {
 		JButton btnLoan = new JButton("Get Loan");
 		btnLoan.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String EndDate = txtEndDate.getText();
+				if(EndDate.trim().length() != 10)
+					JOptionPane.showMessageDialog(null, "You must set a Date", "Error", JOptionPane.ERROR_MESSAGE);
+				else {
+					LoanBusiness loanB = new LoanBusiness();
+				
+				}
 			}
 		});
 		btnLoan.setBounds(557, 222, 89, 23);

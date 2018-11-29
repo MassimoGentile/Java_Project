@@ -28,7 +28,7 @@ public class JBook extends JFrame {
 	private Player Player;
 	private Copy Copy;
 	private JPanel contentPane;
-	private JTextField txtBeginDateWanted;
+	
 	private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 	/**
