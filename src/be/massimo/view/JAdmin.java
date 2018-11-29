@@ -38,7 +38,7 @@ public class JAdmin extends JFrame {
 		this.Player = player;
 		setTitle("Java_Project - Admin Control Panel");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 671, 430);
+		setBounds(100, 100, 343, 264);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -47,11 +47,11 @@ public class JAdmin extends JFrame {
 		JLabel lblNewLabel = new JLabel("Welcome Home Boss !");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblNewLabel.setBounds(59, 11, 512, 35);
+		lblNewLabel.setBounds(59, 11, 253, 35);
 		contentPane.add(lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(164, 84, 302, 74);
+		scrollPane.setBounds(10, 77, 302, 74);
 		contentPane.add(scrollPane);
 		
 		GameBusiness gameB = new GameBusiness();
@@ -91,16 +91,12 @@ public class JAdmin extends JFrame {
 				}
 			}
 		});
-		btnUpdateGame.setBounds(10, 194, 148, 23);
+		btnUpdateGame.setBounds(10, 160, 302, 23);
 		contentPane.add(btnUpdateGame);
 		
-		JButton btnUpdateUnit = new JButton("Update Unit");
-		btnUpdateUnit.setBounds(497, 194, 148, 23);
+		JButton btnUpdateUnit = new JButton("Update Unit User");
+		btnUpdateUnit.setBounds(10, 194, 302, 23);
 		contentPane.add(btnUpdateUnit);
-		
-		JButton btnAddGame = new JButton("Add Game");
-		btnAddGame.setBounds(257, 194, 148, 23);
-		contentPane.add(btnAddGame);
 		listGame.addListSelectionListener(new ListSelectionListener(){
 			public void valueChanged(ListSelectionEvent e) {
 				if(e.getValueIsAdjusting() == false) {

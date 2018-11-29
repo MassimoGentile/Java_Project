@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import be.massimo.BusinessLayer.GameBusiness;
 import be.massimo.pojo.Game;
 import be.massimo.pojo.Player;
 import java.awt.event.ActionListener;
@@ -25,7 +26,7 @@ public class JGame extends JFrame {
 	private JTextField txtUnit;
 
 	/**
-	 * Create the frame. int id,String name, int releaseYear, String editor, int unit, Console console
+	 * Create the frame.
 	 */
 	public JGame(Player player, Game game) {
 		setTitle("Java_Project - Game Update");
@@ -85,8 +86,8 @@ public class JGame extends JFrame {
 		JButton btnUpdate = new JButton("Update");
 		btnUpdate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GameDAO gameD = new GameDAO();
-				gameD.Modification(Game.getId(), txtName.getText(), Integer.parseInt(txtReleaseYear.getText()), txtEditor.getText(), Integer.parseInt(txtUnit.getText()), Game.getConsole());
+				GameBusiness gameB = new GameBusiness();
+				gameB.Modification(Game.getId(), txtName.getText(), Integer.parseInt(txtReleaseYear.getText()), txtEditor.getText(), Integer.parseInt(txtUnit.getText()), Game.getConsole());
 				JAdmin admin = new JAdmin(Player);
 				admin.setVisible(true);
 				dispose();
