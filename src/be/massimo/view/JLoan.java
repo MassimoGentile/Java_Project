@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
+import be.massimo.BusinessLayer.CopyBusiness;
 import be.massimo.pojo.Copy;
 import be.massimo.pojo.Player;
 import javax.swing.JButton;
@@ -17,6 +18,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -152,7 +154,11 @@ public class JLoan extends JFrame {
 				if(EndDate.trim().length() != 10)
 					JOptionPane.showMessageDialog(null, "You must set a Date", "Error", JOptionPane.ERROR_MESSAGE);
 				else {
-					//List<Copy> find(int id) (while.next)
+					List<Copy> copyL = new CopyBusiness().findAll(Copy.getId());
+					boolean available = true;
+					for(int i = 0; i < copyL.size(); i++) {
+						//Date dateBooking = dateFormat.parse(copyL.get(i).get)
+					}
 				}
 			}
 		});
