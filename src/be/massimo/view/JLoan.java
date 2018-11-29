@@ -155,6 +155,9 @@ public class JLoan extends JFrame {
 				String EndDate = txtEndDate.getText();
 				if(EndDate.trim().length() != 10)
 					JOptionPane.showMessageDialog(null, "You must set a Date", "Error", JOptionPane.ERROR_MESSAGE);
+				else if(Player.getAmount() < Copy.getGame().getUnit()) {
+					JOptionPane.showMessageDialog(null, "You don't have enought Unit !", "Error", JOptionPane.ERROR_MESSAGE);
+				}
 				else {
 					LoanBusiness loanB = new LoanBusiness();
 					loanB.MakeLoan(EndDate, Player, Copy);
