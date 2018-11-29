@@ -105,7 +105,7 @@ public class JBorrow extends JFrame {
 				if(listGames.isSelectionEmpty())
 					JOptionPane.showMessageDialog(null, "You must choose a game !", "Error", JOptionPane.ERROR_MESSAGE);
 				else if(copyL.get(listGames.getSelectedIndex()).getLender().getId() == Player.getId())
-					JOptionPane.showMessageDialog(null, "You can't borrow your own copy !", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "You can't book your own copy !", "Error", JOptionPane.ERROR_MESSAGE);
 				else {
 					JBook book = new JBook(Player, copyL.get(listGames.getSelectedIndex()));
 					book.setVisible(true);
