@@ -67,17 +67,6 @@ public class PlayerBusiness {
 			return false;
 	}
 	
-	public Player Refresh(int id) {
-		if(id != 0) {
-			Player player = null;
-			PlayerDAO playerD = new PlayerDAO(conn);
-			player = playerD.find(id);
-			return player;
-		}else {
-			return null;
-		}
-	}
-	
 	public Player AddBooking(Player player, String beginDateWanted, Game game) {
 		if(player != null && beginDateWanted != null && game != null) {
 			Booking booking = new Booking(beginDateWanted, game, player);
