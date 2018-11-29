@@ -22,6 +22,14 @@ public class GameBusiness {
 		return new GameDAO(conn).getAll();
 	}
 	
+	public void Add(int id, String name, int releaseYear, String editor, int unit, Console console) {
+		if(id > 0 && name != null && releaseYear != 0 && editor != null && unit != 0 && console != null) {
+			GameDAO gameDAO = new GameDAO(conn);
+			gameDAO.create(new Game(id, name, releaseYear, editor, unit, console));
+			JOptionPane.showMessageDialog(null, "Game Added !", "Success", JOptionPane.INFORMATION_MESSAGE);
+		}	
+	}
+	
 	public void Modification(int id, String name, int releaseYear, String editor, int unit, Console console) {
 		if(id > 0 && name != null && releaseYear != 0 && editor != null && unit != 0 && console != null) {
 			GameDAO gameDAO = new GameDAO(conn);
