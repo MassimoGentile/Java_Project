@@ -157,7 +157,10 @@ public class JLoan extends JFrame {
 					JOptionPane.showMessageDialog(null, "You must set a Date", "Error", JOptionPane.ERROR_MESSAGE);
 				else {
 					LoanBusiness loanB = new LoanBusiness();
-				
+					loanB.MakeLoan(EndDate, Player, Copy);
+					JHome home = new JHome(Player);
+					home.setVisible(true);
+					dispose();
 				}
 			}
 		});
