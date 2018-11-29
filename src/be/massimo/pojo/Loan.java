@@ -1,5 +1,8 @@
 package be.massimo.pojo;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Loan {
 	
 	//	ATTRIBUTES
@@ -69,8 +72,8 @@ public class Loan {
 		this.C = copy;
 	}
 	
-	public Loan(String datedebut, String datefin, Player borrower, Player lender, Copy copy) {
-		this.BeginDate = datedebut;
+	public Loan(String datefin, Player borrower, Player lender, Copy copy) {
+		this.BeginDate = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 		this.EndDate = datefin;
 		this.Borrower = borrower;
 		this.Lender = lender;

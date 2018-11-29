@@ -14,29 +14,28 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.MaskFormatter;
 
 import be.massimo.BusinessLayer.PlayerBusiness;
-import be.massimo.pojo.Copy;
+import be.massimo.pojo.Game;
 import be.massimo.pojo.Player;
 
 public class JBook extends JFrame {
 
 	private Player Player;
-	private Copy Copy;
+	private Game Game;
 	private JPanel contentPane;
-	private JTextField txtBeginDateWanted;
+	
 	private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 	/**
 	 * Create the frame.
 	 */
-	public JBook(Player player, Copy copy) {
+	public JBook(Player player, Game game) {
 		this.Player = player;
-		this.Copy = copy;
+		this.Game = game;
 		setTitle("Java_Project - Book");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 714, 293);
@@ -75,7 +74,7 @@ public class JBook extends JFrame {
 			}
 		});
 		
-		JLabel lblNewLabel_1 = new JLabel("Lender :");
+		JLabel lblNewLabel_1 = new JLabel("Editor :");
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_1.setBounds(31, 88, 75, 20);
@@ -117,24 +116,24 @@ public class JBook extends JFrame {
         }
 		
 		
-		JLabel txtLender = new JLabel("");
-		txtLender.setBounds(152, 93, 307, 14);
-		txtLender.setText(Copy.getLender().getName() + " " + Copy.getLender().getFirstname());
-		contentPane.add(txtLender);
+		JLabel txtEditor = new JLabel("");
+		txtEditor.setBounds(152, 93, 307, 14);
+		txtEditor.setText(Game.getEditor());
+		contentPane.add(txtEditor);
 		
 		JLabel txtName = new JLabel("");
 		txtName.setBounds(152, 124, 523, 14);
-		txtName.setText(Copy.getGame().getName());
+		txtName.setText(Game.getName());
 		contentPane.add(txtName);
 		
 		JLabel txtVersion = new JLabel("");
 		txtVersion.setBounds(152, 155, 307, 14);
-		txtVersion.setText(Copy.getGame().getConsole().getName() + " " + Copy.getGame().getConsole().getVersion());
+		txtVersion.setText(Game.getConsole().getName() + " " + Game.getConsole().getVersion());
 		contentPane.add(txtVersion);
 		
 		JLabel txtUnit = new JLabel("");
 		txtUnit.setBounds(557, 93, 113, 14);
-		txtUnit.setText(String.valueOf(Copy.getGame().getUnit()));
+		txtUnit.setText(String.valueOf(Game.getUnit()));
 		contentPane.add(txtUnit);
 		
 		btnDisconnect.setContentAreaFilled(false);
@@ -163,7 +162,7 @@ public class JBook extends JFrame {
 					JOptionPane.showMessageDialog(null, "You must set a Date", "Error", JOptionPane.ERROR_MESSAGE);
 				else {
 					PlayerBusiness playerB = new PlayerBusiness();
-					Player = playerB.AddBooking(Player, DateWanted, copy.getGame());
+					Player = playerB.AddBooking(Player, DateWanted, Game);
 					JOptionPane.showMessageDialog(null, "Booking registered !", "Success", JOptionPane.INFORMATION_MESSAGE);
 					JHome home = new JHome(Player);
 					home.setVisible(true);

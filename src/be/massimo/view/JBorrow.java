@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -65,11 +66,13 @@ public class JBorrow extends JFrame {
 		for(int i = 0; i < copyL.size(); i++)
 			modelCopy.addElement("Owner : " + copyL.get(i).getLender().getName() + " " + copyL.get(i).getLender().getFirstname() + " | Name: " + copyL.get(i).getGame().getName() + " | Console: " + copyL.get(i).getGame().getConsole().getName() + " " + copyL.get(i).getGame().getConsole().getVersion() + " | Unit: " + copyL.get(i).getGame().getUnit() + " | Available : " + copyL.get(i).getAvailable());
 		
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(33,104, 644, 300);
+		contentPane.add(scrollPane);
 		JList listGames = new JList(modelCopy);
 		listGames.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listGames.setBorder(new LineBorder(new Color(0, 0, 0)));
-		listGames.setBounds(33, 104, 644, 300);
-		contentPane.add(listGames);
+		scrollPane.setViewportView(listGames);
 		
 		/*
 		 * BUTTONS
@@ -99,40 +102,20 @@ public class JBorrow extends JFrame {
 		btnBack.setBounds(33, 415, 70, 23);
 		contentPane.add(btnBack);
 		
-		JButton btnBook = new JButton("Book");
-		btnBook.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(listGames.isSelectionEmpty())
-					JOptionPane.showMessageDialog(null, "You must choose a game !", "Error", JOptionPane.ERROR_MESSAGE);
-				else if(copyL.get(listGames.getSelectedIndex()).getLender().getId() == Player.getId())
-					JOptionPane.showMessageDialog(null, "You can't borrow your own copy !", "Error", JOptionPane.ERROR_MESSAGE);
-				else {
-					JBook book = new JBook(Player, copyL.get(listGames.getSelectedIndex()));
-					book.setVisible(true);
-					dispose();
-				}
-			}
-		});
-		btnBook.setBounds(307, 415, 90, 23);
-		contentPane.add(btnBook);
-		
 		JButton btnBorrow = new JButton("Borrow");
 		btnBorrow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(listGames.isSelectionEmpty())
-					JOptionPane.showMessageDialog(null, "You must choose a game !", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "You must choose a copy !", "Error", JOptionPane.ERROR_MESSAGE);
 				else if(copyL.get(listGames.getSelectedIndex()).getLender().getId() == Player.getId())
 					JOptionPane.showMessageDialog(null, "You can't borrow your own copy !", "Error", JOptionPane.ERROR_MESSAGE);
 				else if(copyL.get(listGames.getSelectedIndex()).getAvailable() == false)
 					JOptionPane.showMessageDialog(null, "You can't borrow this unavailable copy !", "Error", JOptionPane.ERROR_MESSAGE);
 				else {
-					/*Call the borrow function
-					JHome home = new JHome(Player);
-					home.setVisible(true);
-					dispose();*/
-					JOptionPane.showMessageDialog(null, "Copy: " + copyL.get(listGames.getSelectedIndex()).getGame().getName(), "Success", JOptionPane.INFORMATION_MESSAGE);
+					JLoan loan = new JLoan(Player, copyL.get(listGames.getSelectedIndex()));
+					loan.setVisible(true);
+					dispose();
 				}
-				
 			}
 		});
 		btnBorrow.setBounds(588, 415, 89, 23);
