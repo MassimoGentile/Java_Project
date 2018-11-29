@@ -126,13 +126,10 @@ public class JBorrow extends JFrame {
 				else if(copyL.get(listGames.getSelectedIndex()).getAvailable() == false)
 					JOptionPane.showMessageDialog(null, "You can't borrow this unavailable copy !", "Error", JOptionPane.ERROR_MESSAGE);
 				else {
-					/*Call the borrow function
-					JHome home = new JHome(Player);
-					home.setVisible(true);
-					dispose();*/
-					JOptionPane.showMessageDialog(null, "Copy: " + copyL.get(listGames.getSelectedIndex()).getGame().getName(), "Success", JOptionPane.INFORMATION_MESSAGE);
+					JLoan loan = new JLoan(Player, copyL.get(listGames.getSelectedIndex()));
+					loan.setVisible(true);
+					dispose();
 				}
-				
 			}
 		});
 		btnBorrow.setBounds(588, 415, 89, 23);
