@@ -1,15 +1,18 @@
 package be.massimo.BusinessLayer;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import be.massimo.dao.BookingDAO;
 import be.massimo.dao.ConnectionAccess;
 import be.massimo.dao.CopyDAO;
+import be.massimo.dao.LoanDAO;
 import be.massimo.dao.PlayerDAO;
 import be.massimo.pojo.Booking;
 import be.massimo.pojo.Copy;
 import be.massimo.pojo.Game;
+import be.massimo.pojo.Loan;
 import be.massimo.pojo.Player;
 
 public class PlayerBusiness {
@@ -109,5 +112,36 @@ public class PlayerBusiness {
 			return playerDAO.find(player.getId());
 		}else
 			return null;
+	}
+	
+	public void UpdateUnit() {
+		PlayerDAO playerDAO = new PlayerDAO(conn);
+		List<Player> playerL = playerDAO.getAll();
+		for(int i = 0; i < playerL.size(); i++) {
+			CopyDAO copyDAO = new CopyDAO(conn);
+			List<Copy> copyF = copyDAO.getOwnCopy(playerL.get(i).getId());
+			List<Copy> copyL = new ArrayList<Copy>();
+			for(int t = 0; t < copyF.size(); t++) {
+				if(copyF.get(t).getAvailable() == false)
+					copyL.add(copyF.get(t));
+			}
+			int amount = playerL.get(i).getAmount();
+			for(int j = 0; j < copyL.size(); j++) 
+				amount += copyL.get(j).getGame().getUnit();
+			LoanDAO loanDAO = new LoanDAO(conn);
+			List<Loan> loanL = loanDAO.getOwnLoan(playerL.get(i).getId());
+			for(int x = 0; x < loanL.size(); x++)
+				amount -= loanL.get(x).getCopy().getGame().getUnit();
+			playerL.get(i).setAmount(amount);
+			if(amount <= 0) {
+				List<Integer> index = new ArrayList<Integer>();
+				for(int y = 0; y < loanL.size(); y++)
+					index.add(loanL.get(y).getId());
+				for(int z = 0; z < index.size(); z++) {
+					Loan l = loanDAO.find(loanL.get(z).getId());
+					loanDAO.delete(l);
+				}
+			}
+		}
 	}
 }
