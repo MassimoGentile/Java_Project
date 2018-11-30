@@ -18,6 +18,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import be.massimo.BusinessLayer.GameBusiness;
+import be.massimo.BusinessLayer.PlayerBusiness;
 import be.massimo.pojo.Console;
 import be.massimo.pojo.Game;
 import be.massimo.pojo.Player;
@@ -95,6 +96,13 @@ public class JAdmin extends JFrame {
 		contentPane.add(btnUpdateGame);
 		
 		JButton btnUpdateUnit = new JButton("Update Unit User");
+		btnUpdateUnit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PlayerBusiness playerB = new PlayerBusiness();
+				playerB.UpdateUnit();
+				JOptionPane.showMessageDialog(null, "All players are update !",	"Success", JOptionPane.INFORMATION_MESSAGE);
+			}
+		});
 		btnUpdateUnit.setBounds(10, 194, 302, 23);
 		contentPane.add(btnUpdateUnit);
 		listGame.addListSelectionListener(new ListSelectionListener(){
