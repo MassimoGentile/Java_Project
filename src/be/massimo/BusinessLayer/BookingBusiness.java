@@ -116,7 +116,9 @@ public class BookingBusiness {
 					return list1.get(0);
 			}else
 			return list1.get(0);
-		}else
-			return list1.get(0);
+		}else if(list1.size() == 0)
+				return null;
+			else
+				return list1.get(0);
 	}
 }
