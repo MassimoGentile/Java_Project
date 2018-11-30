@@ -24,8 +24,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import be.massimo.BusinessLayer.BookingBusiness;
 import be.massimo.BusinessLayer.CopyBusiness;
 import be.massimo.BusinessLayer.LoanBusiness;
+import be.massimo.BusinessLayer.PlayerBusiness;
 import be.massimo.pojo.Booking;
 import be.massimo.pojo.Copy;
 import be.massimo.pojo.Loan;
@@ -45,7 +47,7 @@ public class JHome extends JFrame {
 		this.Player = player;
 		setTitle("Java_Project - Home");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 722, 627);
+		setBounds(100, 100, 839, 609);
 		contentPane = new JPanel();
 		contentPane.setOpaque(false);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -196,7 +198,7 @@ public class JHome extends JFrame {
 		});
 		btnBorrow.setFocusable(false);
 		btnBorrow.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnBorrow.setBounds(37, 558, 127, 20);
+		btnBorrow.setBounds(691, 261, 127, 122);
 		contentPane.add(btnBorrow);
 		
 		JButton btnLend = new JButton("Lend");
@@ -209,7 +211,7 @@ public class JHome extends JFrame {
 		});
 		btnLend.setFocusable(false);
 		btnLend.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnLend.setBounds(570, 558, 113, 20);
+		btnLend.setBounds(692, 96, 126, 62);
 		contentPane.add(btnLend);
 		
 		JButton btnBooking = new JButton("Booking");
@@ -222,7 +224,7 @@ public class JHome extends JFrame {
 				dispose();
 			}
 		});
-		btnBooking.setBounds(325, 558, 113, 20);
+		btnBooking.setBounds(691, 424, 127, 123);
 		contentPane.add(btnBooking);
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -230,5 +232,27 @@ public class JHome extends JFrame {
 		lblNewLabel.setBounds(110, 11, 396, 32);
 		lblNewLabel.setText("Welcome " + Player.getName() + " " + Player.getFirstname());
 		contentPane.add(lblNewLabel);
+		
+		JButton btnBorrowFromBooking = new JButton("Find Borrower");
+		btnBorrowFromBooking.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(listLend.isSelectionEmpty())
+					JOptionPane.showMessageDialog(null, "You must select a lend !", "Error", JOptionPane.ERROR_MESSAGE);
+				else {
+					BookingBusiness bookingB = new BookingBusiness();
+					Booking booking = bookingB.getBooking(copyL.get(listLend.getSelectedIndex()).getGame());
+					if(booking == null)
+						JOptionPane.showMessageDialog(null, "No Borrower Available", "Error", JOptionPane.INFORMATION_MESSAGE);
+					else {
+						JContact contact = new JContact(Player, booking);
+						contact.setVisible(true);
+						dispose();
+					}		
+				}
+			}
+		});
+		btnBorrowFromBooking.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnBorrowFromBooking.setBounds(692, 157, 127, 62);
+		contentPane.add(btnBorrowFromBooking);
 	}
 }
