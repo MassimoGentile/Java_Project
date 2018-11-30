@@ -27,6 +27,7 @@ import javax.swing.border.LineBorder;
 import be.massimo.BusinessLayer.BookingBusiness;
 import be.massimo.BusinessLayer.CopyBusiness;
 import be.massimo.BusinessLayer.LoanBusiness;
+import be.massimo.BusinessLayer.PlayerBusiness;
 import be.massimo.pojo.Booking;
 import be.massimo.pojo.Copy;
 import be.massimo.pojo.Loan;
@@ -240,6 +241,15 @@ public class JHome extends JFrame {
 				else {
 					BookingBusiness bookingB = new BookingBusiness();
 					LoanBusiness loanB = new LoanBusiness();
+					PlayerBusiness playerB = new PlayerBusiness();
+					Booking booking = bookingB.getBooking(bookingL.get(listBook.getSelectedIndex()).getGameWanted());
+					if(Player.getAmount() < booking.getGameWanted().getUnit()) {
+						JOptionPane.showMessageDialog(null, "You don't have enough Unit !", "Error", JOptionPane.ERROR_MESSAGE);
+					}else {
+						/*JLoanFromBooking loan = new JLoanFromBooking(Player, booking);
+						loan.setVisible(true);
+						dispose();*/
+					}
 				}
 			}
 		});
