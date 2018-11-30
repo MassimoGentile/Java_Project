@@ -211,7 +211,7 @@ public class JHome extends JFrame {
 		});
 		btnLend.setFocusable(false);
 		btnLend.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnLend.setBounds(692, 96, 126, 123);
+		btnLend.setBounds(692, 96, 126, 62);
 		contentPane.add(btnLend);
 		
 		JButton btnBooking = new JButton("Booking");
@@ -224,7 +224,7 @@ public class JHome extends JFrame {
 				dispose();
 			}
 		});
-		btnBooking.setBounds(691, 424, 127, 62);
+		btnBooking.setBounds(691, 424, 127, 123);
 		contentPane.add(btnBooking);
 		
 		JLabel lblNewLabel = new JLabel("");
@@ -233,28 +233,26 @@ public class JHome extends JFrame {
 		lblNewLabel.setText("Welcome " + Player.getName() + " " + Player.getFirstname());
 		contentPane.add(lblNewLabel);
 		
-		JButton btnBorrowFromBooking = new JButton("Borrow-Booking");
+		JButton btnBorrowFromBooking = new JButton("Find Borrower");
 		btnBorrowFromBooking.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(listBook.isSelectionEmpty())
-					JOptionPane.showMessageDialog(null, "You must select a booking !", "Error", JOptionPane.ERROR_MESSAGE);
+				if(listLend.isSelectionEmpty())
+					JOptionPane.showMessageDialog(null, "You must select a lend !", "Error", JOptionPane.ERROR_MESSAGE);
 				else {
 					BookingBusiness bookingB = new BookingBusiness();
-					LoanBusiness loanB = new LoanBusiness();
-					PlayerBusiness playerB = new PlayerBusiness();
-					Booking booking = bookingB.getBooking(bookingL.get(listBook.getSelectedIndex()).getGameWanted());
-					if(Player.getAmount() < booking.getGameWanted().getUnit()) {
-						JOptionPane.showMessageDialog(null, "You don't have enough Unit !", "Error", JOptionPane.ERROR_MESSAGE);
-					}else {
-						/*JLoanFromBooking loan = new JLoanFromBooking(Player, booking);
-						loan.setVisible(true);
-						dispose();*/
-					}
+					Booking booking = bookingB.getBooking(copyL.get(listLend.getSelectedIndex()).getGame());
+					if(booking == null)
+						JOptionPane.showMessageDialog(null, "No Borrower Available", "Error", JOptionPane.INFORMATION_MESSAGE);
+					else {
+						JContact contact = new JContact(Player, booking);
+						contact.setVisible(true);
+						dispose();
+					}		
 				}
 			}
 		});
 		btnBorrowFromBooking.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnBorrowFromBooking.setBounds(691, 485, 127, 62);
+		btnBorrowFromBooking.setBounds(692, 157, 127, 62);
 		contentPane.add(btnBorrowFromBooking);
 	}
 }
