@@ -142,6 +142,7 @@ public class PlayerBusiness {
 					loanDAO.delete(l);
 				}
 			}
+			playerDAO.update(playerL.get(i));
 		}
 	}
 }
