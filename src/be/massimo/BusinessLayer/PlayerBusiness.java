@@ -116,6 +116,7 @@ public class PlayerBusiness {
 	
 	public void UpdateUnit() {
 		PlayerDAO playerDAO = new PlayerDAO(conn);
+		LoanBusiness loanB = new LoanBusiness();
 		List<Player> playerL = playerDAO.getAll();
 		for(int i = 0; i < playerL.size(); i++) {
 			CopyDAO copyDAO = new CopyDAO(conn);
@@ -139,7 +140,7 @@ public class PlayerBusiness {
 					index.add(loanL.get(y).getId());
 				for(int z = 0; z < index.size(); z++) {
 					Loan l = loanDAO.find(loanL.get(z).getId());
-					loanDAO.delete(l);
+					loanB.RemoveLoan(l);
 				}
 			}
 			playerDAO.update(playerL.get(i));
